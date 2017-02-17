@@ -1,24 +1,6 @@
-# README
+Camelot-Chess
+=============
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![Codeship Status](https://codeship.com/projects/59b6ba90-d6e0-0134-6ded-3a9d3eea3b3f/status?branch=testing_suite)
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
