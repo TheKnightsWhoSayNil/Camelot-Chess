@@ -1,2 +1,21 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  Exclude: 
+    - db/schema.rb
+    - db/migrate/20170218175436_devise_create_users.rb
+    - config/environments/development.rb
+    - spec/spec_helper.rb
+
+AlignParameters:
+  Enabled: false
+
+Encoding:
+  Enabled: false
+
+StringLiterals:
+  Enabled: false
+
 Metrics/LineLength:
-  Max: 120
+  Max: 200
