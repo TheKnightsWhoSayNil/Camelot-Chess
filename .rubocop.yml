@@ -2,7 +2,7 @@ Rails:
   Enabled: true
 
 AllCops:
-  Exclude: 
+  Exclude:
     - db/schema.rb
     - db/migrate/20170218175436_devise_create_users.rb
     - config/environments/development.rb
@@ -19,3 +19,6 @@ StringLiterals:
 
 Metrics/LineLength:
   Max: 200
+
+EndOfLine:
+  Enabled: false
