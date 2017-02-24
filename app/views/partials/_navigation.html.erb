@@ -1,21 +1,23 @@
 <div class="modal">
   <label for="modal-1">
-    <div class="modal-trigger">Log In</div>
+    <div class="modal-trigger">Sign In</div>
   </label>
   <input class="modal-state" id="modal-1" type="checkbox" />
   <div class="modal-fade-screen">
     <div class="modal-inner">
       <div class="modal-close" for="modal-1"></div>
-      <h1>Welcome to Camelot Chess...</h1>
-      <p class="modal-intro">Please sign in to your account.</p>
       <p class="modal-content">
       <% if current_user %>
         <li>Hello, <%= current_user.email %></li>
-        <li><%= link_to "Log Out", destroy_user_session_path, :method => "delete" %></li>
+        <li><%= link_to "Sign Out", destroy_user_session_path, :method => "delete" %></li>
       <% else %>
-        <li><%= link_to "Sign In", new_user_session_path %></li>
-        <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        <%= render "devise/sessions/new" %>
       <% end %></p>
     </div>
   </div>
+</div>
+<div class="log-out">
+  <% if current_user %>
+    <p><%= link_to "Sign Out", destroy_user_session_path, :method => "delete" %></p>
+  <% end %>
 </div>
