@@ -2,7 +2,7 @@
 
 <div class = "game-board">
     <% 4.times do %>
-      <% @board.each do |row| %>
+      <% @game.each do |row| %>
         <% row.each do |col| %>
           <% if col.even? %>
             <div class = 'white-square'></div>

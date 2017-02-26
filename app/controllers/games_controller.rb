@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
 
   def show
-    @board = [[0,1,0,1,0,1,0,1],[1,0,1,0,1,0,1,0]]
+    @game = [[0,1,0,1,0,1,0,1],[1,0,1,0,1,0,1,0]]
   end
 
   def new
@@ -20,11 +20,13 @@ class GamesController < ApplicationController
       redirect_to game_path(@game)
     else
       render :text, :status => :unprocessable_entity
+    end
   end
 
   private
 
   def game_params
     params.require(:game).permit(:game_id)
+  end
 
 end
