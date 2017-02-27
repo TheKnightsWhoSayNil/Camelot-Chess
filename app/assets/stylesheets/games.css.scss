@@ -22,10 +22,11 @@
   float: left;
   border: 1px solid;
   text-align: center;
+}
 
-  .game-board td:hover {
-   border: 2px solid #45BDE6;
-  }
+.game-board td:hover {
+   border: 2px solid;
+   border-color: #45BDE6;
 }
 
 
@@ -37,6 +38,12 @@
   float: left;
   border: 1px solid;
   text-align: center
+}
+
+.game-board tr:nth-child(odd) td:nth-child(even):hover,
+.game-board tr:nth-child(even) td:nth-child(odd):hover {
+  border: 2px solid;
+  border-color: #45BDE6;
 }
 
 
