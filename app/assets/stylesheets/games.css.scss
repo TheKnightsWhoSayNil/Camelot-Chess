@@ -1,1 +1,112 @@
-//-----Gameboard-----//
+//-----CHESS BOARD-----//
+
+.game-title {
+  text-align: center;
+}
+
+.game-board {
+  height: 482px;
+  width: 482px;
+  margin: 0 auto;
+  border: 1px solid;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.white-square {
+  height: 60px;
+  width: 60px;
+  background-image: url('/assets/whitesquare.png');
+  float: left;
+  border: 1px solid;
+}
+
+.black-square {
+  height: 60px;
+  width: 60px;
+  background-image: url('/assets/blacksquare.png');
+  float: left;
+  border: 1px solid;
+}
+
+
+
+@media screen and (max-width: 700px) {
+
+  .game-board {
+    height: 650px;
+    width:650px;
+    margin: 0 auto;
+    border: 5px solid grey;
+
+  }
+
+  .white-square {
+    height: 80px;
+    width: 80px;
+    background-color: white;
+    float: left;
+  }
+
+  .black-square {
+    height: 80px;
+    width: 80px;
+    background-color: black;
+    float: left;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  .game-board {
+    height: 570px;
+    width:570px;
+    margin: 0 auto;
+    border: 5px solid grey;
+
+  }
+
+  .white-square {
+    height: 70px;
+    width: 70px;
+    background-color: white;
+    float: left;
+  }
+
+  .black-square {
+    height: 70px;
+    width: 70px;
+    background-color: black;
+    float: left;
+  }
+
+}
+
+
+@media only screen and (max-width: 320px) {
+
+  .game-board {
+    height: 290px;
+    width:290px;
+    margin: 0 auto;
+    border: 5px solid grey;
+
+  }
+
+  .white-square {
+    height: 35px;
+    width: 35px;
+    background-color: white;
+    float: left;
+  }
+
+  .black-square {
+    height: 35px;
+    width: 35px;
+    background-color: black;
+    float: left;
+  }
+
+}

@@ -1,3 +1,5 @@
+//-----Modal-----//
+
 .modal {
   $base-border-color: #dcdcdc !default;
   $base-border-radius: 3px !default;
@@ -28,6 +30,11 @@
     max-width: $modal-trigger-image-width;
   }
 
+  .checkbox label {
+    vertical-align: middle;
+    display: inline-block;
+  }
+
   .modal-state {
     display: none;
   }
@@ -49,6 +56,10 @@
 
     @include media($large-screen) {
       padding-top: 10em;
+    }
+
+    @include media($medium-screen) {
+      padding-top: 3em;
     }
 
     .modal-bg {
@@ -97,12 +108,13 @@
     width: 95%;
 
     @include media($medium-screen) {
-      max-height: 70%;
+      max-height: 100%;
       padding: $modal-padding;
-      width: 60%;
+      width: 50%;
     }
 
     @include media($large-screen) {
+      max-height: 100%;
       width: 50%;
     }
 
@@ -153,4 +165,16 @@
 
 .modal-open {
   overflow: hidden;
+}
+
+.log-out {
+  padding: 0.8em 1em;
+}
+
+.log-out a {
+  color: #08D4D0;
+  font-family: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  font-size: 1em;
+  line-height: 1.5;
+  font-weight: bold;
 }
