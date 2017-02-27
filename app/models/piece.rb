@@ -9,7 +9,7 @@ class Piece < ApplicationRecord
   end
 
   def within_chessboard?(x, y)
-    return true if x >= 0 && y >= 0 && x <= 7 && y <= 7
+      return (x >= 0 && y >= 0 && x <= 7 && y <= 7) ? true : false
   end
   # should store all the possible diagonal moves 
   # excluding starting position hence "if x > 0"
