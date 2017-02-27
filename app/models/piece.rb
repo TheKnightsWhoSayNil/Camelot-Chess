@@ -79,6 +79,5 @@ class Piece < ApplicationRecord
     return valid_move_coordinates
   end
 
-
 end
 
