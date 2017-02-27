@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :game do
-    name 'example game'
+    #
   end
 
   factory :game_white_player, class: Game do
@@ -9,7 +9,10 @@ FactoryGirl.define do
   end
 
   factory :user do
-    id 1
-    username 'Example name'
+    sequence :email do |n|
+      "person#{n}@example.com"
+    end
+
+    password '123123'
   end
 end
