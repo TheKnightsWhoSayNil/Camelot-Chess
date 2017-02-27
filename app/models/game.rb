@@ -3,7 +3,7 @@ class Game < ApplicationRecord
   belongs_to :user
   has_many :pieces
 
-  after_action :fill_board 
+  # after_action :fill_board 
 
   def fill_board
     # fill white pieces
@@ -33,4 +33,5 @@ class Game < ApplicationRecord
     Bishop.create(user_id: self.black_user_id, game_id: self.id, x_position: 5, y_position: 0, color: false)
     Queen.create(user_id: self.black_user_id, game_id: self.id, x_position: 3, y_position: 0, color: false)
     King.create(user_id: self.black_user_id, game_id: self.id, x_position: 4, y_position: 0, color: false)
+  end
 end
