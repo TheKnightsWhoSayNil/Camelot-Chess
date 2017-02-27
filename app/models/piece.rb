@@ -3,6 +3,13 @@ class Piece < ApplicationRecord
   belongs_to :game
   belongs_to :user
 
+  def initialize(x_position, y_position)
+    @x_position = x_position
+    @y_position = y_position
+    @x_end = x_end
+    @y_end = y_end
+  end
+
   def legal_move?(x_position, y_position)
     ##
   end
@@ -23,14 +30,12 @@ class Piece < ApplicationRecord
 
   end
 
-  def move
-    # horizontal and vertical move logic
+  def move(x_position, y_position)
     if horizontal?
       x_end - self(x_position)
     elsif vertical?
       y_end - self(y_position)
     else
-      # diagonal move logic
       self(x_position) && self(y_position) + x(n) && y(n)
     end
   end
