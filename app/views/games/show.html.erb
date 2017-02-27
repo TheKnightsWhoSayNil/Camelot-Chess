@@ -1,6 +1,7 @@
 <h2 class="game-title">Chess Board</h2>
 
 <div class = "game-board">
+  <% @game = [[0,1,0,1,0,1,0,1],[1,0,1,0,1,0,1,0]] %>
     <% 4.times do %>
       <% @game.each do |row| %>
         <% row.each do |col| %>
