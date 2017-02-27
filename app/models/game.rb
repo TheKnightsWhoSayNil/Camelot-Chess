@@ -3,7 +3,9 @@ class Game < ApplicationRecord
   belongs_to :user
   has_many :pieces
 
-  # after_action :fill_board 
+  # after_action :fill_board
+
+  scope :available, ->{ where(black_user_id: nil).or where(white_user_id: nil) } 
 
   def fill_board
     # fill white pieces
