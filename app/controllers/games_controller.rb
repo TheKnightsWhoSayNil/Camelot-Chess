@@ -14,14 +14,16 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.create(game_params.merge(white_player_id: current_user))
-    redirect_to game_path(@game)
+    game = Game.create(game_params)
+    game.white_user = current_user
+    game.save
+    redirect_to game_path(game)
   end
 
   def update
     @game = Game.find(params[:id])
     @game.update_attributes(game_params)
-    if Game.available?
+    if Game.available
       @game.black_user_id = current_user
       redirect_to game_path(@game)
     else
