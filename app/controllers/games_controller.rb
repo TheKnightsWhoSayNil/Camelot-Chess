@@ -1,3 +1,4 @@
+require 'byebug'
 class GamesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update]
 
@@ -37,5 +38,4 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:game_id, :current_user)
   end
-
 end

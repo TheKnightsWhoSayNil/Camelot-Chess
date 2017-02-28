@@ -1,24 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  describe 'update action' do
-    it 'adds a player to empty black player slot and redirects to the game' do
-      user = create(:user)
-      sign_in user
-      game = create(:game_white_player)
-      patch :update, id: game
-      expect(assigns(:game).black_user_id).to eq(user.id)
-      expect(response).to redirect_to games_path(game)
-    end
-  end
+  describe 'SCOPES' do
+    describe 'Game.available' do
+      it 'shows the available games' do
+        create_games_with_two_players
+        available1 = create_game_with_one_players
+        available2 = create_game_with_one_players
 
-  describe 'create action' do
-    it 'creates a new game with a white player as the current user, and redirect to games' do
-      user = create(:user)
-      sign_in user
-      post :create, game: { name: 'example game' }
-      expect(assigns(:game).white_user_id).to eq(user.id)
-      expect(response).to redirect_to(game_path(assigns(:game)))
+        expect(Game.available).to match_array [available1, available2]
+      end
+      it 'shows no games when there are none available' do
+        create_games_with_two_players
+
+        expect(Game.available).to eq []
+      end
+    end
+
+    def create_games_with_two_players
+      player_1 = FactoryGirl.create(:user)
+      player_2 = FactoryGirl.create(:user)
+      Game.create(white_user: player_1, black_user: player_2)
+    end
+
+    def create_game_with_one_players
+      player_1 = FactoryGirl.create(:user)
+      Game.create(white_user: player_1)
     end
   end
 end
