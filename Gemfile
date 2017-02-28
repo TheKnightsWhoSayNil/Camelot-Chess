@@ -11,7 +11,7 @@ gem 'simple_form'
 
 gem 'devise'
 
-gem 'bourbon',  '~> 4.3.2'
+gem 'bourbon', '~> 4.3.2'
 gem 'bitters', '~> 1.2.0'
 gem 'neat', '~> 1.7.3'
 
