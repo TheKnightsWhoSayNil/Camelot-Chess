@@ -1,5 +1,5 @@
 class CallbacksController < ApplicationController
-  
+
   def facebook
     @user = User.from_omniauth(request.env["omniauth.auth"])
     if @user.persisted?
@@ -17,5 +17,4 @@ class CallbacksController < ApplicationController
       redirect_to new_user_registration_url
     end
   end
-
 end
