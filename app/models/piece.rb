@@ -3,8 +3,9 @@ class Piece < ApplicationRecord
   belongs_to :game
   belongs_to :user
 
-  def legal_move?
-    # example of future logic
-    # for each piece
+  def is_obstructed?
+
   end
+
+
 end

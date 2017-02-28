@@ -5,6 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  belongs_to :game
-  has_many   :pieces
+  has_many :games
+  has_many :pieces
+
 end

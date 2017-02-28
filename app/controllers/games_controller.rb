@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update]
 
   def show
-    @board = [[0,1,0,1,0,1,0,1],[1,0,1,0,1,0,1,0]]
+    @game = [[0,1,0,1,0,1,0,1],[1,0,1,0,1,0,1,0]]
   end
 
   def new

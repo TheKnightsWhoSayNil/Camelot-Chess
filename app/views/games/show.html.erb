@@ -1,15 +1,12 @@
 <h2 class="game-title">Chess Board</h2>
 
-<div class = "game-board">
-    <% 4.times do %>
-      <% @board.each do |row| %>
-        <% row.each do |col| %>
-          <% if col.even? %>
-            <div class = 'white-square'></div>
-          <% else %>
-            <div class = 'black-square'></div>
-          <% end %>
-        <% end %>
+<table class="game-board">
+  <% 7.downto(0) do |row| %>
+    <tr>
+      <% 0.upto(7) do |col| %>
+        <td>
+        </td>
       <% end %>
-    <% end %>
-</div>
+    </tr>
+  <% end %>
+</table>

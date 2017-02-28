@@ -12,24 +12,39 @@
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  text-align: center;
 }
 
-.white-square {
+.game-board td {
   height: 60px;
   width: 60px;
   background-image: url('/assets/whitesquare.png');
   float: left;
   border: 1px solid;
+  text-align: center;
 }
 
-.black-square {
+.game-board td:hover {
+   border: 2px solid;
+   border-color: #45BDE6;
+}
+
+
+.game-board tr:nth-child(odd) td:nth-child(even),
+.game-board tr:nth-child(even) td:nth-child(odd) {
   height: 60px;
   width: 60px;
   background-image: url('/assets/blacksquare.png');
   float: left;
   border: 1px solid;
+  text-align: center
 }
 
+.game-board tr:nth-child(odd) td:nth-child(even):hover,
+.game-board tr:nth-child(even) td:nth-child(odd):hover {
+  border: 2px solid;
+  border-color: #45BDE6;
+}
 
 
 @media screen and (max-width: 700px) {
@@ -39,21 +54,24 @@
     width:650px;
     margin: 0 auto;
     border: 5px solid grey;
-
+    text-align: center
   }
 
-  .white-square {
+  .game-board td {
     height: 80px;
     width: 80px;
     background-color: white;
     float: left;
+    text-align: center;
   }
 
-  .black-square {
+  .game-board tr:nth-child(odd) td:nth-child(even),
+  .game-board tr:nth-child(even) td:nth-child(odd) {
     height: 80px;
     width: 80px;
     background-color: black;
     float: left;
+    text-align: center;
   }
 
 }
@@ -65,21 +83,24 @@
     width:570px;
     margin: 0 auto;
     border: 5px solid grey;
-
+    text-align: center;
   }
 
-  .white-square {
+  .game-board td {
     height: 70px;
     width: 70px;
     background-color: white;
     float: left;
+    text-align: center;
   }
 
-  .black-square {
+  .game-board tr:nth-child(odd) td:nth-child(even),
+  .game-board tr:nth-child(even) td:nth-child(odd) {
     height: 70px;
     width: 70px;
     background-color: black;
     float: left;
+    text-align: center;
   }
 
 }
@@ -92,21 +113,25 @@
     width:290px;
     margin: 0 auto;
     border: 5px solid grey;
+    text-align: center;
 
   }
 
-  .white-square {
+  .game-board td {
     height: 35px;
     width: 35px;
     background-color: white;
     float: left;
+    text-align: center;
   }
 
-  .black-square {
+  .game-board tr:nth-child(odd) td:nth-child(even),
+  .game-board tr:nth-child(even) td:nth-child(odd) {
     height: 35px;
     width: 35px;
     background-color: black;
     float: left;
+    text-align: center;
   }
 
 }

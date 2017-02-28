@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :game do
     id 1
     white_user_id 1
-
   end
 
   factory :game_white_player, class: Game do
@@ -25,5 +24,7 @@ FactoryGirl.define do
     id 2
 
     password '123123'
+      "person#{n}@example.com"
+    end
   end
 end
