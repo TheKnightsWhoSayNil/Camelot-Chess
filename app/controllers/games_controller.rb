@@ -24,7 +24,7 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     @game.update_attributes(game_params)
-    if Game.available
+    if @game.valid?
       @game.black_user_id = current_user
       redirect_to game_path(@game)
     else
@@ -36,6 +36,6 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:game_id, :current_user)
+    params.require(:game).permit(:game_id, :white_user, :black_user_id)
   end
 end

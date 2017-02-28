@@ -13,7 +13,6 @@ RSpec.describe GamesController, type: :controller do
     end
   end
 
-
   describe 'update action' do
     it 'adds a player to empty black player slot and redirects to the game' do
       white_user = FactoryGirl.create(:user)
