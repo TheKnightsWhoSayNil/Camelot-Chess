@@ -43,6 +43,7 @@
 .game-board tr:nth-child(odd) td:nth-child(even):hover,
 .game-board tr:nth-child(even) td:nth-child(odd):hover {
   border: 2px solid;
+  
   border-color: #45BDE6;
 }
 
