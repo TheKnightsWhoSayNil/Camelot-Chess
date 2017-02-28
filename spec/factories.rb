@@ -10,8 +10,17 @@ FactoryGirl.define do
 
   factory :user do
     sequence :email do |n|
-      "person#{n}@example.com"
+      "someone#{n}@example.com"
     end
+
+    password '123123'
+  end
+
+  factory :user_black do
+    sequence :email do |n|
+      "someone#{n}@example.com"
+    end
+    id 2
 
     password '123123'
   end

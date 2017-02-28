@@ -23,7 +23,7 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     @game.update_attributes(game_params)
-    if @game.available?
+    if Game.available
       @game.black_user_id = current_user
       redirect_to game_path(@game)
     else
