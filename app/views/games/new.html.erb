@@ -1,6 +1,7 @@
-<h1>Create a Game here</h1>
-
-<%= simple_form_for @game do |f| %>
-  <%= f.input  :game_id %>
-  <%= f.button :submit %>
-<% end %>
+<div class="sign-up">
+  <h1>Create a Game</h1>
+    <%= simple_form_for @game do |f| %>
+      <%= f.input  :game_id %>
+      <%= f.button :submit %>
+    <% end %>
+</div>
