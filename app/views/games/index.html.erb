@@ -1,10 +1,10 @@
 <h1> Available Games </h1>
 
 <div class="sign-up">
-  <%games.each do |game| %>
+  <% game.each do |game| %>
     <h3><% game.white.user.nil? ? 'White is Open:' : 'Black is Open' %></h3>
       <h3>
-        Game <%= game.game_id %> <%= game.name %>
+        Game <%= game.game_id %>, <%= game.name %>
       </h3>
       <%= button_to 'Join Game', game_path(game.id), {action: :update, method: :patch } %>
     <% end %>
