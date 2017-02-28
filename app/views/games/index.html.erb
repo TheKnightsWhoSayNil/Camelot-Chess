@@ -4,16 +4,16 @@
   <div class="sign-up">
       <% @game.each do |game| %>
         <div class="game-list">
-          <h3><%= game.white_user.nil? ? 'White is open' : 'Join as Black' %></h3>
+          <h2><%= game.white_user.nil? ? 'White is open' : 'Black is Open' %></h2>
         </div>
         <div class="game-list">
             <span class="badge-success"> Game <%= game.id %> <br /></span>
             <br />
-
             <br />
             <%= button_to 'Join game', game_path(game.id), { action: :update, method: :patch } %>
         </div>
         <br />
+        <hr />
       <% end %>
     </div>
   </div>
