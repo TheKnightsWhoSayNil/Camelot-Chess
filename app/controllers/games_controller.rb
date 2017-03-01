@@ -1,5 +1,6 @@
+require 'byebug'
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update]
+  before_action :authenticate_user!, only: [:create, :new]
 
   def show
     @game = [[0,1,0,1,0,1,0,1],[1,0,1,0,1,0,1,0]]
@@ -14,17 +15,17 @@ class GamesController < ApplicationController
   end
 
   def create
-    game = Game.create(game_params)
+    game = Game.new(game_params)
     game.white_user = current_user
     game.save
     redirect_to game_path(game)
   end
 
-  def update
+  def join
     @game = Game.find(params[:id])
-    @game.update_attributes(game_params)
     if @game.available?
-      @game.black_user_id = current_user
+      @game.black_user = current_user
+      @game.save
       redirect_to game_path(@game)
     else
       render :text, :status => :unprocessable_entity
@@ -35,6 +36,6 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:game_id, :current_user)
+    params.require(:game).permit(:game_id, :white_user, :black_user)
   end
 end

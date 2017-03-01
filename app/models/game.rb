@@ -7,7 +7,11 @@ class Game < ApplicationRecord
 
   # after_action :fill_board
 
-  scope :available, ->{ where(black_user_id: nil).or where(white_user_id: nil) } 
+  scope :available, ->{ where(black_user_id: nil) }
+
+  def available?
+    self.black_user.blank?
+  end
 
   def fill_board
     # fill white pieces

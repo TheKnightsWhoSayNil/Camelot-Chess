@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.4.0'
+
 gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'
 
@@ -57,6 +59,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec-rails', '~> 3.5'
   gem 'rubocop', '~> 0.47.1', require: false
+  gem 'rails-controller-testing'
 end
 
 group :development do
