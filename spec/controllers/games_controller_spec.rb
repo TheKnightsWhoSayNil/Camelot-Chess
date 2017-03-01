@@ -4,7 +4,7 @@ require 'byebug'
 RSpec.describe GamesController, type: :controller do
   describe 'create action' do
     it 'creates a new game with a white player as the current user, and redirect to games' do
-      user = FactoryGirl.create(:user)
+      user = create(:user)
       sign_in user
 
       post :create, game: { name: 'example game' }
@@ -14,19 +14,30 @@ RSpec.describe GamesController, type: :controller do
     end
   end
 
-=begin
-  describe 'update action' do
-    it 'adds a player to empty black player slot and redirects to the game' do
-      white_user = FactoryGirl.create(:user)
-      game = FactoryGirl.create(:game)
-      sign_in white_user
 
-      black_user = FactoryGirl.create(:user, id: 2)
+  describe 'join action' do
+    it 'redirects to game_path after a successful join' do
+      game = create_game_with_one_player
+      black_user = create(:user)
       sign_in black_user
 
-      patch :update, id: game.id, game: {id: 2}
+      patch :join, id: game.id
       expect(response).to redirect_to game_path(game)
     end
+    it 'adds a player to empty black player slot' do
+      game = create_game_with_one_player
+      black_user = create(:user)
+      sign_in black_user
+
+      patch :join, id: game.id
+      game.reload
+
+      expect(game.black_user).to eq black_user
+    end
   end
-=end
+
+  def create_game_with_one_player
+    player_1 = FactoryGirl.create(:user)
+    Game.create(white_user: player_1)
+  end
 end
