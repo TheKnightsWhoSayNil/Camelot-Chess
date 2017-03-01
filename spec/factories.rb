@@ -22,8 +22,5 @@ FactoryGirl.define do
       "someone#{n}@example.com"
     end
     id 2
-
-    password '123123'
-      "person#{n}@example.com"
   end
 end
