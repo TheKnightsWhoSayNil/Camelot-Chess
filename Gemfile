@@ -5,6 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "omniauth-google-oauth2"
+gem 'omniauth-facebook'
+
+gem 'figaro'
+
 gem 'rails_12factor', group: :production
 
 gem 'simple_form'
