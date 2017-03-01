@@ -16,5 +16,4 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
->>>>>>> b843daa0f7e4ecaf210046260f3e2debdc08cb75
 end
