@@ -2,6 +2,11 @@
 class Piece < ApplicationRecord
    belongs_to :game
    belongs_to :user
+   self.inheritance_column = :piece_type
+
+   def self.piece_types
+    %w(Pawn Knight Bishop Rook Queen King)
+  end
 
   def initialize (x_position, y_position)
     @x_position = x_position
@@ -11,9 +16,16 @@ class Piece < ApplicationRecord
   def within_chessboard?(x, y)
       return (x >= 0 && y >= 0 && x <= 7 && y <= 7) ? true : false
   end
+    
+  #should render the current position of the piece
+  def current_position
+    coordinates = []
+    coordinates << (Piece.find(params[:id]).x_position, Piece.find(params[:id].y_position)
+  end
+
   # should store all the possible diagonal moves 
   # excluding starting position hence "if x > 0"
-  def diagonal_moves
+  def diagonal_moves_all
       coordinates = []
       8.times do |x|
         if x > 0 
@@ -26,14 +38,14 @@ class Piece < ApplicationRecord
       return coordinates   
   end
 
-  def diagonal_valid_moves(x_position, y_position)
-    valid_move_coordinates = []
-    diagonal_moves.each do |x, y|
-      if within_chessboard?(x_position + x, y_position + y)
-        valid_move_coordinates << [(x_position + x), (y_position + y)]
+  def diagonal_move_valid?(x_position, y_position)
+    coordinates = []
+    diagonal_moves_all.each do |x, y|
+      if within_chessboard?(x + current_position[0], y + current_position[1])
+          coordinates << [(x + current_position[0]), (y + current_position[1])]
       end
     end
-    return valid_move_coordinates   
+    return coordinates.includes?([x_position, y_position]) ? true : false
   end
 
  def horizontal_moves
