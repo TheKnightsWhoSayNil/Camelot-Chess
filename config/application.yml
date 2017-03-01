@@ -9,8 +9,8 @@
 # production:
 #   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
-
 FACEBOOK_CLIENT_ID: '1853903941498398'
 FACEBOOK_SECRET: '962418de964f33f2f1a30478a71171fb'
 GOOGLE_CLIENT_ID: '855541334968-ijrnv29c2pp0r0beavggrikpkirjoul9.apps.googleusercontent.com'
 GOOGLE_SECRET: 'eX72fHyPCl8OgLrrqPeyhybD'
+
