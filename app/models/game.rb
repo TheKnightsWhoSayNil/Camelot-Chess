@@ -9,6 +9,10 @@ class Game < ApplicationRecord
 
   scope :available, ->{ where(black_user_id: nil) } 
 
+  def available?
+    self.black_user.blank?
+  end
+
   def fill_board
     # fill white pieces
     (0..7).each do |i|

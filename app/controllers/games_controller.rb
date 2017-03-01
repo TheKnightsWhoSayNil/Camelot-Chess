@@ -21,11 +21,12 @@ class GamesController < ApplicationController
     redirect_to game_path(game)
   end
 
-  def update
+  def join
     @game = Game.find(params[:id])
-    @game.update_attributes(game_params)
-    if @game.available
-      @game.black_user_id = current_user
+
+    if @game.available?
+      @game.black_user = current_user
+      @game.save
       redirect_to game_path(@game)
     else
       render :text, :status => :unprocessable_entity
