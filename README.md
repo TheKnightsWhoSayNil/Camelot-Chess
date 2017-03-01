@@ -11,4 +11,4 @@ A chess app, built with Ruby on Rails, by Knights-Who-Say-Nil for [The Firehose 
 + [Brandon Elder](https://github.com/BrandonElder)
 + [Conner Hiatt](https://github.com/Connerh92)
 
- [Sam Auciello](https://github.com/olleicua) was our team leader for the project.
+ [Sam Auciello](https://github.com/olleicua) is our team leader for the project.
