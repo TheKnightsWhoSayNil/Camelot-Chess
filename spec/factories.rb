@@ -1,11 +1,12 @@
 FactoryGirl.define do
-  factory :game do
-    id 1
-    white_user_id 1
+  factory :game, class: Game do
+    name 'example game'
+    association :user
   end
 
-  factory :game_white_player, class: Game do
+  factory :white_game, class: Game do
     name 'example game'
+    id 1
     white_player_id 1
   end
 
@@ -22,7 +23,7 @@ FactoryGirl.define do
       "someone#{n}@example.com"
     end
     id 2
-    
+
     password '123123'
   end
 end

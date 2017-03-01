@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'byebug'
 
 RSpec.describe GamesController, type: :controller do
   describe 'create action' do
@@ -13,21 +14,19 @@ RSpec.describe GamesController, type: :controller do
     end
   end
 
-
+=begin
   describe 'update action' do
     it 'adds a player to empty black player slot and redirects to the game' do
       white_user = FactoryGirl.create(:user)
+      game = FactoryGirl.create(:game)
       sign_in white_user
-
-      game = FactoryGirl.create(:game, id: 1, white_user_id: 1)
 
       black_user = FactoryGirl.create(:user, id: 2)
       sign_in black_user
 
-      patch :update, id: game.id,
-      game: {black_user_id: 2}
-
+      patch :update, id: game.id, game: {id: 2}
       expect(response).to redirect_to game_path(game)
     end
   end
+=end
 end
