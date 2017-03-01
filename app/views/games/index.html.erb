@@ -10,7 +10,7 @@
         <span class="badge-success"> Game <%= game.id %> <br /></span>
         <br />
         <br />
-        <%= button_to 'Join game', game_path(game.id), { action: :update, method: :patch } %>
+        <%= button_to 'Join game', join_game_path(@game), { action: :join, method: :patch } %>
       </div>
       <br />
       <hr />
