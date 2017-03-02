@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.4.0'
+
 gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'
 
@@ -16,7 +18,7 @@ gem 'simple_form'
 
 gem 'devise'
 
-gem 'bourbon',  '~> 4.3.2'
+gem 'bourbon', '~> 4.3.2'
 gem 'bitters', '~> 1.2.0'
 gem 'neat', '~> 1.7.3'
 
@@ -53,10 +55,10 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution
   # and get a debugger console
-  gem 'byebug', platform: :mri
   gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec-rails', '~> 3.5'
   gem 'rubocop', '~> 0.47.1', require: false
+  gem 'rails-controller-testing'
 end
 
 group :development do
