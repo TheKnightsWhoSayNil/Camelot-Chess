@@ -1,4 +1,4 @@
-require 'byebug'
+
 class GamesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
 
@@ -39,4 +39,3 @@ class GamesController < ApplicationController
     params.require(:game).permit(:game_id, :white_user, :black_user)
   end
 end
-
