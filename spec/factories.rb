@@ -1,29 +1,23 @@
-FactoryGirl.define do
-  factory :game, class: Game do
-    name 'example game'
-    association :user
+FactoryGirl.define do 
+  factory :game do
+    association :white_user, factory: :user
   end
 
-  factory :white_game, class: Game do
+  factory :game_white_player, class: Game do
     name 'example game'
-    id 1
     white_player_id 1
+  end
+
+  factory :piece do
+    association :user_id
+    association :game
   end
 
   factory :user do
     sequence :email do |n|
-      "someone#{n}@example.com"
+      "dummyEmail#{n}@gmail.com"
     end
-
-    password '123123'
-  end
-
-  factory :user_black do
-    sequence :email do |n|
-      "someone#{n}@example.com"
-    end
-    id 2
-
-    password '123123'
+    password "secretPassword"
+    password_confirmation "secretPassword"
   end
 end

@@ -17,7 +17,7 @@ class Game < ApplicationRecord
     # fill white pieces
     (0..7).each do |i|
       Pawn.create(user_id: self.white_user_id, game_id: self.id, x_position: i, y_position: 6, color: true)
-  end
+    end
 
     Rook.create(user_id: self.white_user_id, game_id: self.id, x_position: 0, y_position: 7, color: true)
     Rook.create(user_id: self.white_user_id, game_id: self.id, x_position: 7, y_position: 7, color: true)
