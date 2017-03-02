@@ -87,6 +87,5 @@ class Piece < ApplicationRecord
       return nil
     end
   end
-  
 end
 
