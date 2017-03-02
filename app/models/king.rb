@@ -4,23 +4,22 @@ class King < Piece
   def valid_move?(x, y)
     super(x, y)
 
-
-  end
-  
-  # logic for King specifics
-  def king_moves_all
-    coordinates = [[-1,-1], [-1,0], [-1,1], [0,-1], [0,1], [1,-1], [1,0], [1,1]]
-  end
-    
-  def king_valid_moves(x_position, y_position)
     valid_move_coordinates = []
-    king _moves.each do |x, y|
-      if within_chessboard?(x_position + x, y_position + y)
+    move_distance.each do |x, y|
         valid_move_coordinates << [(x_position + x), (y_position + y)]
       end
     end
     return valid_move_coordinates   
+
+
   end
+
+  # logic for King specifics
+  def move_distance
+    coordinates = [[-1,-1], [-1,0], [-1,1], [0,-1], [0,1], [1,-1], [1,0], [1,1]]
+  end
+    
+  
 
 # only available if no previous moves
 def castle_king(x_position, y_position)
