@@ -3,6 +3,7 @@ class Piece < ApplicationRecord
    belongs_to :game
    belongs_to :user
 
+
   def horizontal_obstruction(x_end, y_end)
     # movement: right to left
     if x_position < x_end 

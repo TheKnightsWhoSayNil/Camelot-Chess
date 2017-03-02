@@ -21,7 +21,3 @@ FactoryGirl.define do
     password_confirmation "secretPassword"
   end
 end
-
-  
-
-
