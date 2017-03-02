@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'byebug'
 
 RSpec.describe GamesController, type: :controller do
   describe 'create action' do
@@ -32,7 +31,7 @@ RSpec.describe GamesController, type: :controller do
       sign_in black_user
 
       patch :join, id: game.id
-      
+
       expect(response).to redirect_to game_path(game)
     end
   end
