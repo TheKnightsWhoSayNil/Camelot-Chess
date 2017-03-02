@@ -8,26 +8,26 @@ class Pawn < Piece
     # return false if x != x_position
 
     if color == true
-      move = 1
+      move_range = 1
       
       if is_capture?
-        return y <= y_position+move && x <= x_position+move || x <= x_position-move      
+        return y == y_position+move_range && x == x_position+move_range || y == y_position+move_range && x == x_position-move_range      
       elsif in_starting_position?
-        move = 2
-        return y <= y_position+move && x == x_position
+        move_range = 2
+        return y <= y_position+move_range && x == x_position
       else
-        return y <= y_position+move && x == x_position
+        return y <= y_position+move_range && x == x_position
       end
 
     else
-      move = -1
+      move_range = -1
       if is_capture? 
-        return y >= y_position+move && x >= x_position+move || x >= x_position-move
+        return y == y_position+move_range && x == x_position+move_range || y == y_position+move_range && x == x_position-move_range
       elsif in_starting_position?
-        move = -2
-        return y >= y_position+move && x == x_position
+        move_range = -2
+        return y >= y_position+move_range && x == x_position
       else
-        return y >= y_position+move && x == x_position
+        return y >= y_position+move_range && x == x_position
       end
 
     end
