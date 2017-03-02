@@ -6,7 +6,7 @@ class Piece < ApplicationRecord
 
   def horizontal_obstruction(x_end, y_end)
     # movement: right to left
-    if x_position < x_end 
+    if x_position < x_end
       (x_position + 1).upto(x_end - 1) do |x|
         return true if space_occupied?(x, y_position)
       end
@@ -57,19 +57,19 @@ class Piece < ApplicationRecord
     x_end = destination[0]
     y_end = destination[1]
     path = check_path(x_position, y_position, x_end, y_end)
-    
+
     if path == 'horizontal'
       return horizontal_obstruction(x_end, y_end)
     end
 
     if path == 'vertical'
-      return vertical_obstruction(x_end, y_end) 
+      return vertical_obstruction(x_end, y_end)
     end
 
     if path == 'diagonal'
       return diagonal_obstruction(x_end, y_end)
     end
-      
+
     return false
   end
 
@@ -88,5 +88,11 @@ class Piece < ApplicationRecord
       return nil
     end
   end
-end
 
+  def move_to!(x, y)
+    original_x = self.x_position
+    original_y = self.y_position
+    @destination = game.pieces.where(x_position: x, y_position: y).take
+    
+  end
+end
