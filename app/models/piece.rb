@@ -3,8 +3,6 @@ class Piece < ApplicationRecord
    belongs_to :game
    belongs_to :user
 
-  
-
   def horizontal_obstruction(x_end, y_end)
     # movement: right to left
     if x_position < x_end 
@@ -36,6 +34,7 @@ class Piece < ApplicationRecord
   end
 
   def diagonal_obstruction(x_end, y_end)
+    # path is diagonal and down
     if x_position < x_end
       (x_position + 1).upto(x_end - 1) do |x|
         delta_y = x - x_position
@@ -74,7 +73,7 @@ class Piece < ApplicationRecord
   end
 
   def space_occupied?(x, y)
-    game.pieces.where(x_position: x, y_position: y)
+    game.pieces.where(x_position: x, y_position: y).present?
   end
 
   def check_path(x_position, y_position, x_end, y_end)
