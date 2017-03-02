@@ -4,6 +4,9 @@ class Knight < Piece
   def knight_moves
     coordinates = [[1,2], [1,-2], [2,1], [2,-1], [-1,2], [-1,-2], [-2,1], [-2,-1]]
   end
+
+  
+
     
   def knight_valid_moves(x_position, y_position)
     valid_move_coordinates = []

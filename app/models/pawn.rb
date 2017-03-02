@@ -1,5 +1,38 @@
 # /app/models/pawn.rb
 class Pawn < Piece
+
+  def valid_move?(x, y)
+    super(x, y)
+
+    return false if x_position != x
+
+    if color == true
+      distance = 1
+      if in_starting_position?
+       distance = 2
+      end
+
+      return y <= y_position+distance
+    else
+      distance = -1
+    
+      if in_starting_position?
+        distance = -2
+      end
+
+      return y >= y_position+distance
+    end
+  end
+
+
+  def in_starting_position?
+    if color == true
+      y_position == 1
+    else
+      y_position == 6
+    end
+  end
+
   # logic for Pawn specifics
   def start_move(x_position, y_position)
     start_valid_move = []
@@ -55,5 +88,5 @@ class Pawn < Piece
   #   end
   # ===============================================================
         
-  end
+  
 end

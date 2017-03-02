@@ -1,7 +1,14 @@
 # /app/models/king.rb
 class King < Piece
+
+  def valid_move?(x, y)
+    super(x, y)
+
+
+  end
+  
   # logic for King specifics
-  def king_moves
+  def king_moves_all
     coordinates = [[-1,-1], [-1,0], [-1,1], [0,-1], [0,1], [1,-1], [1,0], [1,1]]
   end
     
