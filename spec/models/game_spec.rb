@@ -18,13 +18,17 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe 'Fill Board' do
-    it 'should fill board when game is created' do
+  describe 'fill_board method' do
+    it 'should fill_board when game is created' do
       create_game_with_one_players.fill_board
+
+      expect(create_game_with_one_players.pieces.count).to eq(16)
     end
 
-    it 'should fill board when game has two players' do
+    it 'should fill_board when game is created' do
       create_games_with_two_players.fill_board
+
+      expect(create_games_with_two_players.pieces.count).to eq(32)
     end
   end
 
@@ -32,7 +36,7 @@ RSpec.describe Game, type: :model do
     player_1 = FactoryGirl.create(:user)
     Game.create(white_user: player_1)
   end
-
+  
   def create_games_with_two_players
     player_1 = FactoryGirl.create(:user)
     player_2 = FactoryGirl.create(:user)
