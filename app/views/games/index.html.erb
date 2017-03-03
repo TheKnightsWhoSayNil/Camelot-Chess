@@ -1,11 +1,19 @@
-<h1> Available Games </h1>
+<h1 class="game-title"> Available Games </h1>
 
-<div class="sign-up">
-  <%games.each do |game| %>
-    <h3><% game.white.user.nil? ? 'White is Open:' : 'Black is Open' %></h3>
-      <h3>
-        Game <%= game.game_id %> <%= game.name %>
-      </h3>
-      <%= button_to 'Join Game', game_path(game.id), {action: :update, method: :patch } %>
+<div class="available-list">
+  <div class="sign-up">
+    <% @game.each do |game| %>
+      <div class="game-list">
+        <h2><%= game.white_user.nil? ? 'White is open' : 'Black is Open' %></h2>
+      </div>
+      <div class="game-list">
+        <span class="badge-success"> Game <%= game.id %> <br /></span>
+        <br />
+        <br />
+        <%= button_to 'Join game', join_game_path(game), { action: :join, method: :patch } %>
+      </div>
+      <br />
+      <hr />
     <% end %>
+  </div>
 </div>

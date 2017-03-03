@@ -135,3 +135,42 @@
   }
 
 }
+
+
+.game-box {
+  @include border-width(1px);
+  @include border-style(solid);
+  @include border-color($base-border-color);
+  @include margin(5px, 5px, 5px, 5px);
+  @include background($secondary-background-color);
+  border-radius: $base-border-radius;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: auto;
+  }
+
+  .label {
+    @include row();
+  }
+
+  .title {
+    @include row();
+    @include margin(10px, 10px, 10px, 10px);
+    text-align: center;
+  }
+
+  .content-box {
+    @include outer-container;
+    @include pad(20px);
+    width: 100%;
+  }
+}
+
+.full-width-button-box {
+  @include margin(5px, 5px, 5px, 5px);
+  text-align: center;
+
+  .button {
+    display: block;
+  }
+}
