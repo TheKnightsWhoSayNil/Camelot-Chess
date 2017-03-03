@@ -13,6 +13,12 @@ RSpec.describe GamesController, type: :controller do
     end
   end
 
+  describe 'fill board' do
+    it 'should fill board after game is created' do
+      player_1 = FactoryGirl.create(:user)
+      Game.create(white_user: player_1).fill_board
+    end
+  end
 
   describe 'join action' do
     it 'adds a player to empty black player slot' do

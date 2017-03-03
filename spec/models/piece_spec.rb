@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'piece'
+require 'pawn'
 
 RSpec.describe Piece, type: :model do
 
@@ -106,4 +107,6 @@ RSpec.describe Piece, type: :model do
       expect(piece.is_obstructed?(destination)).to eq(true)
     end
   end
+
 end
+
