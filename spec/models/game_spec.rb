@@ -21,6 +21,14 @@ RSpec.describe Game, type: :model do
   describe 'fill_board method' do
     it 'should fill_board when game is created' do
       create_game_with_one_players.fill_board
+
+      expect(create_game_with_one_players.pieces.count).to eq(16)
+    end
+
+    it 'should fill_board when game is created' do
+      create_games_with_two_players.fill_board
+
+      expect(create_games_with_two_players.pieces.count).to eq(32)
     end
   end
 

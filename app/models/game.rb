@@ -5,7 +5,7 @@ class Game < ApplicationRecord
   has_many :pieces
 
 
-  # after_action :fill_board
+  after_create :fill_board
 
   scope :available, ->{ where(black_user_id: nil) }
 
