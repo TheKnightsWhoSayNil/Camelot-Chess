@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Rook, type: :model do
+
   describe 'valid_move?' do
 
     rook = Rook.create(color: true, x_position: 4, y_position: 4)
@@ -20,5 +21,3 @@ RSpec.describe Rook, type: :model do
   end 
 
 end 
-
-      

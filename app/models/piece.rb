@@ -2,12 +2,17 @@
 class Piece < ApplicationRecord
    belongs_to :game
    belongs_to :user
+
    self.inheritance_column = :piece_type
 
-  def valid_move?(x, y)
-    return false if !within_chessboard?(x, y)
-    return false if is_obstructed?(destination)
-  end
+   def is_obstructed?
+     false  
+   end
+
+   def valid_move?(x, y)
+     return false if !within_chessboard?(x, y)
+     return false if is_obstructed?
+   end
 
   def self.piece_types
     %w(Pawn Knight Bishop Rook Queen King)
@@ -86,6 +91,9 @@ class Piece < ApplicationRecord
     end
     return valid_move_coordinates
   end
+  
+#======
+
 
   def horizontal_obstruction(x_end, y_end)
     # movement: right to left
@@ -171,6 +179,5 @@ class Piece < ApplicationRecord
       return nil
     end
   end
-  
 end
 
