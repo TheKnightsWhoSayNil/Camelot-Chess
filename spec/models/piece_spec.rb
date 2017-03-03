@@ -4,14 +4,7 @@ require 'pawn'
 
 RSpec.describe Piece, type: :model do
 
-  describe 'is_obstructed? method' do
-    it 'should return true if obstructed horizontally to the right' do
-      user1 = FactoryGirl.create(:user)
-      game = FactoryGirl.create(:game, white_user_id: user1.id)
-      piece = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 0, y_position: 0)
-      obstruction = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 1, y_position: 0)
-      
-      destination = [2, 0]
+
 
       expect(piece.is_obstructed?(destination)).to eq(true)
     end
@@ -107,6 +100,7 @@ RSpec.describe Piece, type: :model do
       expect(piece.is_obstructed?(destination)).to eq(true)
     end
   end
+
 
 end
 
