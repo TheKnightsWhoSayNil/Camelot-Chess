@@ -1,8 +1,9 @@
 require 'rails_helper'
 require 'piece'
-require 'pawn'
+
 
 RSpec.describe Piece, type: :model do
+
   describe 'is_obstructed? method' do
     it 'should return true if obstructed horizontally to the right' do
       user1 = FactoryGirl.create(:user)
@@ -106,6 +107,4 @@ RSpec.describe Piece, type: :model do
       expect(piece.is_obstructed?(destination)).to eq(true)
     end
   end
-
 end
-
