@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'piece'
 
+
 RSpec.describe Piece, type: :model do
 
   describe 'is_obstructed? method' do
@@ -107,3 +108,4 @@ RSpec.describe Piece, type: :model do
     end
   end
 end
+
