@@ -1,6 +1,6 @@
 
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :new]
+  before_action :authenticate_user!, only: [:create, :new, :join]
 
   def show
     ##
@@ -36,6 +36,6 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:game_id, :white_user, :black_user)
+    params.require(:game).permit(:game_id, :current_user)
   end
 end

@@ -32,14 +32,14 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  def create_game_with_one_players
+    player_1 = FactoryGirl.create(:user)
+    Game.create(white_user: player_1)
+  end
+  
   def create_games_with_two_players
     player_1 = FactoryGirl.create(:user)
     player_2 = FactoryGirl.create(:user)
     Game.create(white_user: player_1, black_user: player_2)
-  end
-
-  def create_game_with_one_players
-    player_1 = FactoryGirl.create(:user)
-    Game.create(white_user: player_1)
   end
 end
