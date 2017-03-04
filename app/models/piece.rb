@@ -1,12 +1,15 @@
 # Piece will hold all similar logic for all pieces.
 class Piece < ApplicationRecord
-   belongs_to :game
-   belongs_to :user
+  belongs_to :game
+  belongs_to :user
 
-   self.inheritance_column = :piece_type
-   scope :bishops, ->{ where(piece_type: "Bishop") }
-   scope :kings, ->{ where(piece_type: "King") }
-   scope :knight, ->{ where(piece_type: "Knight") }
+  self.inheritance_column = :piece_type
+  scope :bishops, ->{ where(piece_type: "Bishop") }
+  scope :kings,   ->{ where(piece_type: "King") }
+  scope :knights,  ->{ where(piece_type: "Knight") }
+  scope :queens, ->{ where(piece_type: "Queen") }
+  scope :pawns,   ->{ where(piece_type: "Pawn") }
+  scope :rooks,  ->{ where(piece_type: "Rook") }
 
    def is_obstructed?
      false
@@ -83,7 +86,6 @@ class Piece < ApplicationRecord
     return valid_move_coordinates
   end
 
-
   def vertical_moves
     coordinates = []
       8.times do |y|
@@ -105,9 +107,6 @@ class Piece < ApplicationRecord
     return valid_move_coordinates
   end
 
-#======
-
-
   def horizontal_obstruction(x_end, y_end)
     # movement: right to left
     if x_position < x_end
@@ -126,7 +125,7 @@ class Piece < ApplicationRecord
   def vertical_obstruction(x_end, y_end)
     # path is vertical down
     if y_position < y_end
-      (y_position + 1).upto(y_end - 1) do |y|
+        (y_position + 1).upto(y_end - 1) do |y|
         return true if space_occupied?(x_position, y)
       end
     end

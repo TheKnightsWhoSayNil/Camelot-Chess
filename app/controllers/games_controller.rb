@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new, :join]
 
   def show
-    ##
+
   end
 
   def new
