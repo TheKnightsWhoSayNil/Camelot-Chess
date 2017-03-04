@@ -122,9 +122,9 @@ RSpec.describe Piece, type: :model do
 
         black_bishop.reload
 
-        expect(black_knight.captured).to eq(true)
-        expect(black_knight.x_position).to be_nil
-        expect(black_knight.x_position).to be_nil
+        expect(black_bishop.captured).to eq(true)
+        expect(black_bishop.x_position).to be_nil
+        expect(black_bishop.x_position).to be_nil
       end
     end
     describe "when the square is occuppied with same colored piece" do
