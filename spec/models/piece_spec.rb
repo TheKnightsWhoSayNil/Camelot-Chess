@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'piece'
 
 RSpec.describe Piece, type: :model do
-
   describe 'is_obstructed? method' do
     it 'should return true if obstructed horizontally to the right' do
       user1 = FactoryGirl.create(:user)
@@ -94,7 +93,6 @@ RSpec.describe Piece, type: :model do
   end
 
   describe 'move_to!' do
-
     context "when the square is empty" do
       it "does allow the move to the new coordinates" do
         board = create(:game)
@@ -116,7 +114,7 @@ RSpec.describe Piece, type: :model do
         white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
         white_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: true)
 
-        expect(white_king.move_to!(2, 2) ).to eq false
+        expect(white_king.move_to!(2, 2)).to eq false
       end
     end
 
@@ -134,7 +132,7 @@ RSpec.describe Piece, type: :model do
         expect(white_king.y_position).to eq(2)
 
         black_bishop.reload
-        
+
         expect(black_bishop.x_position).to eq(nil)
         expect(black_bishop.y_position).to eq(nil)
       end

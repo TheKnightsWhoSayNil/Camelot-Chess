@@ -4,7 +4,6 @@ class Piece < ApplicationRecord
    belongs_to :user
 
    self.inheritance_column = :piece_type
-   scope :bishop, -> { where(piece_type: "Bishop") }
 
    def is_obstructed?
      false
