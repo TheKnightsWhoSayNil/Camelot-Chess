@@ -7,7 +7,7 @@
         <td>
           <% @pieces.each do |piece| %>
             <% if piece.x_position == col && piece.y_position == row %>
-              <% #what to do here? %>
+              <%= link_to image_tag(piece.image), game_piece_path(piece)%>
             <% end %>
           <% end %>
         </td>
