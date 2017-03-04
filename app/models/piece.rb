@@ -5,7 +5,6 @@ class Piece < ApplicationRecord
 
    self.inheritance_column = :piece_type
    scope :bishops, ->{ where(piece_type: "Bishop") }
-   scope :kings, ->{ where(piece_type: "King") }
 
    def is_obstructed?
      false
