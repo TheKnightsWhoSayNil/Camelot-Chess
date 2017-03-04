@@ -7,7 +7,10 @@
         <h2><%= game.white_user.nil? ? 'White is open' : 'Black is Open' %></h2>
       </div>
       <div class="game-list">
-        <span class="badge-success"> Game <%= game.name %> <br /></span>
+        <span class="badge-success"> <%= game.name %> <br /></span>
+        <br />
+        <br />
+        <span class="badge-success"> Created: <%= game.created_at %> <br /></span>
         <br />
         <br />
         <%= button_to 'Join game', join_game_path(game), { action: :join, method: :patch } %>
