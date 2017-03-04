@@ -3,7 +3,7 @@ class PiecesController < ApplicationController
 
   def show
     @piece = Piece.find_by_id(params[:id])
-    redirect_to game_piece_path(@piece)
+    @pieces = @piece.game.pieces
   end
 
   private
