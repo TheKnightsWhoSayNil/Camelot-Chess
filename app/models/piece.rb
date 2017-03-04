@@ -28,16 +28,11 @@ class Piece < ApplicationRecord
     if @destination.nil?
       update_attributes(x_position: x, y_position: y)
     elsif @destination.color == color
-      return render_not_found
+      return false
     else
-      fail "Error" if color == @destination.color
-      capture(x, y)
+      update_attributes(x_position: x, y_position: y)
+      @destination.update_attributes(x_position: nil, y_position: nil)
     end
-  end
-
-  def capture(x, y)
-    update_attributes(x_position: x, y_position: y)
-    @target.update_attributes(captured: true, x_position: nil, y_position: nil)
   end
 
   #should store all the possible diagonal moves

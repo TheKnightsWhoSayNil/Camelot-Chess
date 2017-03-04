@@ -1,7 +1,6 @@
 require 'rails_helper'
 require 'piece'
 
-
 RSpec.describe Piece, type: :model do
 
   describe 'is_obstructed? method' do
@@ -109,10 +108,23 @@ RSpec.describe Piece, type: :model do
       end
     end
 
+    context "when the square is occupied with same colored piece" do
+      it "does not capture the same colored piece" do
+        board = create(:game)
+        board.pieces.delete_all
+
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
+        white_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: true)
+
+        expect(white_king.move_to!(2, 2) ).to eq false
+      end
+    end
+
     context "when the square is occupied with different colored piece" do
       it "does capture the opponent's piece, and move to the new square" do
         board = create(:game)
         board.pieces.delete_all
+
         white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
         black_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: false)
 
@@ -122,19 +134,9 @@ RSpec.describe Piece, type: :model do
         expect(white_king.y_position).to eq(2)
 
         black_bishop.reload
-
+        
         expect(black_bishop.x_position).to eq(nil)
         expect(black_bishop.y_position).to eq(nil)
-      end
-    end
-
-    context "when the square is occuppied with same colored piece" do
-      it "does not capture the same colored piece" do
-        board = create(:game)
-        board.pieces.delete_all
-        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
-        white_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: true)
-        expect {white_king.move_to!(2, 2) }.to have_http_status :not_found
       end
     end
   end
