@@ -12,10 +12,6 @@ class Game < ApplicationRecord
     self.black_user.blank?
   end
 
-  def populate_board!
-
-  end
-
   def fill_board
     # fill white pieces
     (0..7).each do |i|

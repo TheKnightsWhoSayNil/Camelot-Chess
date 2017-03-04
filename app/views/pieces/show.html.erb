@@ -1,0 +1,19 @@
+<table class="game-board">
+  <% 7.downto(0) do |row| %>
+    <tr>
+      <% 0.upto(7) do |col| %>
+        <td>
+
+          <%= link_to game_piece_path(@piece, x_position: 'col', y_position: 'row'), method: 'PUT' do %>
+            <% @pieces.each do |piece| %>
+              <% if piece.x_position == col && piece.y_position == row %>
+                <%= image_tag(piece.image, class: piece_class(@piece, piece)) %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
