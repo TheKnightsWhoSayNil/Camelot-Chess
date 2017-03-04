@@ -4,6 +4,7 @@ class Piece < ApplicationRecord
    belongs_to :user
 
    self.inheritance_column = :piece_type
+   scope :bishop, -> { where(piece_type: "Bishop") }
 
    def is_obstructed?
      false
@@ -23,12 +24,20 @@ class Piece < ApplicationRecord
   end
 
   def move_to!(x, y)
-    @destination = game.pieces.where(:x_position => x, :y_position => y).take
+    @destination = game.pieces.where(x_position: x, y_position: y).take
     if @destination.nil?
-      update_attributes(:x_position => x, :y_position => y)
+      update_attributes(x_position: x, y_position: y)
+    elsif @destination.color == color
+      return render_not_found
     else
-      fail "False move: that's your own piece dude" if color == @target.color
+      fail "Error" if color == @destination.color
+      capture(x, y)
     end
+  end
+
+  def capture(x, y)
+    update_attributes(x_position: x, y_position: y)
+    @target.update_attributes(captured: true, x_position: nil, y_position: nil)
   end
 
   #should store all the possible diagonal moves

@@ -95,8 +95,9 @@ RSpec.describe Piece, type: :model do
   end
 
   describe 'move_to!' do
-    describe "when the square is empty" do
-      it "will allow the move to the new coordinates" do
+
+    context "when the square is empty" do
+      it "does allow the move to the new coordinates" do
         board = create(:game)
         board.pieces.delete_all
         king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
@@ -108,8 +109,8 @@ RSpec.describe Piece, type: :model do
       end
     end
 
-    describe "when the square is occupied with different colored piece" do
-      it "will capture the opponent's piece, and move to the new square" do
+    context "when the square is occupied with different colored piece" do
+      it "does capture the opponent's piece, and move to the new square" do
         board = create(:game)
         board.pieces.delete_all
         white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
@@ -122,14 +123,18 @@ RSpec.describe Piece, type: :model do
 
         black_bishop.reload
 
-        expect(black_bishop.captured).to eq(true)
-        expect(black_bishop.x_position).to be_nil
-        expect(black_bishop.x_position).to be_nil
+        expect(black_bishop.x_position).to eq(nil)
+        expect(black_bishop.y_position).to eq(nil)
       end
     end
-    describe "when the square is occuppied with same colored piece" do
-      it "will not capture the same color piece" do
 
+    context "when the square is occuppied with same colored piece" do
+      it "does not capture the same colored piece" do
+        board = create(:game)
+        board.pieces.delete_all
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
+        white_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: true)
+        expect {white_king.move_to!(2, 2) }.to have_http_status :not_found
       end
     end
   end
