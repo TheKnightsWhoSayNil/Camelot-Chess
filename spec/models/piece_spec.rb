@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'piece'
 
+
 RSpec.describe Piece, type: :model do
 
   describe 'is_obstructed? method' do
@@ -92,6 +93,7 @@ RSpec.describe Piece, type: :model do
       expect(piece.is_obstructed?(destination)).to eq(true)
     end
   end
+<<<<<<< HEAD
 
   describe 'move_to!' do
     describe "when the square is empty" do
@@ -133,3 +135,6 @@ RSpec.describe Piece, type: :model do
     end
   end
 end
+=======
+end
+>>>>>>> master
