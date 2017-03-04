@@ -3,7 +3,8 @@ class GamesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new, :join]
 
   def show
-    ##
+    @game = Game.find(params[:id])
+    @pieces = @game.pieces
   end
 
   def new

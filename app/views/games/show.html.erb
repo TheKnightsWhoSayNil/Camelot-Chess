@@ -5,6 +5,13 @@
     <tr>
       <% 0.upto(7) do |col| %>
         <td>
+          <% @pieces.each do |piece| %>
+            <% if piece.x_position == col && piece.y_position == row %>
+
+              <%= link_to image_tag(piece.image, class: 'game-piece'), #something_path(piece) %>
+
+            <% end %>
+          <% end %>
         </td>
       <% end %>
     </tr>
