@@ -93,11 +93,10 @@ RSpec.describe Piece, type: :model do
       expect(piece.is_obstructed?(destination)).to eq(true)
     end
   end
-<<<<<<< HEAD
 
   describe 'move_to!' do
     describe "when the square is empty" do
-      it "will allow and move to the new coordinates" do
+      it "will allow the move to the new coordinates" do
         board = create(:game)
         board.pieces.delete_all
         king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
@@ -105,16 +104,16 @@ RSpec.describe Piece, type: :model do
         king.move_to!(2, 2)
 
         expect(king.x_position).to eq(2)
-        expect(king.x_position).to eq(2)
+        expect(king.y_position).to eq(2)
       end
     end
 
-    describe "when the square is occupied" do
+    describe "when the square is occupied with different colored piece" do
       it "will capture the opponent's piece, and move to the new square" do
         board = create(:game)
         board.pieces.delete_all
         white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
-        black_bishop = Knight.create(x_position: 2, y_position: 2, game_id: board.id, color: false)
+        black_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: false)
 
         white_king.move_to!(2, 2)
 
@@ -128,13 +127,10 @@ RSpec.describe Piece, type: :model do
         expect(black_knight.x_position).to be_nil
       end
     end
-    describe "when the pieces are the same color" do
-      it "allows castling" do
+    describe "when the square is occuppied with same colored piece" do
+      it "will not capture the same color piece" do
 
       end
     end
   end
 end
-=======
-end
->>>>>>> master

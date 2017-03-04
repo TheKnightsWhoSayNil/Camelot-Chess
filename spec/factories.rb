@@ -13,6 +13,7 @@ FactoryGirl.define do
     association :game
     x_position 0
     y_position 0
+    color false
   end
 
   factory :user do
@@ -29,7 +30,7 @@ FactoryGirl.define do
     y_position 1
   end
 
-  factory :Bishop, parent: :piece do
+  factory :bishop, parent: :piece do
     piece_type "Bishop"
     x_position 2
     y_position 2

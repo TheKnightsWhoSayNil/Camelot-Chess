@@ -6,7 +6,7 @@ class Piece < ApplicationRecord
    self.inheritance_column = :piece_type
 
    def is_obstructed?
-     false  
+     false
    end
 
    def valid_move?(x, y)
@@ -21,22 +21,29 @@ class Piece < ApplicationRecord
   def within_chessboard?(x, y)
     (x >= 0 && y >= 0 && x <= 7 && y <= 7)
   end
-    
-  
 
-  #should store all the possible diagonal moves 
+  def move_to!(x, y)
+    @destination = game.pieces.where(:x_position => x, :y_position => y).take
+    if @destination.nil?
+      update_attributes(:x_position => x, :y_position => y)
+    else
+      fail "False move: that's your own piece dude" if color == @target.color
+    end
+  end
+
+  #should store all the possible diagonal moves
   # excluding starting position hence "if x > 0"
   def diagonal_moves
     coordinates = []
       8.times do |x|
-        if x > 0 
+        if x > 0
         coordinates << [x, x]
         coordinates << [x, -x]
         coordinates << [-x, x]
         coordinates << [-x, -x]
          end
        end
-       return coordinates   
+       return coordinates
    end
 
   def diagonal_move_valid?(x_position, y_position)
@@ -52,7 +59,7 @@ class Piece < ApplicationRecord
  def horizontal_moves
     coordinates = []
       8.times do |x|
-        if x > 0 
+        if x > 0
         coordinates << [x, 0]
         coordinates << [-x, 0]
         end
@@ -74,7 +81,7 @@ class Piece < ApplicationRecord
   def vertical_moves
     coordinates = []
       8.times do |y|
-        if y > 0 
+        if y > 0
         coordinates << [0, y]
         coordinates << [0, -y]
         end
@@ -91,7 +98,7 @@ class Piece < ApplicationRecord
     end
     return valid_move_coordinates
   end
-  
+
 #======
 
 
@@ -178,12 +185,5 @@ class Piece < ApplicationRecord
     else
       return nil
     end
-  end
-
-  def move_to!(x, y)
-    original_x = self.x_position
-    original_y = self.y_position
-    @destination = game.pieces.where(x_position: x, y_position: y).take
-    
   end
 end
