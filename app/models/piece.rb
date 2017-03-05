@@ -105,6 +105,7 @@ class Piece < ApplicationRecord
       end
     end
     return valid_move_coordinates
+  end
 
   def horizontal_obstruction(x_end, y_end)
     # movement: right to left
