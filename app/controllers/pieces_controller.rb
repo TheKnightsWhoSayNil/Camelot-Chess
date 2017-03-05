@@ -6,6 +6,15 @@ class PiecesController < ApplicationController
     @pieces = @piece.game.pieces
   end
 
+  def update
+    @piece = Piece.find(params[:id])
+    @game = @piece.game
+    @color = @piece.color
+
+    x_coordinates = params[:x_position].to_i
+    y_coordinates = params[:y_position].to_i
+  end
+
   private
 
   def piece_params
