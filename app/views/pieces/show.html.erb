@@ -3,13 +3,11 @@
     <tr>
       <% 0.upto(7) do |col| %>
         <td>
-
-            <% @pieces.each do |piece| %>
-              <% if piece.x_position == col && piece.y_position == row %>
-                <%= image_tag(piece.image, class: piece_class(@piece, piece)) %>
-              <% end %>
+          <% @pieces.each do |piece| %>
+            <% if piece.x_position == col && piece.y_position == row %>
+              <%= image_tag(piece.image, class: piece_class(@piece, piece)) %>
             <% end %>
-
+          <% end %>
         </td>
       <% end %>
     </tr>
