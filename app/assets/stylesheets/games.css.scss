@@ -1,14 +1,14 @@
-//-----CHESS BOARD-----//
+//-----CHESS BOARD & PIECES-----//
 
 .game-title {
   text-align: center;
 }
 
 .game-board {
-  height: 482px;
-  width: 482px;
+  height: 484px;
+  width: 484px;
   margin: 0 auto;
-  border: 1px solid;
+  border: 2px solid;
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
@@ -19,38 +19,28 @@
   height: 60px;
   width: 60px;
   background-image: url('/assets/whitesquare.png');
-  float: left;
   border: 1px solid;
   text-align: center;
-}
-
-.game-board td:hover {
-   border: 2px solid;
-   border-color: #45BDE6;
+  vertical-align: middle;
 }
 
 
 .game-board tr:nth-child(odd) td:nth-child(even),
 .game-board tr:nth-child(even) td:nth-child(odd) {
-  height: 60px;
-  width: 60px;
   background-image: url('/assets/blacksquare.png');
-  float: left;
-  border: 1px solid;
-  text-align: center
 }
 
-.game-board tr:nth-child(odd) td:nth-child(even):hover,
-.game-board tr:nth-child(even) td:nth-child(odd):hover {
-  border: 2px solid;
-  border-color: #45BDE6;
-}
 
 td img {
   width: 40px;
   height: 40px;
-  margin: 0 auto;
+  vertical-align: middle;
+  text-align: center
 }
+
+
+
+//-----MEDIA QUERIES BELOW-----//
 
 
 @media screen and (max-width: 700px) {
@@ -67,7 +57,6 @@ td img {
     height: 80px;
     width: 80px;
     background-color: white;
-    float: left;
     text-align: center;
   }
 
@@ -76,7 +65,6 @@ td img {
     height: 80px;
     width: 80px;
     background-color: black;
-    float: left;
     text-align: center;
   }
 
@@ -96,7 +84,6 @@ td img {
     height: 70px;
     width: 70px;
     background-color: white;
-    float: left;
     text-align: center;
   }
 
@@ -105,7 +92,6 @@ td img {
     height: 70px;
     width: 70px;
     background-color: black;
-    float: left;
     text-align: center;
   }
 
@@ -127,7 +113,6 @@ td img {
     height: 35px;
     width: 35px;
     background-color: white;
-    float: left;
     text-align: center;
   }
 
@@ -136,12 +121,14 @@ td img {
     height: 35px;
     width: 35px;
     background-color: black;
-    float: left;
     text-align: center;
   }
 
 }
 
+
+
+//-----OTHER-----//
 
 .game-box {
   @include border-width(1px);
