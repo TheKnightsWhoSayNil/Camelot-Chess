@@ -1,5 +1,6 @@
-# Piece will hold all similar logic for all pieces.
+ # Piece will hold all similar logic for all pieces.
 class Piece < ApplicationRecord
+<<<<<<< HEAD
   belongs_to :game
   belongs_to :user
 
@@ -11,13 +12,8 @@ class Piece < ApplicationRecord
   scope :pawns,   ->{ where(piece_type: "Pawn") }
   scope :rooks,  ->{ where(piece_type: "Rook") }
 
-   def is_obstructed?
-     false
-   end
-
    def valid_move?(x, y)
      return false if !within_chessboard?(x, y)
-     return false if is_obstructed?
    end
 
   def self.piece_types
@@ -27,6 +23,7 @@ class Piece < ApplicationRecord
   def within_chessboard?(x, y)
     (x >= 0 && y >= 0 && x <= 7 && y <= 7)
   end
+
 
   def move_to!(x, y)
     @destination = game.pieces.where(x_position: x, y_position: y).take
@@ -105,6 +102,10 @@ class Piece < ApplicationRecord
       end
     end
     return valid_move_coordinates
+
+
+#======
+
 
   def horizontal_obstruction(x_end, y_end)
     # movement: right to left
@@ -190,4 +191,5 @@ class Piece < ApplicationRecord
       return nil
     end
   end
+
 end

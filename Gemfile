@@ -7,9 +7,6 @@ end
 
 ruby '2.4.0'
 
-gem "omniauth-google-oauth2"
-gem 'omniauth-facebook'
-
 gem 'figaro'
 
 gem 'rails_12factor', group: :production
