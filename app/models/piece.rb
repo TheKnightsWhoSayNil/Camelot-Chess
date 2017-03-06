@@ -1,4 +1,4 @@
-# Piece will hold all similar logic for all pieces.
+ # Piece will hold all similar logic for all pieces.
 class Piece < ApplicationRecord
    belongs_to :game
    
@@ -6,13 +6,9 @@ class Piece < ApplicationRecord
 
    self.inheritance_column = :piece_type
 
-   def is_obstructed?
-     false  
-   end
-
    def valid_move?(x, y)
      return false if !within_chessboard?(x, y)
-     return false if is_obstructed?
+     return false if is_obstructed(destination)
    end
 
   def self.piece_types
