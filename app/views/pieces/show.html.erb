@@ -1,5 +1,3 @@
-<h2 class="game-title">Chess Board</h2>
-
 <table class="game-board">
   <% 7.downto(0) do |row| %>
     <tr>
@@ -7,9 +5,7 @@
         <td>
           <% @pieces.each do |piece| %>
             <% if piece.x_position == col && piece.y_position == row %>
-              <%= link_to image_tag(piece.image), game_piece_path(piece)%>
-            <% elsif piece.x_position == col && piece.y_position == row %>
-              <%= link_to image_tag(piece.image), game_piece_path(piece) %>
+              <%= image_tag(piece.image, class: piece_class(@piece, piece)) %>
             <% end %>
           <% end %>
         </td>
