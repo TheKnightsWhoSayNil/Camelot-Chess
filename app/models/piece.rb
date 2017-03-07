@@ -5,23 +5,10 @@ class Piece < ApplicationRecord
   self.inheritance_column = :piece_type
   scope :bishops, ->{ where(piece_type: "Bishop") }
   scope :kings,   ->{ where(piece_type: "King") }
-  scope :knights,  ->{ where(piece_type: "Knight") }
-  scope :queens, ->{ where(piece_type: "Queen") }
+  scope :knights, ->{ where(piece_type: "Knight") }
+  scope :queens,  ->{ where(piece_type: "Queen") }
   scope :pawns,   ->{ where(piece_type: "Pawn") }
-  scope :rooks,  ->{ where(piece_type: "Rook") }
-
-   def valid_move?(x, y)
-     return false if !within_chessboard?(x, y)
-   end
-
-  def self.piece_types
-    %w(Pawn Knight Bishop Rook Queen King)
-  end
-
-  def within_chessboard?(x, y)
-    (x >= 0 && y >= 0 && x <= 7 && y <= 7)
-  end
-
+  scope :rooks,   ->{ where(piece_type: "Rook") }
 
   def move_to!(x, y)
     @destination = game.pieces.where(x_position: x, y_position: y).take
@@ -33,6 +20,18 @@ class Piece < ApplicationRecord
       update_attributes(x_position: x, y_position: y)
       @destination.update_attributes(x_position: nil, y_position: nil)
     end
+  end
+
+  def valid_move?(x, y)
+    return false if !within_chessboard?(x, y)
+  end
+
+  def self.piece_types
+    %w(Pawn Knight Bishop Rook Queen King)
+  end
+
+  def within_chessboard?(x, y)
+    (x >= 0 && y >= 0 && x <= 7 && y <= 7)
   end
 
   #should store all the possible diagonal moves
