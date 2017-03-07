@@ -34,7 +34,10 @@ class Piece < ApplicationRecord
     (x >= 0 && y >= 0 && x <= 7 && y <= 7)
   end
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dd39d0d24c08af4ee526949ad2fdf6a3689d9d34
   #should store all the possible diagonal moves
   # excluding starting position hence "if x > 0"
   def diagonal_moves
@@ -101,7 +104,6 @@ class Piece < ApplicationRecord
     end
     return valid_move_coordinates
   end
-
 
 #======
 
