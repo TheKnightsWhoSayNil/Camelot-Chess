@@ -100,12 +100,9 @@ class Piece < ApplicationRecord
       end
     end
     return valid_move_coordinates
+  end
 
 
-=======
-
-
->>>>>>> master
 #======
 
 
@@ -193,6 +190,4 @@ class Piece < ApplicationRecord
       return nil
     end
   end
-
-end
 end
