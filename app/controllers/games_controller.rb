@@ -28,6 +28,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     if @game.available?
       @game.black_user = current_user
+      assign_black_pieces_to_current_user
       @game.save
       redirect_to game_path(@game)
     else
@@ -37,6 +38,13 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def assign_black_pieces_to_current_user
+    @game.black_pieces.each do |piece|
+      piece.user_id = current_user.id
+      piece.save
+    end
+  end
 
   def game_params
     params.require(:game).permit(:game_id, :name, :current_user, :black_user_id, :white_user_id)
