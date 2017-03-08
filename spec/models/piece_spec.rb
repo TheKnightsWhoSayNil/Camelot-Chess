@@ -93,7 +93,7 @@ RSpec.describe Piece, type: :model do
   end
 
   describe 'move_to!' do
-    context "when the square is empty" do
+    context "when the square is unoccupied" do
       it "does allow the move to the new coordinates" do
         board = create(:game)
         board.pieces.delete_all
@@ -106,7 +106,7 @@ RSpec.describe Piece, type: :model do
       end
     end
 
-    context "when the square is occupied with same colored piece" do
+    context "when the square is occupied with a piece of the same color" do
       it "does not capture the same colored piece" do
         board = create(:game)
         board.pieces.delete_all

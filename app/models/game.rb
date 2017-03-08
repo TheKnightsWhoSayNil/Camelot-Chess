@@ -13,6 +13,14 @@ class Game < ApplicationRecord
     self.black_user.blank?
   end
 
+  def black_pieces
+    self.pieces.where(color: false)
+  end
+
+  def white_pieces
+    self.pieces.where(color: true)
+  end
+
   def assign_pieces
     pieces.where(color: true).each do |p|
       p.update_attributes(player_id: white_user_id)
