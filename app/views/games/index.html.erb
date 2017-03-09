@@ -1,19 +1,25 @@
-<h1 class="game-title"> Available Games </h1>
-
 <div class="available-list">
-  <div class="sign-up">
-    <% @game.each do |game| %>
-      <div class="game-list">
-        <h2><%= game.white_user.nil? ? 'White is open' : 'Black is Open' %></h2>
-      </div>
-      <div class="game-list">
-        <span class="badge-success"> Game <%= game.id %> <br /></span>
-        <br />
-        <br />
-        <%= button_to 'Join game', join_game_path(game), { action: :join, method: :patch } %>
-      </div>
+  <h1> Available Games </h1>
+</div>
+
+<div class="cards">
+  <% @game.each do |game| %>
+  <div class="card">
+    <div class="card-header">
+      <h2> <%= game.name %> </h2>
+    </div>
+    <div class="card-copy">
+      <span class="badge-default"><%= game.white_user.nil? ? 'White is open' : 'Black is Open' %><br /></span>
       <br />
-      <hr />
-    <% end %>
+      <br />
+      <span class="badge-default"> Date created: <%= game.created_at.to_date %> <br /></span>
+      <br />
+      <br />
+      <span class="badge-default"> Opponent: <%= game.white_user.email %> <br /></span>
+      <br />
+      <br />
+      <%= button_to 'Join game', join_game_path(game), { action: :join, method: :patch } %>
+    </div>
   </div>
+  <% end %>
 </div>

@@ -1,4 +1,4 @@
-FactoryGirl.define do 
+FactoryGirl.define do
   factory :game do
     association :white_user, factory: :user
   end
@@ -11,13 +11,29 @@ FactoryGirl.define do
   factory :piece do
     association :user_id
     association :game
+    x_position 0
+    y_position 0
+    color false
   end
 
   factory :user do
     sequence :email do |n|
-      "dummyEmail#{n}@gmail.com"
+      "randomEmail#{n}@gmail.com"
     end
     password "secretPassword"
     password_confirmation "secretPassword"
   end
+
+  factory :king, parent: :piece do
+    piece_type "King"
+    x_position 1
+    y_position 1
+  end
+
+  factory :bishop, parent: :piece do
+    piece_type "Bishop"
+    x_position 2
+    y_position 2
+  end
+
 end
