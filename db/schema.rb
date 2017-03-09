@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20170304170619) do
     t.boolean  "draw"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "name"
+    t.integer  "turn"
   end
 
   create_table "pieces", force: :cascade do |t|

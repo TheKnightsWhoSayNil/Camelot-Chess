@@ -5,19 +5,17 @@ class Rook < Piece
     horizontal_move?(x,y) || vertical_move?(x,y) 
   end
 
-  def horizontal_move?(x,y)
-    delta_x = x_position - x
-    delta_y = y_position - y
-
-    delta_y == 0 && delta_x != 0
+  def horizontal_move?(x, y)
+    if y_position == y && x_position != x
+      return true
+    end
+    false
   end
 
-  def vertical_move?(x,y)
-    delta_x = x_position - x
-    delta_y = y_position - y
-
-    delta_y != 0 && delta_x == 0
+  def vertical_move?(x, y)
+    if x_position == x && y_position != y
+      return true
+    end
+    false
   end
-end
-
-
+end 
