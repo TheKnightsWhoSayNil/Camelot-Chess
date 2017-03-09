@@ -24,7 +24,6 @@
   vertical-align: middle;
 }
 
-
 .game-board tr:nth-child(odd) td:nth-child(even),
 .game-board tr:nth-child(even) td:nth-child(odd) {
   background-image: url('/assets/blacksquare.png');
@@ -37,7 +36,6 @@ td img {
   vertical-align: middle;
   text-align: center
 }
-
 
 
 //-----MEDIA QUERIES BELOW-----//

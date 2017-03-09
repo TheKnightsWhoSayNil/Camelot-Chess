@@ -40,6 +40,15 @@ RSpec.describe GamesController, type: :controller do
 
       expect(response).to redirect_to game_path(game)
     end
+    it 'sets the user_id of all black pieces to the current_user who is joining' do
+      game = create_game_with_one_player
+      black_user = create(:user)
+      sign_in black_user
+
+      patch :join, id: game.id
+
+      expect(game.black_pieces.take.user_id).to eq black_user.id
+    end
   end
 
   def create_game_with_one_player

@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20170304170619) do
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
-    t.integer  "game_id"
     t.integer  "white_user_id"
     t.integer  "black_user_id"
     t.integer  "game_winner"
@@ -25,7 +24,6 @@ ActiveRecord::Schema.define(version: 20170304170619) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "name"
-    t.integer  "turn"
   end
 
   create_table "pieces", force: :cascade do |t|
