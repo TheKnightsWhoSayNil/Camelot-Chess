@@ -13,32 +13,12 @@ class Piece < ApplicationRecord
   def move_to!(x, y)
     if unoccupied?(x,y)
       update_attributes(x_position: x, y_position: y)
-    elsif occupied_by_opposing_piece?
+    elsif occupied_by_opposing_piece?(x,y)
       capture_piece_at!(x,y)
       update_attributes(x_position: x, y_position: y)
-    elsif occupied_by_mycolor_piece?
+    elsif occupied_by_mycolor_piece?(x,y)
       return false
     end
-  end
-
-  def capture_piece_at!(x,y)
-    piece_at(x,y).update_attributes(x_position: nil, y_position: nil)
-  end
-
-  def unoccupied?(x,y)
-    !space_occupied?(x,y)
-  end
-
-  def occupied_by_mycolor_piece?(x,y)
-    space_occupied?(x,y) && (piece_at(x,y).color == self.color)
-  end
-
-  def occupied_by_opposing_piece?(x,y)
-    space_occupied?(x,y) && (piece_at(x,y).color != self.color)
-  end
-
-  def piece_at(x, y)
-    game.pieces.where(x_position: x, y_position: y).take
   end
 
   def valid_move?(x, y)
@@ -206,5 +186,25 @@ class Piece < ApplicationRecord
     else
       return nil
     end
+  end
+
+  def capture_piece_at!(x,y)
+    piece_at(x,y).update_attributes(x_position: nil, y_position: nil)
+  end
+
+  def unoccupied?(x,y)
+    !space_occupied?(x,y)
+  end
+
+  def occupied_by_mycolor_piece?(x,y)
+    space_occupied?(x,y) && (piece_at(x,y).color == self.color)
+  end
+
+  def occupied_by_opposing_piece?(x,y)
+    space_occupied?(x,y) && (piece_at(x,y).color != self.color)
+  end
+
+  def piece_at(x, y)
+    game.pieces.where(x_position: x, y_position: y).take
   end
 end
