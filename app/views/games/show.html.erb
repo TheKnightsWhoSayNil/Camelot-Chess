@@ -1,8 +1,25 @@
 <script>
-var borderChange = $( 'td.piece-square' ).on("click", function() {
-  $(this).css('border-color', 'red');
+// var borderChange = $( 'td.piece-square' ).on("click", function() {
+//   $(this).css('border-color', 'red');
   
-});
+// });
+
+$( function() {
+  $( ".piece" ).draggable();
+  $( ".piece-square" ).droppable({
+    accept: ".piece",
+    drop: function( event, ui ) {
+      console.log($('.ui-draggable').data('url'));
+      console.log($(event.target).data('x'));
+      console.log($(event.target).data('y'));
+      // AJAX PUT requyest to URL with x, y (as params)
+      // handle response from this request
+      // e.g. return 
+      // { ok: true }
+      // check if OK, if not show error or move back
+    }
+  });
+} );
 </script>
 
 
@@ -12,12 +29,12 @@ var borderChange = $( 'td.piece-square' ).on("click", function() {
   <% 7.downto(0) do |row| %>
     <tr>
       <% 0.upto(7) do |col| %>
-        <td class="piece-square">
+        <td class="piece-square ui-droppable" data-x="<%= col %>" data-y="<%= row %>">
           <% @pieces.each do |piece| %>
             <% if piece.x_position == col && piece.y_position == row %>
-              <%= link_to image_tag(piece.image), game_piece_path(piece)%>
-            <% elsif piece.x_position == col && piece.y_position == row %>
-              <%= link_to image_tag(piece.image), game_piece_path(piece) %>
+              <div class="piece" data-url="<%= game_piece_path(piece.game, piece) %>">
+                <%= image_tag(piece.image) %>
+              </div>
             <% end %>
           <% end %>
         </td>

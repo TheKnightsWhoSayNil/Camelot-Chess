@@ -3,7 +3,7 @@ class PiecesController < ApplicationController
 
   def show
     #show the board again
-    @game = Game.find(params[:id])
+    @game = Game.find(params[:game_id])
     @pieces = @game.pieces
   end
 
@@ -12,7 +12,7 @@ class PiecesController < ApplicationController
     
     @piece.update_attributes(piece_params)
     if @piece.valid?
-      redirect_to game_path
+      redirect_to game_path(piece.game)
     else
       return :show, status: :not_acceptable
     end
