@@ -209,6 +209,18 @@ class Piece < ApplicationRecord
     game.pieces.where(x_position: x, y_position: y).take
   end
 
+  def diagonal_move?(x, y)
+    (y_position - y).abs == (x_position - x).abs
+  end
+
+  def vertical_move?(x, y)
+    x_position == x && y_position != y
+  end
+
+  def horizontal_move?(x, y)
+    y_position == y && x_position != x
+  end
+
   private 
 
   def set_default_state
