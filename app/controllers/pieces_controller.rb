@@ -12,7 +12,7 @@ class PiecesController < ApplicationController
     
     @piece.update_attributes(piece_params)
     if @piece.valid?
-      redirect_to game_path
+      redirect_to game_path(game)
     else
       return :show, status: :not_acceptable
     end

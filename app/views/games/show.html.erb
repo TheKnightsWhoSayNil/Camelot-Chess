@@ -1,18 +1,10 @@
-<script>
-var borderChange = $( 'td.piece-square' ).on("click", function() {
-  $(this).css('border-color', 'red');
-  
-});
-</script>
-
-
 <h2 class="game-title">Chess Board</h2>
 
 <table class="game-board">
   <% 7.downto(0) do |row| %>
     <tr>
       <% 0.upto(7) do |col| %>
-        <td class="piece-square">
+        <td class="square">
           <% @pieces.each do |piece| %>
             <% if piece.x_position == col && piece.y_position == row %>
               <%= link_to image_tag(piece.image), game_piece_path(piece)%>
@@ -25,3 +17,5 @@ var borderChange = $( 'td.piece-square' ).on("click", function() {
     </tr>
   <% end %>
 </table>
+
+      
