@@ -27,7 +27,7 @@ class King < Piece
       update_attributes(x_position: 2, state: 'moved')
       rook.update_attributes(x_position: 3, state: 'moved')
       return true 
-    else 
+    else #kingside
       update_attributes(x_position: 6, state: 'moved')
       rook.update_attributes(x_position: 5, state: 'moved')
       return true 
@@ -38,6 +38,7 @@ class King < Piece
     #to do: return false if in check
     #to do: return false if spaces between rook & king are obstructed 
     return false unless state == 'unmoved' #ensure king hasn't moved yet
+    return false unless rook.state == 'unmoved' 
     true 
   end 
 
