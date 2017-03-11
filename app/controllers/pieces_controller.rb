@@ -9,14 +9,17 @@ class PiecesController < ApplicationController
 
   def update
     @piece = Piece.find_by_id(params[:id])
-    
-    @piece.update_attributes(piece_params)
-    if @piece.valid?
-      redirect_to game_path(game)
-    else
-      return :show, status: :not_acceptable
+    @game = @piece.game
+
+    # x = params[:x_position].to_i
+    # y = params[:y_position].to_i
+
+    if @piece.update_attributes(piece_params)
+      redirect_to game_path(@game)
     end
+    
   end
+    
 
   private
 
