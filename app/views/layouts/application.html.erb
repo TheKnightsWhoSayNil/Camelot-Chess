@@ -6,14 +6,11 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Carrois+Gothic+SC|Cutive+Mono|Montserrat|Rubik+Mono+One" rel="stylesheet">
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <%= render 'partials/navbar' %>
-    <%= render 'partials/modalforms' %>
     <%= yield %>
-    <%= render 'partials/create_join' %>
   </body>
 </html>
