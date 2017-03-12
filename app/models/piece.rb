@@ -226,4 +226,5 @@ class Piece < ApplicationRecord
   def set_default_state
     self.state ||= 'unmoved'
   end 
+
 end

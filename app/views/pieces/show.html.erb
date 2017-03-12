@@ -1,11 +1,15 @@
+<h2 class="game-title">Chess Board</h2>
+
 <table class="game-board">
   <% 7.downto(0) do |row| %>
     <tr>
       <% 0.upto(7) do |col| %>
-        <td>
+        <td class="square">
           <% @pieces.each do |piece| %>
             <% if piece.x_position == col && piece.y_position == row %>
-              <%= image_tag(piece.image, class: piece_class(@piece, piece)) %>
+              <%= link_to image_tag(piece.image), game_piece_path(piece)%>
+            <% elsif piece.x_position == col && piece.y_position == row %>
+              <%= link_to image_tag(piece.image), game_piece_path(piece) %>
             <% end %>
           <% end %>
         </td>
@@ -13,3 +17,13 @@
     </tr>
   <% end %>
 </table>
+
+<script>
+$( document ).ready(function() {
+  $( 'td.square' ).on("click", function(e) {
+    e.preventDefault();
+    $( this ).css('border-color', 'red');
+    
+  });
+});
+</script>

@@ -21,14 +21,14 @@ class Game < ApplicationRecord
     self.pieces.where(color: true)
   end
 
-  def assign_pieces
-    pieces.where(color: true).each do |p|
-      p.update_attributes(player_id: white_user_id)
-    end
-    pieces.where(color: false).each do |p|
-      p.update_attributes(player_id: black_user_id)
-    end
-  end
+  # def assign_pieces
+  #   pieces.where(color: true).each do |p|
+  #     p.update_attributes(player_id: white_user_id)
+  #   end
+  #   pieces.where(color: false).each do |p|
+  #     p.update_attributes(player_id: black_user_id)
+  #   end
+  # end
 
   def fill_board
     # fill white pieces

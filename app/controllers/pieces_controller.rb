@@ -1,18 +1,17 @@
 class PiecesController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :update]
-
+  
   def show
-    @piece = Piece.find_by_id(params[:id])
-    @pieces = @piece.game.pieces
+    @game = Game.find(params[:id])
+    @pieces = @game.pieces
   end
 
   def update
     @piece = Piece.find(params[:id])
     @game = @piece.game
-    @color = @piece.color
 
-    x_coordinates = params[:x_position].to_i
-    y_coordinates = params[:y_position].to_i
+    if @piece.update_attributes(piece_params)
+      redirect_to game_path(@game)
+    end
   end
 
   private
