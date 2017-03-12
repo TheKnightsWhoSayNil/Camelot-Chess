@@ -11,7 +11,7 @@ RSpec.describe Bishop, type: :model do
     end 
 
     it 'returns false if moves horizontally' do 
-      expect(bishop.valid_move?(8,4)).to eq false 
+      expect(bishop.valid_move?(1,4)).to eq false 
     end 
 
     it 'returns true if moving diagonally' do 
