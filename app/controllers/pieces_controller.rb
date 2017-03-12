@@ -1,5 +1,5 @@
 class PiecesController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :update]
+  
 
   def show
     #show the board again
@@ -8,13 +8,11 @@ class PiecesController < ApplicationController
   end
 
   def update
-    @piece = Piece.find_by_id(params[:id])
-    
-    @piece.update_attributes(piece_params)
-    if @piece.valid?
-      redirect_to game_path(game)
-    else
-      return :show, status: :not_acceptable
+    @piece = Piece.find(params[:id])
+    @game = @piece.game
+
+    if @piece.update_attributes(piece_params)
+      redirect_to game_path(@game)
     end
   end
 
