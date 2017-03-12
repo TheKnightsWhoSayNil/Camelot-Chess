@@ -9,6 +9,8 @@
         <li class="nav-link"><%= link_to 'Camelot Chess', root_path %></li>
         <li class="nav-link"><%= link_to 'About Us', root_path %></li>
         <% if user_signed_in? %>
+        <li class="nav-link"><%= link_to 'Create Game', new_game_path %></li>
+        <li class="nav-link"><%= link_to 'Join Game', games_path %></li>
         <li class="nav-link">Hello, <%= current_user.email %></li>
         <li class="nav-link"><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
         <% else %>
