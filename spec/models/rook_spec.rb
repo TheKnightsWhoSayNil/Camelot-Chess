@@ -11,7 +11,7 @@ RSpec.describe Rook, type: :model do
     end 
 
     it 'returns true if moving horizontally' do
-      expect(rook.valid_move?(8,4)).to eq(true)
+      expect(rook.valid_move?(1,4)).to eq(true)
     end 
 
     it 'returns false if trying to move diagonally' do

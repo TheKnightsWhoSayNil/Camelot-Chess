@@ -1,8 +1,6 @@
 class PiecesController < ApplicationController
-  
 
   def show
-    #show the board again
     @game = Game.find(params[:id])
     @pieces = @game.pieces
   end
