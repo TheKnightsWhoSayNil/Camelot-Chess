@@ -32,9 +32,6 @@ $( function() {
       <% 0.upto(7) do |col| %>
 
         <td class="piece-square ui-droppable" data-x="<%= col %>" data-y="<%= row %>">
-
-        <td class="square">
-
           <% @pieces.each do |piece| %>
             <% if piece.x_position == col && piece.y_position == row %>
               <div class="piece" data-url="<%= game_piece_path(piece.game, piece) %>">
