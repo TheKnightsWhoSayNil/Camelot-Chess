@@ -1,11 +1,11 @@
 <div class="modal">
-  <label for="modal-1">
+  <label for="sign-in-modal">
     <div class="modal-trigger">Sign In</div>
   </label>
-  <input class="modal-state" id="modal-1" type="checkbox" />
+  <input class="modal-state" id="sign-in-modal" type="checkbox" />
   <div class="modal-fade-screen">
     <div class="modal-inner">
-      <div class="modal-close" for="modal-1"></div>
+      <div class="modal-close" for="sign-in-modal"></div>
       <p class="modal-content">
       <% if current_user %>
         <li>Hello, <%= current_user.email %></li>

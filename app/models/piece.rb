@@ -1,5 +1,6 @@
  # Piece will hold all similar logic for all pieces.
 class Piece < ApplicationRecord
+  after_initialize :set_default_state
   belongs_to :game
 
   self.inheritance_column = :piece_type
@@ -138,4 +139,23 @@ class Piece < ApplicationRecord
   def piece_at(x, y)
     game.pieces.where(x_position: x, y_position: y).take
   end
+
+  def diagonal_move?(x, y)
+    (y_position - y).abs == (x_position - x).abs
+  end
+
+  def vertical_move?(x, y)
+    x_position == x && y_position != y
+  end
+
+  def horizontal_move?(x, y)
+    y_position == y && x_position != x
+  end
+
+  private 
+
+  def set_default_state
+    self.state ||= 'unmoved'
+  end 
+
 end

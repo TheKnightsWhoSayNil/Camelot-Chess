@@ -19,7 +19,7 @@ RSpec.describe Queen, type: :model do
     end 
 
     it 'returns true if moves horizontally' do 
-      expect(queen.valid_move?(8,4)).to eq true 
+      expect(queen.valid_move?(1,4)).to eq true 
     end 
   end 
 end 
