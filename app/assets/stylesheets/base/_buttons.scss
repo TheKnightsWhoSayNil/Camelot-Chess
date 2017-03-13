@@ -1,9 +1,10 @@
-#{$all-buttons} {
+#{$all-buttons},
+.forfeit {
   appearance: none;
-  background-color: $action-color;
-  border: 0;
+  
+  border: 2px solid #FF4769;
   border-radius: $base-border-radius;
-  color: #fff;
+  color: black;
   cursor: pointer;
   display: inline-block;
   font-family: $base-font-family;
@@ -20,7 +21,8 @@
 
   &:hover,
   &:focus {
-    background-color: shade($action-color, 20%);
+    background-color: shade(#FF4769, 30%);
+    border-color: shade(#FF4769, 30%);
     color: #fff;
   }
 
@@ -32,4 +34,9 @@
       background-color: $action-color;
     }
   }
+}
+
+//- This will change once we are sure about a wireframe for the game/show page -//
+.buttons {
+  padding-left: 20px;
 }

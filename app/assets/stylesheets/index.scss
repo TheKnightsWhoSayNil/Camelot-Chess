@@ -1,5 +1,17 @@
 //-----HOMEPAGE-----//
 
+@keyframes fade-down {
+  from { 
+    opacity: 0;
+    transform: translateY(-150px);
+   }
+  to   { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+
 body {
   margin: 0;
 }
@@ -20,10 +32,12 @@ h1.hero-text {
   margin: 0;
   padding-top: 1.8em;
   font-family: 'Montserrat', sans-serif;
+  animation: fade-down 1.5s;
 }
 
 h4.hero-subtext {
   color: #fff;
   font-size: 1.5em;
   margin: 0;
+  animation: fade-down 1.5s;
 }
