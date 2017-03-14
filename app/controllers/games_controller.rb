@@ -11,8 +11,8 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @pieces = @game.pieces
-    @black_player = User.find_by(id: @game.black_user_id)
-    @white_player = User.find_by(id: @game.white_user_id)
+    @black_player = @game.black_user_id
+    @white_player = @game.white_user_id
   end
 
   def new
@@ -20,7 +20,7 @@ class GamesController < ApplicationController
   end
 
   def index
-    @game = Game.available
+    @games = Game.available
   end
 
   def create
@@ -47,7 +47,7 @@ class GamesController < ApplicationController
 
   def assign_black_pieces_to_current_user
     @game.black_pieces.each do |piece|
-      piece.user_id = current_user.id
+      piece.color = 'BLACK'
       piece.save
     end
   end

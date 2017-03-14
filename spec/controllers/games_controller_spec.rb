@@ -60,7 +60,7 @@ RSpec.describe GamesController, type: :controller do
 
       patch :join, id: game.id
 
-      expect(game.black_pieces.take.user_id).to eq black_user.id
+      expect(game.black_pieces.take.color).to eq 'BLACK'
     end
   end
 

@@ -34,7 +34,6 @@ class Piece < ApplicationRecord
     (x >= 0 && y >= 0 && x <= 7 && y <= 7)
   end
 
- 
   def horizontal_obstruction(x_end, y_end)
     # movement: right to left
     if x_position < x_end
@@ -152,10 +151,17 @@ class Piece < ApplicationRecord
     y_position == y && x_position != x
   end
 
-  private 
+  def available_moves
+    Game.all_board_coordinates.select do |coordinate_pair|
+      valid_move?(coordinate_pair[0], coordinate_pair[1]) &&
+      !is_obstructed?(coordinate_pair) &&
+      !occupied_by_mycolor_piece?(coordinate_pair[0], coordinate_pair[1])
+    end
+  end
+
+  private
 
   def set_default_state
     self.state ||= 'unmoved'
-  end 
-
+  end
 end
