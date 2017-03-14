@@ -7,7 +7,7 @@ class Pawn < Piece
     #set to true to pass make the
     # return false if x != x_position
 
-    if color == true
+    if color == 'WHITE'
       move_range = 1
 
       if is_capture?
@@ -36,7 +36,7 @@ class Pawn < Piece
 
 
   def in_starting_position?
-    if color == true
+    if color == 'WHITE'
       y_position == 1
     else
       y_position == 6

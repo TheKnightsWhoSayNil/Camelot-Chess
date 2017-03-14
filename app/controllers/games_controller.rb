@@ -47,7 +47,7 @@ class GamesController < ApplicationController
 
   def assign_black_pieces_to_current_user
     @game.black_pieces.each do |piece|
-      piece.user_id = current_user.id
+      piece.color = 'BLACK'
       piece.save
     end
   end

@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170311221303) do
+ActiveRecord::Schema.define(version: 20170314021003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dogs", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "games", force: :cascade do |t|
     t.integer  "white_user_id"
@@ -28,14 +34,13 @@ ActiveRecord::Schema.define(version: 20170311221303) do
 
   create_table "pieces", force: :cascade do |t|
     t.integer  "game_id"
-    t.boolean  "color"
+    t.string   "color"
     t.integer  "x_position"
     t.integer  "y_position"
     t.string   "piece_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "image"
-    t.integer  "user_id"
     t.string   "state"
   end
 
@@ -52,8 +57,6 @@ ActiveRecord::Schema.define(version: 20170311221303) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "provider"
-    t.string   "uid"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

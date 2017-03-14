@@ -6,4 +6,4 @@ class Rook < Piece
     horizontal_move?(x,y) || vertical_move?(x,y)
   end
 
-end 
+end
