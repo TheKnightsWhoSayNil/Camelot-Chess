@@ -1,4 +1,5 @@
 # Game will hold all Game Logic, gameboard etc.
+
 class Game < ApplicationRecord
   belongs_to :white_user, class_name: 'User'
   belongs_to :black_user, class_name: 'User', optional: true
@@ -8,6 +9,18 @@ class Game < ApplicationRecord
   after_create :fill_board
 
   scope :available, ->{ where(black_user_id: nil) }
+
+  def in_check?(color)
+    king = pieces.find_by(piece_type: "King", color: true)
+
+    opponents = pieces.where(color: false)
+  	opponents.each do |piece|
+			if piece.move_to?(king.x_position, king.y_position)
+				return true
+			end
+		false
+    end
+  end
 
   def available?
     self.black_user.blank?

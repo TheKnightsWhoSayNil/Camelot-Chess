@@ -35,5 +35,4 @@ FactoryGirl.define do
     x_position 2
     y_position 2
   end
-
 end

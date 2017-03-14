@@ -221,9 +221,9 @@ class Piece < ApplicationRecord
     y_position == y && x_position != x
   end
 
-  private 
+  private
 
   def set_default_state
     self.state ||= 'unmoved'
-  end 
+  end
 end
