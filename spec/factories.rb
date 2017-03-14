@@ -9,7 +9,6 @@ FactoryGirl.define do
   end
 
   factory :piece do
-    association :user_id
     association :game
     x_position 0
     y_position 0

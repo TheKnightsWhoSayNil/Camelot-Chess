@@ -33,10 +33,10 @@ RSpec.describe Game, type: :model do
   end
 
   describe 'in check' do
-    it 'returns false if opposing piece can not king' do
-      game = create_games_with_two_players.fill_board
+    it 'returns false if opposing piece can not capture the king in the current state' do
+      game = create_games_with_two_players
 
-      expect(game.in_check?(false)).to eq(false)
+      expect(game.in_check?('BLACK')).to eq(false)
     end
     it 'returns true when piece can capture king' do
       game = create_games_with_two_players
