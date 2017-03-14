@@ -10,16 +10,16 @@ class Game < ApplicationRecord
 
   scope :available, ->{ where(black_user_id: nil) }
 
-  def in_check?(color)
-    king = pieces.find_by(piece_type: "King", color: true)
-    opponents = pieces.where(color: false)
-  	opponents.each do |piece|
-			if piece.move_to?(king.x_position, king.y_position)
-				return true
-			end
-		false
-    end
-  end
+  #def in_check?(color)
+    #king = pieces.find_by(piece_type: "King", color: true)
+    #opponents = pieces.where(color: false)
+  	#opponents.each do |piece|
+			#if piece.move_to?(king.x_position, king.y_position)
+				#return true
+			#end
+		#false
+    #end
+  #end
 
   def available?
     self.black_user.blank?
