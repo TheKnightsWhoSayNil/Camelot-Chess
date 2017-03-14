@@ -12,7 +12,6 @@ class Game < ApplicationRecord
 
   def in_check?(color)
     king = pieces.find_by(piece_type: "King", color: true)
-
     opponents = pieces.where(color: false)
   	opponents.each do |piece|
 			if piece.move_to?(king.x_position, king.y_position)
