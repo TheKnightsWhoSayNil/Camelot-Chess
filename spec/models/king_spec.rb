@@ -25,22 +25,13 @@ RSpec.describe King, type: :model do
     end
   end
   
-  describe 'castling' do 
-    black_king = King.create(color: false, x_position: 4, y_position: 7)
-    black_kingside_rook = Rook.create(color: false, x_position: 7, y_position: 7)
-    black_queenside_rook = Rook.create(color: false, x_position: 0, y_position: 7)
-    white_king = King.create(color: true, x_position: 4, y_position: 0)
-    white_kingside_rook = Rook.create(color: false, x_position: 7, y_position: 0)
-    white_queenside_rook = Rook.create(color: false, x_position: 0, y_position: 0)
-
+  describe 'castling' do
+    
     context 'valid castle moves' do 
-      it 'returns true for queenside castle' do 
-        expect(black_king.can_castle?(black_queenside_rook)).to eq(true)
-        expect(white_king.can_castle?(white_queenside_rook)).to eq(true)
-      end 
-      it 'returns true for kingside castle' do 
-        expect(black_king.can_castle?(black_kingside_rook)).to eq(true)
-        expect(white_king.can_castle?(white_kingside_rook)).to eq(true)
+      it 'returns true for castling' do
+        king = King.create(color: true, x_position: 4, y_position: 0, state: 'unmoved')
+        rook = Rook.create(color: true, x_position: 0, y_position: 0, state: 'unmoved')
+        expect(king.can_castle?(2, 0)).to eq(true)
       end 
     end 
   end 
