@@ -32,24 +32,24 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  #describe 'in check' do
-    #it 'returns false if opposing piece can not capture the king in the current state' do
-    #  game = create_games_with_two_players
+  describe 'in check' do
+    it 'returns false if opposing piece can not capture the king in the current state' do
+      game = create_games_with_two_players
 
-      #expect(game.in_check?('BLACK')).to eq(false)
-    #end
-    #it 'returns true when piece can capture king' do
-      #game = create_games_with_two_players
-		  #game.pieces.each(&:delete)
+      expect(game.in_check?('BLACK')).to eq(false)
+    end
+    it 'returns true when piece can capture king' do
+      game = create_games_with_two_players
+		  game.pieces.each(&:delete)
 
-      #white_king = King.create(x_position: 1, y_position: 1, color: true)
-      #white_bishop = Bishop.create(x_position: 2, y_position: 2, color: false)
+      white_king = King.create(x_position: 1, y_position: 1, color: true)
+      white_bishop = Bishop.create(x_position: 2, y_position: 2, color: false)
 
-      #game.reload
+      game.reload
 
-    #  expect(game.in_check?(true)).to eq true
-    #end
-#  end
+      expect(game.in_check?(true)).to eq true
+    end
+  end
 
   def create_game_with_one_players
     player_1 = FactoryGirl.create(:user)
