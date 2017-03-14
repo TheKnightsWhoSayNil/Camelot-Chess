@@ -5,6 +5,6 @@ Rails.application.routes.draw do
     member do
       patch :join
     end
-    resources :pieces, only: [:update, :create, :show]
+    resources :pieces, only: [:show, :update]
   end
 end

@@ -1,0 +1,43 @@
+//-----HOMEPAGE-----//
+
+@keyframes fade-down {
+  from { 
+    opacity: 0;
+    transform: translateY(-150px);
+   }
+  to   { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+
+body {
+  margin: 0;
+}
+
+.hero {
+  background: linear-gradient(to bottom, rgba(13, 175, 129, 0.1) 0%, rgba(13, 175, 129, 0.1) 100%), url('chess7.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 600px;
+  box-shadow: 0px 3px 8px #2a2a2a;
+}
+
+h1.hero-text {
+  color: #fff;
+  font-size: 6.5em;
+  margin: 0;
+  padding-top: 1.8em;
+  font-family: 'Montserrat', sans-serif;
+  animation: fade-down 1.5s;
+}
+
+h4.hero-subtext {
+  color: #fff;
+  font-size: 1.5em;
+  margin: 0;
+  animation: fade-down 1.5s;
+}

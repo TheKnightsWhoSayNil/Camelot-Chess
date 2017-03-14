@@ -1,6 +1,12 @@
 
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :new, :join]
+  before_action :authenticate_user!, only: [:create, :new, :join, :destroy]
+
+  def destroy
+    @game = Game.find(params[:id])
+    @game.destroy
+    redirect_to root_path
+  end
 
   def show
     @game = Game.find(params[:id])
