@@ -6,7 +6,7 @@ RSpec.describe Pawn, type: :model do
 
     context 'a white pawn' do
 
-      let(:color) { true }
+      let(:color) { 'WHITE' }
       let(:start_y) { 1 }
       let(:pawn) { Pawn.create(color: color, x_position: 1, y_position: start_y) }
       
