@@ -6,8 +6,8 @@ RSpec.describe Piece, type: :model do
     it 'should return true if obstructed horizontally to the right' do
       user1 = FactoryGirl.create(:user)
       game = FactoryGirl.create(:game, white_user_id: user1.id)
-      piece = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 0, y_position: 0)
-      obstruction = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 1, y_position: 0)
+      piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 0)
+      obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 1, y_position: 0)
 
       destination = [2, 0]
 
@@ -17,8 +17,8 @@ RSpec.describe Piece, type: :model do
     it 'should return true if obstructed horizontally to the left' do
       user1 = FactoryGirl.create(:user)
       game = FactoryGirl.create(:game, white_user_id: user1.id)
-      piece = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 2, y_position: 0)
-      obstruction = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 1, y_position: 0)
+      piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 0)
+      obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 1, y_position: 0)
 
       destination = [0, 0]
 
@@ -28,8 +28,8 @@ RSpec.describe Piece, type: :model do
     it 'should return true if obstructed vertically from above' do
       user1 = FactoryGirl.create(:user)
       game = FactoryGirl.create(:game, white_user_id: user1.id)
-      piece = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 0, y_position: 2)
-      obstruction = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 0, y_position: 1)
+      piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 2)
+      obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 1)
 
       destination = [0, 0]
 
@@ -39,8 +39,8 @@ RSpec.describe Piece, type: :model do
     it 'should return true if obstructed vertically from below' do
       user1 = FactoryGirl.create(:user)
       game = FactoryGirl.create(:game, white_user_id: user1.id)
-      piece = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 0, y_position: 0)
-      obstruction = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 0, y_position: 1)
+      piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 0)
+      obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 1)
 
       destination = [0, 2]
 
@@ -50,8 +50,8 @@ RSpec.describe Piece, type: :model do
     it 'should return true if obstructed diagonally moving down and to the left' do
       user1 = FactoryGirl.create(:user)
       game = FactoryGirl.create(:game, white_user_id: user1.id)
-      piece = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 3, y_position: 0)
-      obstruction = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 2, y_position: 1)
+      piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 3, y_position: 0)
+      obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 1)
 
       destination = [1, 2]
 
@@ -61,8 +61,8 @@ RSpec.describe Piece, type: :model do
     it 'should return true if obstructed diagonally moving down and to the right' do
       user1 = FactoryGirl.create(:user)
       game = FactoryGirl.create(:game, white_user_id: user1.id)
-      piece = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 0, y_position: 0)
-      obstruction = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 2, y_position: 2)
+      piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 0)
+      obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 2)
 
       destination = [3, 3]
 
@@ -72,8 +72,8 @@ RSpec.describe Piece, type: :model do
     it 'should return true if obstructed diagonally moving up and to the right' do
       user1 = FactoryGirl.create(:user)
       game = FactoryGirl.create(:game, white_user_id: user1.id)
-      piece = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 1, y_position: 3)
-      obstruction = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 2, y_position: 2)
+      piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 1, y_position: 3)
+      obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 2)
 
       destination = [3, 1]
 
@@ -83,8 +83,8 @@ RSpec.describe Piece, type: :model do
     it 'should return true if obstructed diagonally moving up and to the left' do
       user1 = FactoryGirl.create(:user)
       game = FactoryGirl.create(:game, white_user_id: user1.id)
-      piece = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 3, y_position: 3)
-      obstruction = FactoryGirl.create(:piece, game: game, user_id: user1.id, x_position: 2, y_position: 2)
+      piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 3, y_position: 3)
+      obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 2)
 
       destination = [1, 1]
 
@@ -135,6 +135,40 @@ RSpec.describe Piece, type: :model do
 
         expect(black_bishop.x_position).to eq(nil)
         expect(black_bishop.y_position).to eq(nil)
+      end
+    end
+  end
+
+  describe "available_moves" do
+    describe 'Rook' do
+      it 'returns the valid spaces to move to on an empty board' do
+        board = create(:game)
+        board.pieces.delete_all
+        white_rook = Rook.create(x_position: 0, y_position: 0, game_id: board.id, color: 'WHITE')
+
+        result = white_rook.available_moves
+
+        expect(result).to match_array [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]]
+      end
+      it 'returns the valid spaces to move to on non-empty board blocked by my own color' do
+        board = create(:game)
+        board.pieces.delete_all
+        white_rook = Rook.create(x_position: 0, y_position: 0, game_id: board.id, color: 'WHITE')
+        other_piece = Pawn.create(x_position: 0, y_position: 0, game_id: board.id, color: 'WHITE')
+
+        result = white_rook.available_moves
+
+        expect(result).to match_array [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]]
+      end
+      it 'returns the valid spaces to move to on non-empty board blocked by opposing color' do
+        board = create(:game)
+        board.pieces.delete_all
+        white_rook = Rook.create(x_position: 0, y_position: 0, game_id: board.id, color: 'WHITE')
+        other_piece = Pawn.create(x_position: 0, y_position: 0, game_id: board.id, color: 'WHITE')
+
+        result = white_rook.available_moves
+
+        expect(result).to match_array [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]]
       end
     end
   end

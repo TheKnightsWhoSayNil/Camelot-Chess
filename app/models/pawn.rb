@@ -4,14 +4,14 @@ class Pawn < Piece
   def valid_move?(x, y)
     super(x, y)
 
-    #set to true to pass make the 
+    #set to true to pass make the
     # return false if x != x_position
 
-    if color == true
+    if color == 'WHITE'
       move_range = 1
-      
+
       if is_capture?
-        return y == y_position+move_range && x == x_position+move_range || y == y_position+move_range && x == x_position-move_range      
+        return y == y_position+move_range && x == x_position+move_range || y == y_position+move_range && x == x_position-move_range
       elsif in_starting_position?
         move_range = 2
         return y <= y_position+move_range && x == x_position
@@ -21,7 +21,7 @@ class Pawn < Piece
 
     else
       move_range = -1
-      if is_capture? 
+      if is_capture?
         return y == y_position+move_range && x == x_position+move_range || y == y_position+move_range && x == x_position-move_range
       elsif in_starting_position?
         move_range = -2
@@ -36,7 +36,7 @@ class Pawn < Piece
 
 
   def in_starting_position?
-    if color == true
+    if color == 'WHITE'
       y_position == 1
     else
       y_position == 6
@@ -46,6 +46,6 @@ class Pawn < Piece
 
   def is_capture?
       false
-  end     
-  
+  end
+
 end
