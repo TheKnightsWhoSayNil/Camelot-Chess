@@ -1,29 +1,29 @@
- # Piece will hold all similar logic for all pieces.
+# Piece will hold all similar logic for all pieces.
 class Piece < ApplicationRecord
   after_initialize :set_default_state
   belongs_to :game
 
   self.inheritance_column = :piece_type
-  scope :bishops, ->{ where(piece_type: "Bishop") }
-  scope :kings,   ->{ where(piece_type: "King") }
-  scope :knights, ->{ where(piece_type: "Knight") }
-  scope :queens,  ->{ where(piece_type: "Queen") }
-  scope :pawns,   ->{ where(piece_type: "Pawn") }
-  scope :rooks,   ->{ where(piece_type: "Rook") }
+  scope :bishops, -> { where(piece_type: "Bishop") }
+  scope :kings,   -> { where(piece_type: "King") }
+  scope :knights, -> { where(piece_type: "Knight") }
+  scope :queens,  -> { where(piece_type: "Queen") }
+  scope :pawns,   -> { where(piece_type: "Pawn") }
+  scope :rooks,   -> { where(piece_type: "Rook") }
 
   def move_to!(x, y)
-    if unoccupied?(x,y)
+    if unoccupied?(x, y)
       update_attributes(x_position: x, y_position: y)
-    elsif occupied_by_opposing_piece?(x,y)
-      capture_piece_at!(x,y)
+    elsif occupied_by_opposing_piece?(x, y)
+      capture_piece_at!(x, y)
       update_attributes(x_position: x, y_position: y)
-    elsif occupied_by_mycolor_piece?(x,y)
-      return false
+    elsif occupied_by_mycolor_piece?(x, y)
+      false
     end
   end
 
   def valid_move?(x, y)
-    return false if !within_chessboard?(x, y)
+    return false unless within_chessboard?(x, y)
   end
 
   def self.piece_types
@@ -34,7 +34,7 @@ class Piece < ApplicationRecord
     (x >= 0 && y >= 0 && x <= 7 && y <= 7)
   end
 
-  def horizontal_obstruction(x_end, y_end)
+  def horizontal_obstruction(x_end, _y_end)
     # movement: right to left
     if x_position < x_end
       (x_position + 1).upto(x_end - 1) do |x|
@@ -49,10 +49,10 @@ class Piece < ApplicationRecord
     end
   end
 
-  def vertical_obstruction(x_end, y_end)
+  def vertical_obstruction(_x_end, y_end)
     # path is vertical down
     if y_position < y_end
-        (y_position + 1).upto(y_end - 1) do |y|
+      (y_position + 1).upto(y_end - 1) do |y|
         return true if space_occupied?(x_position, y)
       end
     end
@@ -88,19 +88,13 @@ class Piece < ApplicationRecord
     y_end = destination[1]
     path = check_path(x_position, y_position, x_end, y_end)
 
-    if path == 'horizontal'
-      return horizontal_obstruction(x_end, y_end)
-    end
+    return horizontal_obstruction(x_end, y_end) if path == 'horizontal'
 
-    if path == 'vertical'
-      return vertical_obstruction(x_end, y_end)
-    end
+    return vertical_obstruction(x_end, y_end) if path == 'vertical'
 
-    if path == 'diagonal'
-      return diagonal_obstruction(x_end, y_end)
-    end
+    return diagonal_obstruction(x_end, y_end) if path == 'diagonal'
 
-    return false
+    false
   end
 
   def space_occupied?(x, y)
@@ -109,30 +103,28 @@ class Piece < ApplicationRecord
 
   def check_path(x_position, y_position, x_end, y_end)
     if y_position == y_end
-      return 'horizontal'
+      'horizontal'
     elsif x_position == x_end
-      return 'vertical'
+      'vertical'
     elsif (y_end - y_position).abs == (x_end - x_position).abs
-      return 'diagonal'
-    else
-      return nil
+      'diagonal'
     end
   end
 
-  def capture_piece_at!(x,y)
-    piece_at(x,y).update_attributes(x_position: nil, y_position: nil)
+  def capture_piece_at!(x, y)
+    piece_at(x, y).update_attributes(x_position: nil, y_position: nil)
   end
 
-  def unoccupied?(x,y)
-    !space_occupied?(x,y)
+  def unoccupied?(x, y)
+    !space_occupied?(x, y)
   end
 
-  def occupied_by_mycolor_piece?(x,y)
-    space_occupied?(x,y) && (piece_at(x,y).color == self.color)
+  def occupied_by_mycolor_piece?(x, y)
+    space_occupied?(x, y) && (piece_at(x, y).color == color)
   end
 
-  def occupied_by_opposing_piece?(x,y)
-    space_occupied?(x,y) && (piece_at(x,y).color != self.color)
+  def occupied_by_opposing_piece?(x, y)
+    space_occupied?(x, y) && (piece_at(x, y).color != color)
   end
 
   def piece_at(x, y)
@@ -154,8 +146,8 @@ class Piece < ApplicationRecord
   def available_moves
     Game.all_board_coordinates.select do |coordinate_pair|
       valid_move?(coordinate_pair[0], coordinate_pair[1]) &&
-      !is_obstructed?(coordinate_pair) &&
-      !occupied_by_mycolor_piece?(coordinate_pair[0], coordinate_pair[1])
+        !is_obstructed?(coordinate_pair) &&
+        !occupied_by_mycolor_piece?(coordinate_pair[0], coordinate_pair[1])
     end
   end
 

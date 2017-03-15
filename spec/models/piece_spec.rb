@@ -97,7 +97,7 @@ RSpec.describe Piece, type: :model do
       it "does allow the move to the new coordinates" do
         board = create(:game)
         board.pieces.delete_all
-        king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
+        king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE')
 
         king.move_to!(2, 2)
 
@@ -111,8 +111,8 @@ RSpec.describe Piece, type: :model do
         board = create(:game)
         board.pieces.delete_all
 
-        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
-        white_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: true)
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE')
+        white_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: 'WHITE')
 
         expect(white_king.move_to!(2, 2)).to eq false
       end
@@ -123,8 +123,8 @@ RSpec.describe Piece, type: :model do
         board = create(:game)
         board.pieces.delete_all
 
-        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: true)
-        black_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: false)
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE')
+        black_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: 'BLACK')
 
         white_king.move_to!(2, 2)
 
@@ -148,7 +148,7 @@ RSpec.describe Piece, type: :model do
 
         result = white_rook.available_moves
 
-        expect(result).to match_array [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]]
+        expect(result).to match_array [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]]
       end
       it 'returns the valid spaces to move to on non-empty board blocked by my own color' do
         board = create(:game)
@@ -158,17 +158,17 @@ RSpec.describe Piece, type: :model do
 
         result = white_rook.available_moves
 
-        expect(result).to match_array [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]]
+        expect(result).to match_array [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]]
       end
       it 'returns the valid spaces to move to on non-empty board blocked by opposing color' do
         board = create(:game)
         board.pieces.delete_all
         white_rook = Rook.create(x_position: 0, y_position: 0, game_id: board.id, color: 'WHITE')
-        other_piece = Pawn.create(x_position: 0, y_position: 0, game_id: board.id, color: 'WHITE')
+        other_piece = Pawn.create(x_position: 0, y_position: 0, game_id: board.id, color: 'BLACK')
 
         result = white_rook.available_moves
 
-        expect(result).to match_array [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]]
+        expect(result).to match_array [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]]
       end
     end
   end
