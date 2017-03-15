@@ -115,6 +115,88 @@ RSpec.describe Game, type: :model do
         expect(board.in_check?('WHITE')).to eq(false)
       end
     end
+    context 'Knight pieces' do
+      it 'returns true when opposing piece, knight, can capture king' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        black_knight = Knight.create(x_position: 2, y_position: 3, game_id: board.id, color: 'BLACK', piece_type: 'Knight')
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
+
+        board.pieces << white_king
+        board.pieces << black_knight
+        board.save
+
+        expect(board.in_check?('WHITE')).to eq(true)
+      end
+      it 'returns false when opposing piece can not capture king' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        black_knight = Knight.create(x_position: 6, y_position: 7, game_id: board.id, color: 'BLACK', piece_type: 'Knight')
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
+
+        board.pieces << white_king
+        board.pieces << black_knight
+        board.save
+
+        expect(board.in_check?('WHITE')).to eq(false)
+      end
+      it 'returns false when same colored piece... can not capture king' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        white_knight = Knight.create(x_position: 1, y_position: 2, game_id: board.id, color: 'WHITE', piece_type: 'Knight')
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
+
+        board.pieces << white_king
+        board.pieces << white_knight
+        board.save
+
+        expect(board.in_check?('WHITE')).to eq(false)
+      end
+    end
+    context 'Queen pieces' do
+      it 'returns true when opposing piece, queen, can capture king' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        black_queen = Queen.create(x_position: 7, y_position: 1, game_id: board.id, color: 'BLACK', piece_type: 'Queen')
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
+
+        board.pieces << white_king
+        board.pieces << black_queen
+        board.save
+
+        expect(board.in_check?('WHITE')).to eq(true)
+      end
+      it 'returns false when opposing piece, queen, can not capture king' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        black_queen = Queen.create(x_position: 6, y_position: 0, game_id: board.id, color: 'BLACK', piece_type: 'Queen')
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
+
+        board.pieces << white_king
+        board.pieces << black_queen
+        board.save
+
+        expect(board.in_check?('WHITE')).to eq(false)
+      end
+      it 'returns false when same colored piece... can not capture king' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        white_queen = Queen.create(x_position: 1, y_position: 2, game_id: board.id, color: 'WHITE', piece_type: 'Queen')
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
+
+        board.pieces << white_king
+        board.pieces << white_queen
+        board.save
+
+        expect(board.in_check?('WHITE')).to eq(false)
+      end
+    end
     context 'Neither in check'
       it 'should return false if both kings are not in check' do
         board = create(:game)
