@@ -152,7 +152,7 @@ class Piece < ApplicationRecord
   end
 
   def available_moves
-    Game.all_board_coordinates.select do |coordinate_pair|
+      Game.all_board_coordinates.select do |coordinate_pair|
       valid_move?(coordinate_pair[0], coordinate_pair[1]) &&
       !is_obstructed?(coordinate_pair) &&
       !occupied_by_mycolor_piece?(coordinate_pair[0], coordinate_pair[1])

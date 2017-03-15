@@ -32,24 +32,47 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  #describe 'in check' do
-    #it 'returns false if opposing piece can not capture the king in the current state' do
-    #  game = create_games_with_two_players
+  describe 'in check' do
+    it 'returns true when opposing piece can capture king' do
+      board = create(:game)
+      board.pieces.delete_all
 
-      #expect(game.in_check?('BLACK')).to eq(false)
-    #end
-    #it 'returns true when piece can capture king' do
-      #game = create_games_with_two_players
-		  #game.pieces.each(&:delete)
+      black_rook = Rook.create(x_position: 1, y_position: 2, game_id: board.id, color: 'BLACK', piece_type: 'Rook')
+      white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
 
-      #white_king = King.create(x_position: 1, y_position: 1, color: true)
-      #white_bishop = Bishop.create(x_position: 2, y_position: 2, color: false)
+      board.pieces << white_king
+      board.pieces << black_rook
+      board.save
 
-      #game.reload
+      expect(board.in_check?('WHITE')).to eq(true)
+    end
+    it 'returns false when opposing piece can not capture king' do
+      board = create(:game)
+      board.pieces.delete_all
 
-    #  expect(game.in_check?(true)).to eq true
-    #end
-#  end
+      black_rook = Rook.create(x_position: 7, y_position: 7, game_id: board.id, color: 'BLACK', piece_type: 'Rook')
+      white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
+
+      board.pieces << white_king
+      board.pieces << black_rook
+      board.save
+
+      expect(board.in_check?('WHITE')).to eq(false)
+    end
+    it 'returns false when same colored piece... can not capture king' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      black_rook = Rook.create(x_position: 1, y_position: 2, game_id: board.id, color: 'WHITE', piece_type: 'Rook')
+      white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
+
+      board.pieces << white_king
+      board.pieces << black_rook
+      board.save
+
+      expect(board.in_check?('WHITE')).to eq(false)
+    end
+  end
 
   def create_game_with_one_players
     player_1 = FactoryGirl.create(:user)

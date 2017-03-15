@@ -1,5 +1,5 @@
 # Game will hold all Game Logic, gameboard etc.
-
+require 'pry'
 class Game < ApplicationRecord
   belongs_to :white_user, class_name: 'User'
   belongs_to :black_user, class_name: 'User', optional: true
@@ -10,16 +10,19 @@ class Game < ApplicationRecord
 
   scope :available, ->{ where(black_user_id: nil) }
 
-  #def in_check?(color)
-    #king = pieces.find_by(piece_type: "King", color: true)
-    #opponents = pieces.where(color: false)
-  	#opponents.each do |piece|
-			#if piece.move_to?(king.x_position, king.y_position)
-				#return true
-			#end
-		#false
-    #end
-  #end
+  def in_check?(color)
+    king = pieces.find_by(piece_type: "King", color: color)
+    opponents = opponents_pieces(color)
+  	opponents.each do |piece|
+        return true if piece.valid_move?(king.x_position, king.y_position)
+		end
+    false
+  end
+
+  def opponents_pieces(color)
+    opposing_color = color == 'BLACK' ? 'WHITE' : 'BLACK'
+    pieces.where(color: opposing_color).to_a
+  end
 
   def available?
     self.black_user.blank?
