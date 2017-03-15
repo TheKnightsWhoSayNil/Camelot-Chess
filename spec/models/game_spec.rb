@@ -20,9 +20,9 @@ RSpec.describe Game, type: :model do
 
   describe 'fill_board method' do
     # it 'should fill_board when game is created' do
-      # create_game_with_one_players.fill_board
+    # create_game_with_one_players.fill_board
 
-      # expect(create_game_with_one_players.pieces.count).to eq(16)
+    # expect(create_game_with_one_players.pieces.count).to eq(16)
     # end
 
     it 'should fill_board when game is created' do
@@ -197,7 +197,7 @@ RSpec.describe Game, type: :model do
         expect(board.in_check?('WHITE')).to eq(false)
       end
     end
-    context 'Neither in check'
+    context 'Neither in check' do
       it 'should return false if both kings are not in check' do
         board = create(:game)
         board.pieces.delete_all
@@ -218,6 +218,7 @@ RSpec.describe Game, type: :model do
         expect(board.in_check?('BLACK')).to eq(false)
       end
     end
+  end
 
   def create_game_with_one_players
     player_1 = FactoryGirl.create(:user)

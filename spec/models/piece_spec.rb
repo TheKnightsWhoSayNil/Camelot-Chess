@@ -148,7 +148,7 @@ RSpec.describe Piece, type: :model do
 
         result = white_rook.available_moves
 
-        expect(result).to match_array [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]]
+        expect(result).to match_array [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]]
       end
       it 'returns the valid spaces to move to on non-empty board blocked by my own color' do
         board = create(:game)
@@ -158,7 +158,7 @@ RSpec.describe Piece, type: :model do
 
         result = white_rook.available_moves
 
-        expect(result).to match_array [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]]
+        expect(result).to match_array [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]]
       end
       it 'returns the valid spaces to move to on non-empty board blocked by opposing color' do
         board = create(:game)
@@ -168,7 +168,7 @@ RSpec.describe Piece, type: :model do
 
         result = white_rook.available_moves
 
-        expect(result).to match_array [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0]]
+        expect(result).to match_array [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]]
       end
     end
   end
