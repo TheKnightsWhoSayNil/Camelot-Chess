@@ -43,7 +43,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << black_rook
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(true)
       end
@@ -56,7 +55,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << black_rook
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(false)
       end
@@ -69,7 +67,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << white_rook
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(false)
       end
@@ -84,7 +81,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << black_bishop
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(true)
       end
@@ -97,7 +93,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << black_bishop
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(false)
       end
@@ -110,7 +105,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << white_bishop
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(false)
       end
@@ -125,7 +119,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << black_knight
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(true)
       end
@@ -138,7 +131,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << black_knight
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(false)
       end
@@ -151,7 +143,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << white_knight
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(false)
       end
@@ -166,7 +157,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << black_queen
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(true)
       end
@@ -179,7 +169,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << black_queen
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(false)
       end
@@ -192,7 +181,6 @@ RSpec.describe Game, type: :model do
 
         board.pieces << white_king
         board.pieces << white_queen
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(false)
       end
@@ -211,8 +199,6 @@ RSpec.describe Game, type: :model do
         board.pieces << black_king
         board.pieces << white_queen
         board.pieces << black_queen
-
-        board.save
 
         expect(board.in_check?('WHITE')).to eq(false)
         expect(board.in_check?('BLACK')).to eq(false)
