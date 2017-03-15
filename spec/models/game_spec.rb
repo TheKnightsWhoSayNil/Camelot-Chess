@@ -63,14 +63,27 @@ RSpec.describe Game, type: :model do
       board = create(:game)
       board.pieces.delete_all
 
-      black_rook = Rook.create(x_position: 1, y_position: 2, game_id: board.id, color: 'WHITE', piece_type: 'Rook')
+      white_rook = Rook.create(x_position: 1, y_position: 2, game_id: board.id, color: 'WHITE', piece_type: 'Rook')
       white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
 
       board.pieces << white_king
-      board.pieces << black_rook
+      board.pieces << white_rook
       board.save
 
       expect(board.in_check?('WHITE')).to eq(false)
+    end
+    it 'returns true when same bishop piece can capture king' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      black_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: 'BLACK', piece_type: 'Bishop')
+      white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
+
+      board.pieces << white_king
+      board.pieces << black_bishop
+      board.save
+
+      expect(board.in_check?('WHITE')).to eq(true)
     end
   end
 
