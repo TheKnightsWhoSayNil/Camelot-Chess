@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Game, type: :model do
   describe 'SCOPES' do
-    describe 'Game.available' do
+    context 'Game.available' do
       it 'shows the available games' do
         create_games_with_two_players
         available1 = create_game_with_one_players
@@ -32,8 +32,8 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe 'in check' do
-    describe 'Rook pieces' do
+  describe 'in_check method' do
+    context 'Rook pieces' do
       it 'returns true when opposing piece can capture king' do
         board = create(:game)
         board.pieces.delete_all
@@ -74,7 +74,7 @@ RSpec.describe Game, type: :model do
         expect(board.in_check?('WHITE')).to eq(false)
       end
     end
-    describe 'Bishop pieces' do
+    context 'Bishop pieces' do
       it 'returns true when opposing piece, bishop, can capture king' do
         board = create(:game)
         board.pieces.delete_all
@@ -115,7 +115,27 @@ RSpec.describe Game, type: :model do
         expect(board.in_check?('WHITE')).to eq(false)
       end
     end
-  end
+    context 'Neither in check'
+      it 'should return false if both kings are not in check' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        black_king = King.create(x_position: 3, y_position: 3, game_id: board.id, color: 'BLACK', piece_type: 'King')
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: "King")
+        white_queen = Queen.create(x_position: 0, y_position: 7, game_id: board.id, color: 'WHITE', piece_type: 'Queen')
+        black_queen = Queen.create(x_position: 5, y_position: 0, game_id: board.id, color: 'WHITE', piece_type: 'Queen')
+
+        board.pieces << white_king
+        board.pieces << black_king
+        board.pieces << white_queen
+        board.pieces << black_queen
+
+        board.save
+
+        expect(board.in_check?('WHITE')).to eq(false)
+        expect(board.in_check?('BLACK')).to eq(false)
+      end
+    end
 
   def create_game_with_one_players
     player_1 = FactoryGirl.create(:user)

@@ -20,7 +20,11 @@ class Game < ApplicationRecord
   end
 
   def opponents_pieces(color)
-    opposing_color = color == 'BLACK' ? 'WHITE' : 'BLACK'
+    if color == 'BLACK'
+      opposing_color = 'WHITE'
+    else
+      opposing_color = 'BLACK'
+    end
     pieces.where(color: opposing_color).to_a
   end
 
