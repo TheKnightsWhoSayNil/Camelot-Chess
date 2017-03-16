@@ -27,7 +27,7 @@ class Piece < ApplicationRecord
   end
 
   def valid_move?(x, y)
-    return false unless within_chessboard?(x, y)
+    within_chessboard?(x, y)
   end
 
   def self.piece_types
