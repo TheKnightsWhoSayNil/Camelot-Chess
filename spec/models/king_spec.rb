@@ -31,8 +31,7 @@ RSpec.describe King, type: :model do
     end
   end
   
-  describe 'castling' do
-    
+  describe 'castling' do    
     context 'valid castle moves' do 
       it 'returns true for castling' do
         king = King.create(x_position: 4, y_position: 0, state: 'unmoved', game: game)
@@ -40,5 +39,14 @@ RSpec.describe King, type: :model do
         expect(king.can_castle?(2, 0)).to eq(true)
       end 
     end 
+    context 'invalid castle moves' do 
+      it 'returns false if has obstructions' do
+        king = King.create(x_position: 4, y_position: 0, state: 'unmoved', game: game)
+        rook = Rook.create(x_position: 0, y_position: 0, state: 'unmoved', game: game)
+        queen = Queen.create(x_position: 2, y_position: 0, game: game)
+        expect(king.can_castle?(2, 0)).to eq(false)
+      end 
+    end 
+
   end 
 end

@@ -27,7 +27,7 @@ class King < Piece
     state == 'unmoved' && 
       !castle_rook(x).nil? &&
       castle_rook(x).state == 'unmoved' &&
-      horizontal_obstruction(x, y)
+      horizontal_obstruction(x, y).nil?
   end 
 
   def castle! 
