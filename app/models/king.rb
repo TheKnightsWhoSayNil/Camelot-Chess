@@ -24,12 +24,12 @@ class King < Piece
   def can_castle?(x, y)
     state == 'unmoved' && 
       !castle_rook(x).nil? &&
-      castle_rook(x).state == 'unmoved' &&
-#      horizontal_obstruction(x, y)
+      castle_rook(x).state == 'unmoved' 
   end 
 
   def castle! 
 
   end 
+
 end 
 
