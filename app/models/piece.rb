@@ -23,7 +23,7 @@ class Piece < ApplicationRecord
   end
 
   def valid_move?(x, y)
-    return false if !within_chessboard?(x, y)
+    within_chessboard?(x, y)
   end
 
   def self.piece_types
@@ -83,9 +83,9 @@ class Piece < ApplicationRecord
     end
   end
 
-  def is_obstructed?(x_end, y_end)
-#    x_end = destination[0]
-#    y_end = destination[1]
+  def is_obstructed?(destination)
+    x_end = destination[0]
+    y_end = destination[1]
     path = check_path(x_position, y_position, x_end, y_end)
 
     if path == 'horizontal'
