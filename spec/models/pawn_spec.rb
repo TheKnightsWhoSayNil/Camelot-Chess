@@ -9,7 +9,7 @@ RSpec.describe Pawn, type: :model do
       let(:color) { 'WHITE' }
       let(:start_y) { 1 }
       let(:pawn) { Pawn.create(color: color, x_position: 1, y_position: start_y) }
-
+      
       it 'be a valid move' do
         expect(pawn.valid_move?(1, 2)).to eq(true) unless pawn.is_capture?
         expect(pawn.valid_move?(1, 3)).to eq(true) unless pawn.is_capture?
