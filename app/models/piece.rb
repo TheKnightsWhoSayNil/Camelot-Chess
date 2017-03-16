@@ -13,19 +13,22 @@ class Piece < ApplicationRecord
   scope :rooks,   -> { where(piece_type: "Rook") }
 
   def move_to!(x, y)
-    return false unless valid_move?(x, y)
-    if unoccupied?(x, y)
+    if occupied_by_mycolor_piece?(x, y)
+      return false
+    end
+    if valid_move?(x, y)
+      if occupied_by_opposing_piece?(x, y)
+        capture_piece_at!(x, y)
+      end
+      ## If not occupied by my color or opposing piece then it's unoccupied
       update_attributes(x_position: x, y_position: y)
-    elsif occupied_by_opposing_piece?(x, y)
-      capture_piece_at!(x, y)
-      update_attributes(x_position: x, y_position: y)
-    elsif occupied_by_mycolor_piece?(x, y)
+    else
       false
     end
   end
 
   def valid_move?(x, y)
-    return false unless within_chessboard?(x, y)
+    within_chessboard?(x, y)
   end
 
   def self.piece_types
@@ -115,10 +118,6 @@ class Piece < ApplicationRecord
 
   def capture_piece_at!(x, y)
     piece_at(x, y).update_attributes(x_position: nil, y_position: nil)
-  end
-
-  def unoccupied?(x, y)
-    !space_occupied?(x, y)
   end
 
   def occupied_by_mycolor_piece?(x, y)
