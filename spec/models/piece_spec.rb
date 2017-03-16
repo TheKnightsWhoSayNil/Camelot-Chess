@@ -9,9 +9,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 0)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 1, y_position: 0)
 
-      destination = [2, 0]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(2, 2)).to eq(true)
     end
 
     it 'should return true if obstructed horizontally to the left' do
@@ -20,9 +18,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 0)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 1, y_position: 0)
 
-      destination = [0, 0]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(0, 0)).to eq(true)
     end
 
     it 'should return true if obstructed vertically from above' do
@@ -31,9 +27,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 2)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 1)
 
-      destination = [0, 0]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(0, 0)).to eq(true)
     end
 
     it 'should return true if obstructed vertically from below' do
@@ -42,9 +36,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 0)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 1)
 
-      destination = [0, 2]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(0, 2)).to eq(true)
     end
 
     it 'should return true if obstructed diagonally moving down and to the left' do
@@ -53,9 +45,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 3, y_position: 0)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 1)
 
-      destination = [1, 2]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(1, 2)).to eq(true)
     end
 
     it 'should return true if obstructed diagonally moving down and to the right' do
@@ -64,9 +54,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 0)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 2)
 
-      destination = [3, 3]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(3, 3)).to eq(true)
     end
 
     it 'should return true if obstructed diagonally moving up and to the right' do
@@ -75,9 +63,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 1, y_position: 3)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 2)
 
-      destination = [3, 1]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(3, 1)).to eq(true)
     end
 
     it 'should return true if obstructed diagonally moving up and to the left' do
@@ -86,9 +72,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 3, y_position: 3)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 2)
 
-      destination = [1, 1]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(1, 1)).to eq(true)
     end
   end
 

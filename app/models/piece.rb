@@ -1,4 +1,5 @@
 # Piece will hold all similar logic for all pieces.
+require 'pry'
 class Piece < ApplicationRecord
   after_initialize :set_default_state
   belongs_to :game
@@ -12,6 +13,7 @@ class Piece < ApplicationRecord
   scope :rooks,   -> { where(piece_type: "Rook") }
 
   def move_to!(x, y)
+    return false unless valid_move?(x, y)
     if unoccupied?(x, y)
       update_attributes(x_position: x, y_position: y)
     elsif occupied_by_opposing_piece?(x, y)
@@ -83,9 +85,9 @@ class Piece < ApplicationRecord
     end
   end
 
-  def is_obstructed?(destination)
-    x_end = destination[0]
-    y_end = destination[1]
+  def is_obstructed?(x, y)
+    x_end = x
+    y_end = y
     path = check_path(x_position, y_position, x_end, y_end)
 
     return horizontal_obstruction(x_end, y_end) if path == 'horizontal'
@@ -146,7 +148,7 @@ class Piece < ApplicationRecord
   def available_moves
     Game.all_board_coordinates.select do |coordinate_pair|
       valid_move?(coordinate_pair[0], coordinate_pair[1]) &&
-        !is_obstructed?(coordinate_pair) &&
+        !is_obstructed?(coordinate_pair[0], coordinate_pair[1]) &&
         !occupied_by_mycolor_piece?(coordinate_pair[0], coordinate_pair[1])
     end
   end
