@@ -7,35 +7,39 @@ RSpec.describe Rook, type: :model do
     black_user: FactoryGirl.create(:user))
   end
 
+  def create_game_with_one_white_rook
+    rook = Rook.create(color: 'WHITE', x_position: 4, y_position: 4, game: game)
+  end
+
   describe 'valid_move?' do
     context 'regular moves' do
       it 'returns true if moving 2 spaces vertically' do
         game.pieces.delete_all
-        rook = Rook.create(color: 'WHITE', x_position: 4, y_position: 4, game: game)
+        rook = create_game_with_one_white_rook
         expect(rook.valid_move?(4,6)).to eq(true)
       end
 
       it 'returns true if moving left horizontally' do
         game.pieces.delete_all
-        rook = Rook.create(color: 'WHITE', x_position: 4, y_position: 4, game: game)
+        rook = create_game_with_one_white_rook
         expect(rook.valid_move?(1,4)).to eq(true)
       end
 
       it 'returns true if moving right horizontally' do
         game.pieces.delete_all
-        rook = Rook.create(color: 'WHITE', x_position: 4, y_position: 4, game: game)
+        rook = create_game_with_one_white_rook
         expect(rook.valid_move?(5,4)).to eq(true)
       end
 
       it 'returns false if trying to move diagonally' do
         game.pieces.delete_all
-        rook = Rook.create(color: 'WHITE', x_position: 4, y_position: 4, game: game)
+        rook = create_game_with_one_white_rook
         expect(rook.valid_move?(7,7)).to eq(false)
       end
 
       it 'returns false if trying to move left diagonally' do
         game.pieces.delete_all
-        rook = Rook.create(color: 'WHITE', x_position: 4, y_position: 4, game: game)
+        rook = create_game_with_one_white_rook
         expect(rook.valid_move?(0,0)).to eq(false)
       end
     end
