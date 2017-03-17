@@ -9,9 +9,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 0)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 1, y_position: 0)
 
-      destination = [2, 0]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(2, 2)).to eq(true)
     end
 
     it 'should return true if obstructed horizontally to the left' do
@@ -20,9 +18,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 0)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 1, y_position: 0)
 
-      destination = [0, 0]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(0, 0)).to eq(true)
     end
 
     it 'should return true if obstructed vertically from above' do
@@ -31,9 +27,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 2)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 1)
 
-      destination = [0, 0]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(0, 0)).to eq(true)
     end
 
     it 'should return true if obstructed vertically from below' do
@@ -42,9 +36,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 0)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 1)
 
-      destination = [0, 2]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(0, 2)).to eq(true)
     end
 
     it 'should return true if obstructed diagonally moving down and to the left' do
@@ -53,9 +45,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 3, y_position: 0)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 1)
 
-      destination = [1, 2]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(1, 2)).to eq(true)
     end
 
     it 'should return true if obstructed diagonally moving down and to the right' do
@@ -64,9 +54,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 0, y_position: 0)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 2)
 
-      destination = [3, 3]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(3, 3)).to eq(true)
     end
 
     it 'should return true if obstructed diagonally moving up and to the right' do
@@ -75,9 +63,7 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 1, y_position: 3)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 2)
 
-      destination = [3, 1]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(3, 1)).to eq(true)
     end
 
     it 'should return true if obstructed diagonally moving up and to the left' do
@@ -86,51 +72,63 @@ RSpec.describe Piece, type: :model do
       piece = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 3, y_position: 3)
       obstruction = FactoryGirl.create(:piece, game: game, color: 'WHITE', x_position: 2, y_position: 2)
 
-      destination = [1, 1]
-
-      expect(piece.is_obstructed?(destination)).to eq(true)
+      expect(piece.is_obstructed?(1, 1)).to eq(true)
     end
   end
 
   describe 'move_to!' do
+    let(:game) do
+    Game.create(
+      white_user: FactoryGirl.create(:user),
+      black_user: FactoryGirl.create(:user))
+    end
     context "when the square is unoccupied" do
-      it "does allow the move to the new coordinates" do
-        board = create(:game)
-        board.pieces.delete_all
-        king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE')
+      it "will the move to the new coordinates" do
+        game.pieces.delete_all
 
-        king.move_to!(2, 2)
+        queen = Queen.create(x_position: 1, y_position: 1, game: game, color: 'WHITE', piece_type: 'Queen')
 
-        expect(king.x_position).to eq(2)
-        expect(king.y_position).to eq(2)
+        queen.move_to!(2, 2)
+
+        expect(queen.x_position).to eq(2)
+        expect(queen.y_position).to eq(2)
+      end
+      it "will the move to the new coordinates" do
+        game.pieces.delete_all
+
+        bishop = Bishop.create(x_position: 0, y_position: 0, game: game, color: 'WHITE', piece_type: 'Bishop')
+
+        bishop.move_to!(7, 7)
+
+        expect(bishop.x_position).to eq(7)
+        expect(bishop.y_position).to eq(7)
       end
     end
 
     context "when the square is occupied with a piece of the same color" do
       it "does not capture the same colored piece" do
-        board = create(:game)
-        board.pieces.delete_all
+        game.pieces.delete_all
 
-        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE')
-        white_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: 'WHITE')
+        white_king = King.create(x_position: 1, y_position: 1, game: game, color: 'WHITE', piece_type: 'King')
+        white_bishop = Bishop.create(x_position: 2, y_position: 2, game: game, color: 'WHITE', piece_type: 'Bishop')
 
         expect(white_king.move_to!(2, 2)).to eq false
       end
     end
 
     context "when the square is occupied with different colored piece" do
-      it "does capture the opponent's piece, and move to the new square" do
-        board = create(:game)
-        board.pieces.delete_all
+      it "captures the opponent's piece, and moves to the new square" do
+        game.pieces.delete_all
 
-        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE')
-        black_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: 'BLACK')
+        queen = Queen.create(x_position: 1, y_position: 1, game: game, color: 'WHITE', piece_type: 'Queen')
+        black_bishop = Bishop.create(x_position: 1, y_position: 2, game: game, color: 'BLACK', piece_type: 'Bishop')
 
-        white_king.move_to!(2, 2)
+        queen.move_to!(1, 2)
+        black_bishop.reload
 
-        expect(white_king.x_position).to eq(2)
-        expect(white_king.y_position).to eq(2)
-
+        expect(queen.x_position).to eq(1)
+        expect(queen.y_position).to eq(2)
+        
         black_bishop.reload
 
         expect(black_bishop.x_position).to eq(nil)

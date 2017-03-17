@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 // var borderChange = $( 'td.piece-square' ).on("click", function() {
 //   $(this).css('border-color', 'red');
   
@@ -35,13 +35,13 @@ $( function() {
     }
   });
 } );
-</script>
+</script> -->
 
 
 
 <h2 class="game-title">Chess Board</h2>
 
-<table class="game-board">
+<!-- <table class="game-board">
   <% 7.downto(0) do |row| %>
     <tr>
       <% 0.upto(7) do |col| %>
@@ -50,8 +50,26 @@ $( function() {
           <% @pieces.each do |piece| %>
             <% if piece.x_position == col && piece.y_position == row %>
               <div class="piece" data-url="<%= game_piece_path(piece.game, piece) %>">
-                <%= image_tag(piece.image) %>
+                <%= image_tag(piece.piece_image) %>
               </div>
+            <% end %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table> -->
+
+<table class="game-board">
+  <% 7.downto(0) do |row| %>
+    <tr>
+      <% 0.upto(7) do |col| %>
+
+        <td class="piece-square" data-x="<%= col %>" data-y="<%= row %>">
+        <td class="square">
+          <% @pieces.each do |piece| %>
+            <% if piece.x_position == col && piece.y_position == row %>
+              <%= link_to image_tag(piece.piece_image), game_piece_path(piece.game, piece) %>      
             <% end %>
           <% end %>
         </td>

@@ -3,7 +3,6 @@ class Pawn < Piece
 
   def valid_move?(x, y)
     super(x, y)
-
     #set to true to pass make the
     # return false if x != x_position
 
@@ -13,6 +12,9 @@ class Pawn < Piece
       if is_capture?
         return y == y_position+move_range && x == x_position+move_range || y == y_position+move_range && x == x_position-move_range
       elsif in_starting_position?
+        # if (y - y_position).abs > 1
+        #   return false if is_obstructed?([x, y])
+        # end
         move_range = 2
         return y <= y_position+move_range && x == x_position
       else
@@ -24,6 +26,9 @@ class Pawn < Piece
       if is_capture?
         return y == y_position+move_range && x == x_position+move_range || y == y_position+move_range && x == x_position-move_range
       elsif in_starting_position?
+        # if (y - y_position).abs > 1
+        #   return false if is_obstructed?([x, y])
+        # end
         move_range = -2
         return y >= y_position+move_range && x == x_position
       else
@@ -31,7 +36,6 @@ class Pawn < Piece
       end
 
     end
-
   end
 
 
@@ -45,7 +49,7 @@ class Pawn < Piece
 
 
   def is_capture?
-      false
+    false
   end
 
 end
