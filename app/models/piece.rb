@@ -11,6 +11,10 @@ class Piece < ApplicationRecord
   scope :pawns,   -> { where(piece_type: "Pawn") }
   scope :rooks,   -> { where(piece_type: "Rook") }
 
+  def piece_image
+    "#{color.downcase}_#{piece_type.downcase}.png"
+  end
+
   def move_to!(x, y)
     if occupied_by_mycolor_piece?(x, y)
       return false

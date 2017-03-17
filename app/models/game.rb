@@ -10,6 +10,10 @@ class Game < ApplicationRecord
 
   scope :available, -> { where(black_user_id: nil) }
 
+  def piece_image
+    "#{color.downcase}_#{piece_type.downcase}.png"
+  end
+
   def in_check?(color)
     king = pieces.find_by(piece_type: "King", color: color)
     opponents = opponents_pieces(color)
@@ -52,31 +56,31 @@ class Game < ApplicationRecord
   def fill_board
     # fill white pieces
     (0..7).each do |i|
-      Pawn.create(game_id: id, x_position: i, y_position: 1, image: 'white_pawn.png', color: 'WHITE')
+      Pawn.create(game_id: id, x_position: i, y_position: 1, color: 'WHITE')
     end
 
-    Rook.create(game_id: id, x_position: 0, y_position: 0, image: 'white_rook.png', color: 'WHITE')
-    Rook.create(game_id: id, x_position: 7, y_position: 0, image: 'white_rook.png', color: 'WHITE')
-    Knight.create(game_id: id, x_position: 1, y_position: 0, image: 'white_knight.png', color: 'WHITE')
-    Knight.create(game_id: id, x_position: 6, y_position: 0, image: 'white_knight.png', color: 'WHITE')
-    Bishop.create(game_id: id, x_position: 2, y_position: 0, image: 'white_bishop.png', color: 'WHITE')
-    Bishop.create(game_id: id, x_position: 5, y_position: 0, image: 'white_bishop.png', color: 'WHITE')
-    Queen.create(game_id: id, x_position: 3, y_position: 0, image: 'white_queen.png', color: 'WHITE')
-    King.create(game_id: id, x_position: 4, y_position: 0, image: 'white_king.png', color: 'WHITE')
+    Rook.create(game_id: id, x_position: 0, y_position: 0, color: 'WHITE')
+    Rook.create(game_id: id, x_position: 7, y_position: 0, color: 'WHITE')
+    Knight.create(game_id: id, x_position: 1, y_position: 0, color: 'WHITE')
+    Knight.create(game_id: id, x_position: 6, y_position: 0, color: 'WHITE')
+    Bishop.create(game_id: id, x_position: 2, y_position: 0, color: 'WHITE')
+    Bishop.create(game_id: id, x_position: 5, y_position: 0, color: 'WHITE')
+    Queen.create(game_id: id, x_position: 3, y_position: 0, color: 'WHITE')
+    King.create(game_id: id, x_position: 4, y_position: 0, color: 'WHITE')
 
     # fill black pieces
     (0..7).each do |i|
-      Pawn.create(game_id: id, x_position: i, y_position: 6, image: 'black_pawn.png', color: 'BLACK')
+      Pawn.create(game_id: id, x_position: i, y_position: 6, color: 'BLACK')
     end
 
-    Rook.create(game_id: id, x_position: 0, y_position: 7, image: 'black_rook.png', color: 'BLACK')
-    Rook.create(game_id: id, x_position: 7, y_position: 7, image: 'black_rook.png', color: 'BLACK')
-    Knight.create(game_id: id, x_position: 1, y_position: 7, image: 'black_knight.png', color: 'BLACK')
-    Knight.create(game_id: id, x_position: 6, y_position: 7, image: 'black_knight.png', color: 'BLACK')
-    Bishop.create(game_id: id, x_position: 2, y_position: 7, image: 'black_bishop.png', color: 'BLACK')
-    Bishop.create(game_id: id, x_position: 5, y_position: 7, image: 'black_bishop.png', color: 'BLACK')
-    Queen.create(game_id: id, x_position: 3, y_position: 7, image: 'black_queen.png', color: 'BLACK')
-    King.create(game_id: id, x_position: 4, y_position: 7, image: 'black_king.png', color: 'BLACK')
+    Rook.create(game_id: id, x_position: 0, y_position: 7, color: 'BLACK')
+    Rook.create(game_id: id, x_position: 7, y_position: 7, color: 'BLACK')
+    Knight.create(game_id: id, x_position: 1, y_position: 7, color: 'BLACK')
+    Knight.create(game_id: id, x_position: 6, y_position: 7, color: 'BLACK')
+    Bishop.create(game_id: id, x_position: 2, y_position: 7, color: 'BLACK')
+    Bishop.create(game_id: id, x_position: 5, y_position: 7, color: 'BLACK')
+    Queen.create(game_id: id, x_position: 3, y_position: 7, color: 'BLACK')
+    King.create(game_id: id, x_position: 4, y_position: 7, color: 'BLACK')
   end
 
   def self.all_board_coordinates
