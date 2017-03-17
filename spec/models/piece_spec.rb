@@ -81,6 +81,7 @@ RSpec.describe Piece, type: :model do
       it "does allow the move to the new coordinates" do
         board = create(:game)
         board.pieces.delete_all
+
         king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE')
 
         king.move_to!(2, 2)
@@ -103,7 +104,7 @@ RSpec.describe Piece, type: :model do
     end
 
     context "when the square is occupied with different colored piece" do
-      it "does capture the opponent's piece, and move to the new square" do
+      it "captures the opponent's piece, and moves to the new square" do
         board = create(:game)
         board.pieces.delete_all
 
@@ -112,13 +113,12 @@ RSpec.describe Piece, type: :model do
 
         white_king.move_to!(2, 2)
 
-        expect(white_king.x_position).to eq(2)
-        expect(white_king.y_position).to eq(2)
-
-        black_bishop.reload
+        board.reload
 
         expect(black_bishop.x_position).to eq(nil)
         expect(black_bishop.y_position).to eq(nil)
+        expect(white_king.x_position).to eq(2)
+        expect(white_king.y_position).to eq(2)
       end
     end
   end

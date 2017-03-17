@@ -15,12 +15,12 @@ class Piece < ApplicationRecord
   def move_to!(x, y)
     if occupied_by_mycolor_piece?(x, y)
       return false
-    end
-    if valid_move?(x, y)
+    elsif valid_move?(x, y)
       if occupied_by_opposing_piece?(x, y)
         capture_piece_at!(x, y)
+        update_attributes(x_position: x, y_position: y)
       end
-      ## If not occupied by my color or opposing piece then it's unoccupied
+    elsif unoccupied?(x, y)
       update_attributes(x_position: x, y_position: y)
     else
       false
@@ -30,6 +30,7 @@ class Piece < ApplicationRecord
   def valid_move?(x, y)
     return false if is_obstructed?(x, y)
     return false if within_chessboard?(x, y)
+    return false if occupied_by_mycolor_piece?(x, y)
   end
 
   def self.piece_types
@@ -61,13 +62,13 @@ class Piece < ApplicationRecord
       (y_position + 1).upto(y_end - 1) do |y|
         return true if space_occupied?(x_position, y)
       end
-    end
     # path is vertical up
-    if y_position > y_end
+    elsif y_position > y_end
       (y_position - 1).downto(y_end + 1) do |y|
         return true if space_occupied?(x_position, y)
       end
     end
+    false
   end
 
   def diagonal_obstruction(x_end, y_end)
@@ -78,15 +79,15 @@ class Piece < ApplicationRecord
         y = y_end > y_position ? y_position + delta_y : y_position - delta_y
         return true if space_occupied?(x, y)
       end
-    end
     # path is diagonal and up
-    if x_position > x_end
+    elsif x_position > x_end
       (x_position - 1).downto(x_end + 1) do |x|
         delta_y = x_position - x
         y = y_end > y_position ? y_position + delta_y : y_position - delta_y
         return true if space_occupied?(x, y)
       end
     end
+    false
   end
 
   def is_obstructed?(x, y)
@@ -119,6 +120,10 @@ class Piece < ApplicationRecord
 
   def capture_piece_at!(x, y)
     piece_at(x, y).update_attributes(x_position: nil, y_position: nil)
+  end
+
+  def unoccupied?(x,y)
+    !space_occupied?(x,y)
   end
 
   def occupied_by_mycolor_piece?(x, y)

@@ -1,14 +1,14 @@
 # /app/models/king.rb
 class King < Piece
   def valid_move?(x, y)
-    super(x, y) && (valid_king_move?(x, y) || can_castle?(x,y))
-  end 
+    super(x, y) && (valid_king_move?(x, y)) || (can_castle?(x,y))
+  end
 
   def valid_king_move?(x, y)
     dx = (x - x_position).abs
     dy = (y - y_position).abs
     dx <= 1 && dy <= 1 && dx + dy > 0
-  end 
+  end
 
   def checkmate?
     # example logic
@@ -19,17 +19,16 @@ class King < Piece
       piece_type: 'Rook',
       x_position: (x > x_position ? 7:0),
       y_position: y_position)
-  end 
+  end
 
   def can_castle?(x, y)
-    state == 'unmoved' && 
+    state == 'unmoved' &&
       !castle_rook(x).nil? &&
-      castle_rook(x).state == 'unmoved' 
-  end 
+      castle_rook(x).state == 'unmoved'
+  end
 
-  def castle! 
+  def castle!
 
-  end 
+  end
 
-end 
-
+end
