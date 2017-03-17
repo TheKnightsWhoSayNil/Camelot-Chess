@@ -22,6 +22,12 @@ RSpec.describe Queen, type: :model do
         expect(queen.valid_move?(6,5)).to eq false
       end
 
+      it 'returns false if move off the board' do
+        game.pieces.delete_all
+        queen = Queen.create(color: 'WHITE', x_position: 4, y_position: 4, game: game)
+        expect(queen.valid_move?(200,15)).to eq false
+      end
+
       it 'returns true if moves diagonally' do
         game.pieces.delete_all
         queen = Queen.create(color: 'WHITE', x_position: 4, y_position: 4, game: game)
@@ -35,7 +41,7 @@ RSpec.describe Queen, type: :model do
         expect(queen.valid_move?(1,4)).to eq true
       end
     end
-    context 'can not move if piece is in the way' do
+    context 'can not move if queen is obsctructed' do
       it ' returns false if piece is in the way' do
         game.pieces.delete_all
         queen = Queen.create(color: 'WHITE', x_position: 0, y_position: 0, game: game)
