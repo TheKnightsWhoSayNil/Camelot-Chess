@@ -3,7 +3,6 @@ class Pawn < Piece
 
   def valid_move?(x, y)
     super(x, y)
-
     #set to true to pass make the
     # return false if x != x_position
 
@@ -39,7 +38,7 @@ class Pawn < Piece
     end
   end
 
-  
+
   def in_starting_position?
     if color == 'WHITE'
       y_position == 1
