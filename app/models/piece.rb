@@ -127,11 +127,11 @@ class Piece < ApplicationRecord
   end
 
   def occupied_by_mycolor_piece?(x, y)
-    space_occupied?(x, y) && (piece_at(x, y).color == color)
+    space_occupied?(x, y) && (piece_at(x, y).color == self.color)
   end
 
   def occupied_by_opposing_piece?(x, y)
-    space_occupied?(x, y) && (piece_at(x, y).color != color)
+    space_occupied?(x, y) && (piece_at(x, y).color != self.color)
   end
 
   def piece_at(x, y)

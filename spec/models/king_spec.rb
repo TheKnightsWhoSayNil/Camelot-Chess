@@ -7,7 +7,7 @@ RSpec.describe King, type: :model do
       black_user: FactoryGirl.create(:user))
   end
 
-  describe 'valid_move?' do
+  describe 'king making a valid_move?' do
     context 'valid move within 1 square' do
       it 'be a valid move' do
         king = King.create(x_position: 3, y_position: 5, game: game)
@@ -43,7 +43,7 @@ RSpec.describe King, type: :model do
       end
     end
 
-    context 'invalid move' do
+    context 'king making an invalid move' do
       it 'be an invalid move' do
         king = King.create(x_position: 3, y_position: 5, game: game)
         expect(king.valid_move?(3, 5)).to eq(false)
