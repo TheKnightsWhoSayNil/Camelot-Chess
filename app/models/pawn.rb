@@ -16,27 +16,22 @@ class Pawn < Piece
         #   return false if is_obstructed?([x, y])
         # end
         move_range = 2
-        return false if is_obstructed?(x, y)
         return y <= y_position+move_range && x == x_position
       else
-        return false if is_obstructed?(x, y)
         return y <= y_position+move_range && x == x_position
       end
 
     else
       move_range = -1
       if is_capture?
-        return false if is_obstructed?(x, y)
         return y == y_position+move_range && x == x_position+move_range || y == y_position+move_range && x == x_position-move_range
       elsif in_starting_position?
         # if (y - y_position).abs > 1
         #   return false if is_obstructed?([x, y])
         # end
         move_range = -2
-        return false if is_obstructed?(x, y)
         return y >= y_position+move_range && x == x_position
       else
-        return false if is_obstructed?(x, y)
         return y >= y_position+move_range && x == x_position
       end
 

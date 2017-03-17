@@ -33,8 +33,8 @@ class Piece < ApplicationRecord
 
   def valid_move?(x, y)
     return false if is_obstructed?(x, y)
-    return false if within_chessboard?(x, y)
     return false if occupied_by_mycolor_piece?(x, y)
+    within_chessboard?(x, y)
   end
 
   def self.piece_types
