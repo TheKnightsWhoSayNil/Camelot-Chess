@@ -8,11 +8,11 @@ RSpec.describe Pawn, type: :model do
   end
 
   def create_game_with_one_black_pawn
-    Pawn.create(color: 'BLACK', x_position: 1, y_position: 6, game: game)
+    Pawn.create(color: 'BLACK', x_position: 1, y_position: 6, game: game, piece_type: 'Pawn')
   end
 
   def create_game_with_one_white_pawn
-    Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game: game)
+    Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game: game, piece_type: 'Pawn')
   end
 
   describe 'a white pawns' do
@@ -84,6 +84,16 @@ RSpec.describe Pawn, type: :model do
       it 'when the piece is one square diagonally from it' do
         pawn = create_game_with_one_black_pawn
         expect(pawn.valid_move?(0, 5)).to eq(true) unless pawn.is_capture? == false
+      end
+    end
+
+    context 'cant make a valid move if obstructed' do
+      it 'when a piece is in the way in front' do
+        game.pieces.delete_all
+        pawn = Pawn.create(color: 'WHITE', x_position: 0, y_position: 0, game: game)
+        rook = Pawn.create(color: 'BLACK', x_position: 0, y_position: 1, game: game)
+
+        expect(pawn.valid_move?(0,2)).to eq false
       end
     end
   end

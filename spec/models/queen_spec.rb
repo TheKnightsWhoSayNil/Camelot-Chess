@@ -41,7 +41,7 @@ RSpec.describe Queen, type: :model do
         expect(queen.valid_move?(1,4)).to eq true
       end
     end
-    context 'can not move if queen is obsctructed' do
+    context 'can not move if queen is obstructed' do
       it ' returns false if piece is in the way' do
         game.pieces.delete_all
         queen = Queen.create(color: 'WHITE', x_position: 0, y_position: 0, game: game)

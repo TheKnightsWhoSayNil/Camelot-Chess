@@ -238,8 +238,6 @@ RSpec.describe Game, type: :model do
         board.pieces << black_pawn
         board.pieces << black_pawn
 
-        board.save
-
         expect(board.in_check?('BLACK')).to eq(false)
       end
     end
