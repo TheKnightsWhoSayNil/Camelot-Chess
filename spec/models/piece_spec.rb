@@ -77,17 +77,22 @@ RSpec.describe Piece, type: :model do
   end
 
   describe 'move_to!' do
+    let(:game) do
+    Game.create(
+      white_user: FactoryGirl.create(:user),
+      black_user: FactoryGirl.create(:user))
+    end
     context "when the square is unoccupied" do
-      it "does allow the move to the new coordinates" do
-        board = create(:game)
-        board.pieces.delete_all
+      it "will the move to the new coordinates" do
+        game.pieces.delete_all
 
-        king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE')
+        queen = Queen.create(x_position: 1, y_position: 1, game: game, color: 'WHITE', piece_type: 'Queen')
 
-        king.move_to!(2, 2)
+        queen.move_to!(2, 2)
+        binding.pry
 
-        expect(king.x_position).to eq(2)
-        expect(king.y_position).to eq(2)
+        expect(queen.x_position).to eq(2)
+        expect(queen.y_position).to eq(2)
       end
     end
 
@@ -96,8 +101,8 @@ RSpec.describe Piece, type: :model do
         board = create(:game)
         board.pieces.delete_all
 
-        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE')
-        white_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: 'WHITE')
+        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: 'King')
+        white_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: 'WHITE', piece_type: 'Bishop')
 
         expect(white_king.move_to!(2, 2)).to eq false
       end
@@ -108,17 +113,16 @@ RSpec.describe Piece, type: :model do
         board = create(:game)
         board.pieces.delete_all
 
-        white_king = King.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE')
-        black_bishop = Bishop.create(x_position: 2, y_position: 2, game_id: board.id, color: 'BLACK')
+        queen = Queen.create(x_position: 1, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: 'Queen')
+        black_bishop = Bishop.create(x_position: 1, y_position: 2, game_id: board.id, color: 'BLACK', piece_type: 'Bishop')
 
-        white_king.move_to!(2, 2)
-
-        board.reload
+        queen.move_to!(1, 2)
 
         expect(black_bishop.x_position).to eq(nil)
         expect(black_bishop.y_position).to eq(nil)
-        expect(white_king.x_position).to eq(2)
-        expect(white_king.y_position).to eq(2)
+
+        expect(queen.x_position).to eq(2)
+        expect(queen.y_position).to eq(2)
       end
     end
   end

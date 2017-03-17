@@ -19,9 +19,9 @@ class Piece < ApplicationRecord
       if occupied_by_opposing_piece?(x, y)
         capture_piece_at!(x, y)
         update_attributes(x_position: x, y_position: y)
+      elsif unoccupied?(x, y)
+        update_attributes(x_position: x, y_position: y)
       end
-    elsif unoccupied?(x, y)
-      update_attributes(x_position: x, y_position: y)
     else
       false
     end
