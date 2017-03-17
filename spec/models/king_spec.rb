@@ -8,26 +8,58 @@ RSpec.describe King, type: :model do
   end
 
   describe 'valid_move?' do
-    let(:king) do
-      King.create(x_position: 3, y_position: 5, game: game)
+    context 'valid move within 1 square' do
+      it 'be a valid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(3, 6)).to eq(true)
+      end
+      it 'be a valid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(3, 4)).to eq(true)
+      end
+      it 'be a valid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(2, 6)).to eq(true)
+      end
+      it 'be a valid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(2, 5)).to eq(true)
+      end
+      it 'be a valid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(2, 4)).to eq(true)
+      end
+      it 'be a valid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(4, 6)).to eq(true)
+      end
+      it 'be a valid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(4, 5)).to eq(true)
+      end
+      it 'be a valid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(4, 4)).to eq(true)
+      end
     end
 
-    it 'be a valid move' do
-      expect(king.valid_move?(3, 6)).to eq(true)
-      expect(king.valid_move?(3, 4)).to eq(true)
-      expect(king.valid_move?(2, 6)).to eq(true)
-      expect(king.valid_move?(2, 5)).to eq(true)
-      expect(king.valid_move?(2, 4)).to eq(true)
-      expect(king.valid_move?(4, 6)).to eq(true)
-      expect(king.valid_move?(4, 5)).to eq(true)
-      expect(king.valid_move?(4, 4)).to eq(true)
-    end
-
-    it 'be an invalid move', focus: true do
-      expect(king.valid_move?(3, 5)).to eq(false)
-      expect(king.valid_move?(3, 7)).to eq(false)
-      expect(king.valid_move?(3, 8)).to eq(false)
-      expect(king.valid_move?(1, 5)).to eq(false)
+    context 'invalid move' do
+      it 'be an invalid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(3, 5)).to eq(false)
+      end
+      it 'be an ivalid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(3, 7)).to eq(false)
+      end
+      it 'be an ivalid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(3, 8)).to eq(false)
+      end
+      it 'be an ivalid move' do
+        king = King.create(x_position: 3, y_position: 5, game: game)
+        expect(king.valid_move?(1, 5)).to eq(false)
+      end
     end
   end
 
