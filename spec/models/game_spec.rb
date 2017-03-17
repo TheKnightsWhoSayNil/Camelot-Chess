@@ -211,14 +211,14 @@ RSpec.describe Game, type: :model do
       end
     end
     context 'Both in check' do
-      it 'should return false if both kings are not in check' do
+      it 'should return true if both kings are not in check' do
         board = create(:game)
         board.pieces.delete_all
 
         black_king = King.create(x_position: 0, y_position: 0, game_id: board.id, color: 'BLACK', piece_type: 'King')
-        white_king = King.create(x_position: 0, y_position: 6, game_id: board.id, color: 'WHITE', piece_type: "King")
-        white_queen = Queen.create(x_position: 0, y_position: 1, game_id: board.id, color: 'WHITE', piece_type: 'Queen')
-        black_queen = Queen.create(x_position: 4, y_position: 6, game_id: board.id, color: 'BLACK', piece_type: 'Queen')
+        white_king = King.create(x_position: 7, y_position: 7, game_id: board.id, color: 'WHITE', piece_type: "King")
+        white_queen = Queen.create(x_position: 0, y_position: 2, game_id: board.id, color: 'WHITE', piece_type: 'Queen')
+        black_queen = Queen.create(x_position: 7, y_position: 5, game_id: board.id, color: 'BLACK', piece_type: 'Queen')
 
         board.pieces << white_king
         board.pieces << black_king
@@ -228,6 +228,8 @@ RSpec.describe Game, type: :model do
         expect(board.in_check?('WHITE')).to eq(true)
         expect(board.in_check?('BLACK')).to eq(true)
       end
+    end
+    context 'Pieces blocking from being in Check' do
       it 'should return false if king has a piece blocking it from being capured' do
         board = create(:game)
         board.pieces.delete_all

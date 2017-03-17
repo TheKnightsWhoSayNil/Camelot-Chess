@@ -28,7 +28,8 @@ class Piece < ApplicationRecord
   end
 
   def valid_move?(x, y)
-    within_chessboard?(x, y)
+    return false if is_obstructed?(x, y)
+    return false if within_chessboard?(x, y)
   end
 
   def self.piece_types
@@ -39,22 +40,22 @@ class Piece < ApplicationRecord
     (x >= 0 && y >= 0 && x <= 7 && y <= 7)
   end
 
-  def horizontal_obstruction(x_end, _y_end)
+  def horizontal_obstruction?(x_end, _y_end)
     # movement: right to left
     if x_position < x_end
       (x_position + 1).upto(x_end - 1) do |x|
         return true if space_occupied?(x, y_position)
       end
-    end
     # movement: left to right
-    if x_position > x_end
+    elsif x_position > x_end
       (x_position - 1).downto(x_end + 1) do |x|
         return true if space_occupied?(x, y_position)
       end
     end
+    false
   end
 
-  def vertical_obstruction(_x_end, y_end)
+  def vertical_obstruction(x_end, y_end)
     # path is vertical down
     if y_position < y_end
       (y_position + 1).upto(y_end - 1) do |y|
@@ -93,7 +94,7 @@ class Piece < ApplicationRecord
     y_end = y
     path = check_path(x_position, y_position, x_end, y_end)
 
-    return horizontal_obstruction(x_end, y_end) if path == 'horizontal'
+    return horizontal_obstruction?(x_end, y_end) if path == 'horizontal'
 
     return vertical_obstruction(x_end, y_end) if path == 'vertical'
 
@@ -141,7 +142,7 @@ class Piece < ApplicationRecord
   end
 
   def horizontal_move?(x, y)
-    y_position == y && x_position != x
+    (y_position == y) && (x_position != x) ? true : false
   end
 
   def available_moves
