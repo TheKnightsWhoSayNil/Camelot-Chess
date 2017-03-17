@@ -7,14 +7,26 @@
 $( function() {
   $( ".piece" ).draggable({
     start: function(event, ui) {
-    console.log($(event.target).data('url'));
+      var urlUpdatePath = $(event.target).data('url')
+    console.log(urlUpdatePath);
     }
   });
   $( ".piece-square" ).droppable({
     accept: ".piece",
     drop: function( event, ui ) {
-      console.log($(event.target).data('x'));
-      console.log($(event.target).data('y'));
+      var x = $(event.target).data('x');
+      var y = $(event.target).data('y');
+      console.log(x);
+      console.log(y);
+
+      $.ajax({
+        type: 'PUT',
+        url: urlUpdatePath,
+        piece: {
+              x_position : x,
+              y_position : y,
+              }
+        });
       // AJAX PUT requyest to URL with x, y (as params)
       // handle response from this request
       // e.g. return 
