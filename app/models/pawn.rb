@@ -9,7 +9,7 @@ class Pawn < Piece
     if color == 'WHITE'
       move_range = 1
 
-      if is_capture?
+      if occupied_by_opposing_piece?(x, y)
         return y == y_position+move_range && x == x_position+move_range || y == y_position+move_range && x == x_position-move_range
       elsif in_starting_position?
         # if (y - y_position).abs > 1
@@ -23,7 +23,7 @@ class Pawn < Piece
 
     else
       move_range = -1
-      if is_capture?
+      if occupied_by_opposing_piece?(x, y)
         return y == y_position+move_range && x == x_position+move_range || y == y_position+move_range && x == x_position-move_range
       elsif in_starting_position?
         # if (y - y_position).abs > 1
@@ -47,9 +47,5 @@ class Pawn < Piece
     end
   end
 
-
-  def is_capture?
-    false
-  end
 
 end

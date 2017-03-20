@@ -15,15 +15,25 @@ RSpec.describe Pawn, type: :model do
     Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game: game, piece_type: 'Pawn')
   end
 
+  def create_bishop_to_be_captured
+   Bishop.create(color: 'BLACK', x_position: 0, y_position: 2, game: game, piece_type: 'Bishop')
+  end
+
+  def create_knight_to_be_captured
+  Knight.create(color: 'BLACK', x_position: 2, y_position: 2, game: game, piece_type: 'Knight')
+  end
+
+
+
   describe 'a white pawns' do
     context 'a valid move' do
       it 'can move one space forward' do
         pawn = create_game_with_one_white_pawn
-        expect(pawn.valid_move?(1, 2)).to eq(true) unless pawn.is_capture?
+        expect(pawn.valid_move?(1, 2)).to eq(true)
       end
       it 'can move two spaces forward' do
         pawn = create_game_with_one_white_pawn
-        expect(pawn.valid_move?(1, 3)).to eq(true) unless pawn.is_capture?
+        expect(pawn.valid_move?(1, 3)).to eq(true)
       end
     end
     context 'invalid move' do
@@ -43,11 +53,15 @@ RSpec.describe Pawn, type: :model do
     context 'can make a valid capture move' do
       it 'when the piece is one square diagonally from it' do
         pawn = create_game_with_one_white_pawn
-        expect(pawn.valid_move?(2, 2)).to eq(true) unless pawn.is_capture? == false
+        bishop = create_bishop_to_be_captured
+        expect(pawn.valid_move?(0, 2)).to eq(true)
+        expect(bishop.capture_piece_at!(0, 2)).to eq(bishop.x_position = nil, bishop.y_position = nil)
       end
       it 'when the piece is one square diagonally from it' do
         pawn = create_game_with_one_white_pawn
-        expect(pawn.valid_move?(0, 2)).to eq(true) unless pawn.is_capture? == false
+        knight = create_knight_to_be_captured
+        expect(pawn.valid_move?(2, 2)).to eq(true)
+        expect(knight.capture_piece_at!(2, 2)).to eq(knight.x_position = nil, knight.y_position = nil)
       end
     end
   end
@@ -55,11 +69,11 @@ RSpec.describe Pawn, type: :model do
     context 'valid moves' do
       it 'moves one square forward' do
         pawn = create_game_with_one_black_pawn
-        expect(pawn.valid_move?(1, 5)).to eq(true) unless pawn.is_capture?
+        expect(pawn.valid_move?(1, 5)).to eq(true)
       end
       it 'moves two squares forward' do
         pawn = create_game_with_one_black_pawn
-        expect(pawn.valid_move?(1, 4)).to eq(true) unless pawn.is_capture?
+        expect(pawn.valid_move?(1, 4)).to eq(true)
       end
     end
     context 'invalid moves' do
@@ -79,11 +93,11 @@ RSpec.describe Pawn, type: :model do
     context 'can make a valid capture move' do
       it 'when the piece is one square diagonally from it' do
         pawn = create_game_with_one_black_pawn
-        expect(pawn.valid_move?(2, 5)).to eq(true) unless pawn.is_capture? == false
+        expect(pawn.valid_move?(2, 5)).to eq(true)
       end
       it 'when the piece is one square diagonally from it' do
         pawn = create_game_with_one_black_pawn
-        expect(pawn.valid_move?(0, 5)).to eq(true) unless pawn.is_capture? == false
+        expect(pawn.valid_move?(0, 5)).to eq(true)
       end
     end
 
