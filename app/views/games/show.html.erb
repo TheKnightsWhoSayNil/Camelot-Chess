@@ -1,47 +1,46 @@
-<!-- <script>
+<script>
 // var borderChange = $( 'td.piece-square' ).on("click", function() {
 //   $(this).css('border-color', 'red');
   
 // });
 
+// AJAX PUT requyest to URL with x, y (as params)
+      // handle response from this request
+      // e.g. return 
+      // { ok: true }
+      // check if OK, if not show error or move back
+
 $( function() {
   $( ".piece" ).draggable({
     start: function(event, ui) {
-      var urlUpdatePath = $(event.target).data('url')
-    console.log(urlUpdatePath);
-    }
-  });
-  $( ".piece-square" ).droppable({
+    var urlUpdatePath = $(event.target).data('url')
+   
+    $( ".piece-square" ).droppable({
     accept: ".piece",
     drop: function( event, ui ) {
       var x = $(event.target).data('x');
       var y = $(event.target).data('y');
       console.log(x);
       console.log(y);
-
+      console.log(urlUpdatePath);
       $.ajax({
         type: 'PUT',
         url: urlUpdatePath,
-        piece: {
-              x_position : x,
-              y_position : y,
-              }
+        data: { piece: { x_position: x, y_position: y }  }
         });
-      // AJAX PUT requyest to URL with x, y (as params)
-      // handle response from this request
-      // e.g. return 
-      // { ok: true }
-      // check if OK, if not show error or move back
+      }
+    });
     }
   });
-} );
-</script> -->
+});
+</script>
 
+ 
 
 
 <h2 class="game-title">Chess Board</h2>
 
-<!-- <table class="game-board">
+<table class="game-board">
   <% 7.downto(0) do |row| %>
     <tr>
       <% 0.upto(7) do |col| %>
@@ -58,25 +57,8 @@ $( function() {
       <% end %>
     </tr>
   <% end %>
-</table> -->
-
-<table class="game-board">
-  <% 7.downto(0) do |row| %>
-    <tr>
-      <% 0.upto(7) do |col| %>
-
-        <td class="piece-square" data-x="<%= col %>" data-y="<%= row %>">
-        <td class="square">
-          <% @pieces.each do |piece| %>
-            <% if piece.x_position == col && piece.y_position == row %>
-              <%= link_to image_tag(piece.piece_image), game_piece_path(piece.game, piece) %>      
-            <% end %>
-          <% end %>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
 </table>
+
 
 <div class="buttons">
   <%= render 'partials/endGameButton' %>
