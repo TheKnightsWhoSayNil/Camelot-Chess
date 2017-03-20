@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+require 'pry'
 RSpec.describe Game, type: :model do
   describe 'SCOPES' do
     context 'Game.available' do
@@ -28,7 +28,7 @@ RSpec.describe Game, type: :model do
 
   describe 'in_check method' do
     context 'Rook pieces' do
-      it 'returns true when opposing piece can capture king' do
+      it 'True when opposing piece can capture king' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -40,7 +40,7 @@ RSpec.describe Game, type: :model do
 
         expect(board.in_check?('WHITE')).to eq(true)
       end
-      it 'returns false when opposing piece can not capture king' do
+      it 'False when opposing piece can not capture king' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -52,7 +52,7 @@ RSpec.describe Game, type: :model do
 
         expect(board.in_check?('WHITE')).to eq(false)
       end
-      it 'returns false when same colored piece... can not capture king' do
+      it 'False when same colored piece... can not capture king' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -66,7 +66,7 @@ RSpec.describe Game, type: :model do
       end
     end
     context 'Bishop pieces' do
-      it 'returns true when opposing piece, bishop, can capture king' do
+      it 'True when opposing piece, bishop, can capture king' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -78,7 +78,7 @@ RSpec.describe Game, type: :model do
 
         expect(board.in_check?('WHITE')).to eq(true)
       end
-      it 'returns false when opposing piece can not capture king' do
+      it 'False when opposing piece can not capture king' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -104,7 +104,7 @@ RSpec.describe Game, type: :model do
       end
     end
     context 'Knight pieces' do
-      it 'returns true when opposing piece, knight, can capture king' do
+      it 'True when opposing piece, knight, can capture king' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -116,7 +116,7 @@ RSpec.describe Game, type: :model do
 
         expect(board.in_check?('WHITE')).to eq(true)
       end
-      it 'returns false when opposing piece can not capture king' do
+      it 'False when opposing piece can not capture king' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -128,7 +128,7 @@ RSpec.describe Game, type: :model do
 
         expect(board.in_check?('WHITE')).to eq(false)
       end
-      it 'returns false when same colored piece... can not capture king' do
+      it 'False when same colored piece... can not capture king' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -142,7 +142,7 @@ RSpec.describe Game, type: :model do
       end
     end
     context 'Queen pieces' do
-      it 'returns true when opposing piece, queen, can capture king' do
+      it 'True when opposing piece, queen, can capture king' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -154,7 +154,7 @@ RSpec.describe Game, type: :model do
 
         expect(board.in_check?('WHITE')).to eq(true)
       end
-      it 'returns false when opposing piece, queen, can not capture king' do
+      it 'False when opposing piece, queen, can not capture king' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -166,7 +166,7 @@ RSpec.describe Game, type: :model do
 
         expect(board.in_check?('WHITE')).to eq(false)
       end
-      it 'returns false when same colored piece... can not capture king' do
+      it 'False when same colored piece... can not capture king' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -180,7 +180,7 @@ RSpec.describe Game, type: :model do
       end
     end
     context 'Neither in check' do
-      it 'should return false if both kings are not in check' do
+      it 'False if both kings are not in check' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -205,7 +205,7 @@ RSpec.describe Game, type: :model do
       end
     end
     context 'Both in check' do
-      it 'should return true if both kings are not in check' do
+      it 'True if both kings are not in check' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -224,7 +224,7 @@ RSpec.describe Game, type: :model do
       end
     end
     context 'Pieces blocking from being in Check' do
-      it 'should return false if king has a piece blocking it from being capured' do
+      it 'False if king has a piece blocking it from being capured' do
         board = create(:game)
         board.pieces.delete_all
 
@@ -242,6 +242,134 @@ RSpec.describe Game, type: :model do
       end
     end
   end
+
+  describe 'capture_opponent_causing_check?' do
+    it 'True if WHITE king enemies causing check are capturable' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 3, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+
+      board.pieces << queen
+      board.pieces << king
+
+      expect(board.in_check?('WHITE')).to eq true
+      expect(board.send(:capture_opponent_causing_check?, 'WHITE')).to eq true
+    end
+
+    it 'True if BLACK king enemies causing check are capturable' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      king = King.new(x_position: 4, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 5, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'Queen')
+
+      board.pieces << queen
+      board.pieces << king
+
+      expect(board.in_check?('BLACK')).to eq true
+      expect(board.send(:capture_opponent_causing_check?, 'BLACK')).to eq true
+    end
+
+    it 'False if WHITE king enemies causing check are not capturable' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 6, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+
+      board.pieces << queen
+      board.pieces << king
+
+      expect(board.in_check?('WHITE')).to eq true
+      expect(board.send(:capture_opponent_causing_check?, 'WHITE')).to eq false
+    end
+
+    it 'False if BLACK king enemies causing check are not capturable' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      king = King.new(x_position: 4, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 6, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'Queen')
+
+      board.pieces << queen
+      board.pieces << king
+
+      expect(board.in_check?('BLACK')).to eq true
+      expect(board.send(:capture_opponent_causing_check?, 'BLACK')).to eq false
+    end
+  end
+
+  describe 'can_i_move_out_of_check?' do
+      it 'True if WHITE king i_can_move_out_of_check' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+        queen = Queen.new(x_position: 5, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+
+        board.pieces << queen
+        board.pieces << king
+
+        expect(board.in_check?('WHITE')).to eq true
+        expect(board.send(:i_can_move_out_of_check?, 'WHITE')).to eq true
+      end
+
+      it 'True if BLACK king i_CANT_move_out_of_check' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        king = King.new(x_position: 4, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'King')
+        queen = Queen.new(x_position: 5, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'Queen')
+
+        board.pieces << queen
+        board.pieces << king
+
+        expect(board.in_check?('BLACK')).to eq true
+        expect(board.send(:i_can_move_out_of_check?, 'BLACK')).to eq true
+      end
+
+      it 'False if WHITE king can not_move_out_of_check' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+        queen = Queen.new(x_position: 5, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+        queen2 = Queen.new(x_position: 5, y_position: 5, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+        queen3 = Queen.new(x_position: 5, y_position: 3, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+
+        board.pieces << queen
+        board.pieces << queen2
+        board.pieces << queen3
+        board.pieces << king
+
+        expect(board.in_check?('WHITE')).to eq true
+        expect(board.send(:i_can_move_out_of_check?, 'WHITE')).to eq false
+      end
+
+      it 'Expect king position attributes to update to original x_position, y_position' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+        queen = Queen.new(x_position: 5, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+
+        board.pieces << queen
+        board.pieces << king
+
+        expect(board.in_check?('WHITE')).to eq true
+        expect(board.send(:i_can_move_out_of_check?, 'WHITE')).to eq true
+        expect(king.x_position).to eq 4
+        expect(king.y_position).to eq 4
+      end
+    end
+
+  def create_game_with_no_pieces
+    board = create(:game)
+    board.pieces.delete_all
+  end
+
 
   def create_game_with_one_players
     player_1 = FactoryGirl.create(:user)

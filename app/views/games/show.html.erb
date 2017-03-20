@@ -1,7 +1,7 @@
 <!-- <script>
 // var borderChange = $( 'td.piece-square' ).on("click", function() {
 //   $(this).css('border-color', 'red');
-  
+
 // });
 
 $( function() {
@@ -14,15 +14,13 @@ $( function() {
       console.log($(event.target).data('y'));
       // AJAX PUT requyest to URL with x, y (as params)
       // handle response from this request
-      // e.g. return 
+      // e.g. return
       // { ok: true }
       // check if OK, if not show error or move back
     }
   });
 } );
 </script> -->
-
-
 
 <h2 class="game-title">Chess Board</h2>
 
@@ -51,10 +49,9 @@ $( function() {
       <% 0.upto(7) do |col| %>
 
         <td class="piece-square" data-x="<%= col %>" data-y="<%= row %>">
-        <td class="square">
           <% @pieces.each do |piece| %>
             <% if piece.x_position == col && piece.y_position == row %>
-              <%= link_to image_tag(piece.piece_image), game_piece_path(piece.game, piece) %>      
+              <%= link_to image_tag(piece.piece_image), game_piece_path(piece.game, piece) %>
             <% end %>
           <% end %>
         </td>

@@ -161,7 +161,7 @@ class Piece < ApplicationRecord
         !occupied_by_mycolor_piece?(coordinate_pair[0], coordinate_pair[1])
     end
   end
-
+  
   private
 
   def set_default_state

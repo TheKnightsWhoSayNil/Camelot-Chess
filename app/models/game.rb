@@ -15,12 +15,61 @@ class Game < ApplicationRecord
   end
 
   def in_check?(color)
-    king = pieces.find_by(piece_type: "King", color: color)
+    king = find_king(color)
     opponents = opponents_pieces(color)
+    @enemies_causing_check = []
     opponents.each do |piece|
-      return true if piece.valid_move?(king.x_position, king.y_position)
+      @enemies_causing_check << piece if piece.valid_move?(king.x_position, king.y_position) == true
     end
+    return true if @enemies_causing_check.any?
     false
+  end
+
+  def find_king(color)
+    pieces.find_by(piece_type: "King", color: color)
+  end
+
+  def checkmate?(color)
+    return false unless in_check?(color)
+    return false unless capture_opponent_causing_check?(color)
+    return false unless i_can_move_out_of_check?(color)
+    true
+  end
+
+  def i_can_move_out_of_check?(color)
+    king = find_king(color)
+    x_start = king.x_position
+    y_start = king.y_position
+    state = false
+    ((king.x_position - 1)..(king.x_position + 1)).each do |x|
+      ((king.y_position - 1)..(king.y_position + 1)).each do |y|
+        king.update(x_position: x, y_position: y) if king.valid_move?(x, y)
+        state = true unless in_check?(color)
+        king.update(x_position: x_start, y_position: y_start)
+      end
+    end
+    state
+  end
+
+  def capture_opponent_causing_check?(color)
+    friendlies = friendly_pieces(color)
+    the_liberator = []
+    friendlies.each do |friend|
+      @enemies_causing_check.each do |enemy|
+        the_liberator << friend if friend.valid_move?(enemy.x_position, enemy.y_position) == true
+      end
+    end
+    return true if the_liberator.any?
+    false
+  end
+
+  def friendly_pieces(color)
+    friendly_pieces = if color == 'BLACK'
+                       'BLACK'
+                     else
+                       'WHITE'
+                     end
+    pieces.where(color: friendly_pieces).to_a
   end
 
   def opponents_pieces(color)
@@ -81,6 +130,10 @@ class Game < ApplicationRecord
     Bishop.create(game_id: id, x_position: 5, y_position: 7, color: 'BLACK')
     Queen.create(game_id: id, x_position: 3, y_position: 7, color: 'BLACK')
     King.create(game_id: id, x_position: 4, y_position: 7, color: 'BLACK')
+  end
+
+  def space_occupied?(x, y)
+    self.pieces.where(x_position: x, y_position: y).present?
   end
 
   def self.all_board_coordinates
