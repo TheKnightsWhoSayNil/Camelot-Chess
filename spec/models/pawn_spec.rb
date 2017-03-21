@@ -36,6 +36,16 @@ RSpec.describe Pawn, type: :model do
 
         expect(pawn.valid_move?(1, 5)).to eq(false)
       end
+      it 'can not move to a square occupied by the same color' do
+        game.pieces.delete_all
+        pawn = Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game: game)
+        rook = Rook.create(color: 'WHITE', x_position: 1, y_position: 2, game: game)
+
+        game.pieces << pawn
+        game.pieces << rook
+
+        expect(pawn.valid_move?(1, 2)).to eq(false)
+      end
       it 'can not move horizontally' do
         game.pieces.delete_all
         pawn = Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game: game)
@@ -115,6 +125,16 @@ RSpec.describe Pawn, type: :model do
         game.pieces << pawn
 
         expect(pawn.valid_move?(0, 3)).to eq false
+      end
+      it 'can not move to a square occupied by the same color' do
+        game.pieces.delete_all
+        pawn = Pawn.create(color: 'BLACK', x_position: 2, y_position: 6, game: game)
+        rook = Rook.create(color: 'BLACK', x_position: 2, y_position: 5, game: game)
+
+        game.pieces << pawn
+        game.pieces << rook
+
+        expect(pawn.valid_move?(2, 5)).to eq(false)
       end
       it 'can not move horizontally' do
         game.pieces.delete_all
