@@ -49,6 +49,9 @@ RSpec.describe Rook, type: :model do
         rook = Rook.create(color: 'WHITE', x_position: 0, y_position: 0, game: game)
         pawn = Pawn.create(color: 'WHITE', x_position: 0, y_position: 1, game: game)
 
+        game.pieces << rook
+        game.pieces << pawn
+
         expect(rook.valid_move?(0,4)).to eq(false)
       end
       it 'returns false if piece is blocking down' do
