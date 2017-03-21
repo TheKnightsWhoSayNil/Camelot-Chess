@@ -8,6 +8,39 @@ RSpec.describe Pawn, type: :model do
   )
   end
 
+  # Pawn promotion tests: 
+  describe 'promotable? method' do
+    it 'Should show that a pawn is promotable' do
+      create_game_with_promotable_pawn
+
+      expect(@pawn.promotable?(7)).to eq(true)
+    end
+  end
+
+  describe 'promotion method' do
+    it 'Should remove white pawn from board replace with Queen' do
+      create_game_with_promotable_pawn
+
+      @pawn.promotion(x_position: 1, y_position: 7, piece_type: 'Queen')
+      expect(@pawn.x_position).to eq(nil)
+      expect(@pawn.y_position).to eq(nil)
+      expect(@game.pieces.find_by(x_position: 1, y_position: 7).piece_type).to eq('Queen')
+    end
+  end
+
+  describe 'promote! method' do
+    it 'Should allow pawn promotion move' do
+      create_game_with_promotable_pawn
+
+      @pawn.promote!(x_position: 1, y_position: 7, piece_type: 'Queen')
+      @pawn.reload
+      expect(@pawn.x_position).to eq(nil)
+      expect(@pawn.y_position).to eq(nil)
+      expect(@game.pieces.find_by(x_position: 1, y_position: 7).piece_type).to eq('Queen')
+    end
+  end
+
+# Valid move tests
   describe 'white pawn' do
     context 'valid move' do
       it 'can move one space forward' do
@@ -211,4 +244,18 @@ RSpec.describe Pawn, type: :model do
       end
     end
   end
+
+  private
+
+  def create_game_with_promotable_pawn
+    @game = FactoryGirl.create(:game)
+    @game.pieces.find_by(x_position: 1, y_position: 7).destroy
+    @game.pieces.find_by(x_position: 2, y_position: 7).destroy
+    @pawn = @game.pieces.find_by(x_position: 1, y_position: 1)
+    @pawn.update_attributes(y_position: 6)
+    @pawn.reload
+    @game.pieces.find_by(x_position: 0, y_position: 0).destroy
+    @piece_type = 'Queen'
+  end
+  
 end
