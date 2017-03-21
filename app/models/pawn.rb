@@ -57,4 +57,48 @@ class Pawn < Piece
     end
     false
   end
+
+#-----> PAWN PROMOTION <-----#
+
+  # checks to see if pawn is promotable
+  def promotable?(y)
+    return true if y == 7 && color || y == 0 && !color
+    false
+  end
+
+  # updates the attributes of pawn  - maybe put in private and rename?
+  def promotion(params)
+    x = params[:x_position].to_i
+    y = params[:y_position].to_i
+    type = params[:piece_type]
+
+    # removes pawn from board
+    update_attributes(
+      x_position: nil,
+      y_position: nil,
+      state: 'retired-pawn'
+    )
+
+    #creates the new piece
+    game.pieces.create(
+      x_position: x,
+      y_position: y,
+      piece_type: type,
+      state: 'promoted-piece',
+      color: color,
+    )
+  end
+
+  # performs the pawn promotion!
+  def promote!(params)
+    x = params[:x_position].to_i
+    y = params[:y_position].to_i
+
+    if promotable?(y) && valid_move?(x, y)
+      promotion(params)
+    else
+      super(params)
+    end
+  end
+  
 end

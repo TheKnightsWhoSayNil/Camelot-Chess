@@ -12,6 +12,7 @@ class Piece < ApplicationRecord
   scope :rooks,   -> { where(piece_type: "Rook") }
 
   def piece_image
+    color = game.white_user_id == user.id ? 'white' : 'black'
     "#{color.downcase}_#{piece_type.downcase}.png"
   end
 

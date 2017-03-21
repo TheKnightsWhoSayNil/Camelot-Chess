@@ -1,171 +1,47 @@
-//-----CHESS BOARD & PIECES-----//
+//-----AVAILABLE GAMES-----//
 
-.game-title {
-  text-align: center;
-}
+.available-list {
+  $base-border-radius: 3px !default;
+  $base-spacing: 1.5em !default;
+  $action-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  $comment-gutter: 1.4em;
+  $comment-image-padding: 0.7em;
+  $comment-image-width: 4em;
+  $comment-color: $base-font-color;
+  $comment-background: lighten($action-color, 15%);
+  $comment-detail-color: transparentize($comment-color, 0.5);
+  $comment-image-vert-alignment: top;
 
-.game-board {
-  height: 484px;
-  width: 484px;
-  margin: 0 auto;
-  border: 2px solid;
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  text-align: center;
-}
+  border-bottom: 1px solid transparentize($comment-color, 0.9);
+  display: table;
+  margin-bottom: $base-spacing;
+  padding-bottom: 1em;
+  width: 100%;
 
-.game-board td {
-  height: 60px;
-  width: 60px;
-  background-image: url('/assets/whitesquare.png');
-  border: 1px solid;
-  text-align: center;
-  vertical-align: middle;
-}
-
-.game-board tr:nth-child(odd) td:nth-child(even),
-.game-board tr:nth-child(even) td:nth-child(odd) {
-  background-image: url('/assets/blacksquare.png');
-}
-
-
-td img {
-  width: 50px;
-  height: 50px;
-  vertical-align: middle;
-  text-align: center
-}
-
-td {
-  padding: 0px;
-}
-
-
-//-----MEDIA QUERIES BELOW-----//
-
-
-@media screen and (max-width: 700px) {
-
-  .game-board {
-    height: 650px;
-    width:650px;
-    margin: 0 auto;
-    border: 5px solid grey;
-    text-align: center
+  .game-list {
+    display: table-cell;
+    vertical-align: $comment-image-vert-alignment;
   }
 
-  .game-board td {
-    height: 80px;
-    width: 80px;
-    background-color: white;
-    text-align: center;
-  }
-
-  .game-board tr:nth-child(odd) td:nth-child(even),
-  .game-board tr:nth-child(even) td:nth-child(odd) {
-    height: 80px;
-    width: 80px;
-    background-color: black;
-    text-align: center;
-  }
-
-}
-
-@media screen and (max-width: 600px) {
-
-  .game-board {
-    height: 570px;
-    width:570px;
-    margin: 0 auto;
-    border: 5px solid grey;
-    text-align: center;
-  }
-
-  .game-board td {
-    height: 70px;
-    width: 70px;
-    background-color: white;
-    text-align: center;
-  }
-
-  .game-board tr:nth-child(odd) td:nth-child(even),
-  .game-board tr:nth-child(even) td:nth-child(odd) {
-    height: 70px;
-    width: 70px;
-    background-color: black;
-    text-align: center;
-  }
-
-}
-
-
-@media only screen and (max-width: 320px) {
-
-  .game-board {
-    height: 290px;
-    width:290px;
-    margin: 0 auto;
-    border: 5px solid grey;
-    text-align: center;
-
-  }
-
-  .game-board td {
-    height: 35px;
-    width: 35px;
-    background-color: white;
-    text-align: center;
-  }
-
-  .game-board tr:nth-child(odd) td:nth-child(even),
-  .game-board tr:nth-child(even) td:nth-child(odd) {
-    height: 35px;
-    width: 35px;
-    background-color: black;
-    text-align: center;
-  }
-
-}
-
-
-
-//-----OTHER-----//
-
-.game-box {
-  @include border-width(1px);
-  @include border-style(solid);
-  @include border-color($base-border-color);
-  @include margin(5px, 5px, 5px, 5px);
-  @include background($secondary-background-color);
-  border-radius: $base-border-radius;
-
-  h1, h2, h3, h4, h5, h6 {
-    margin: auto;
-  }
-
-  .label {
-    @include row();
-  }
-
-  .title {
-    @include row();
-    @include margin(10px, 10px, 10px, 10px);
-    text-align: center;
-  }
-
-  .content-box {
-    @include outer-container;
-    @include pad(20px);
+  .game-list {
     width: 100%;
-  }
-}
 
-.full-width-button-box {
-  @include margin(5px, 5px, 5px, 5px);
-  text-align: center;
+    h1 {
+      font-size: 1em;
+      margin: 0 0 0.5em 0;
+    }
 
-  .button {
-    display: block;
+    p {
+      line-height: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    p.comment-detail {
+      color: $comment-detail-color;
+      font-size: 0.9em;
+      font-style: italic;
+    }
   }
 }
