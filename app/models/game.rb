@@ -10,30 +10,22 @@ class Game < ApplicationRecord
 
   scope :available, -> { where(black_user_id: nil) }
 
-  def piece_image
-    "#{color.downcase}_#{piece_type.downcase}.png"
+  def checkmate?(color)
+    return false unless in_check?(color)
+    return false unless capture_opponent_causing_check?(color)
+    return false unless i_can_move_out_of_check?(color)
+    true
   end
 
   def in_check?(color)
     king = find_king(color)
     opponents = opponents_pieces(color)
     @enemies_causing_check = []
-    opponents.each do |piece|
+    opponents.each do |piece|=
       @enemies_causing_check << piece if piece.valid_move?(king.x_position, king.y_position) == true
     end
     return true if @enemies_causing_check.any?
     false
-  end
-
-  def find_king(color)
-    pieces.find_by(piece_type: "King", color: color)
-  end
-
-  def checkmate?(color)
-    return false unless in_check?(color)
-    return false unless capture_opponent_causing_check?(color)
-    return false unless i_can_move_out_of_check?(color)
-    true
   end
 
   def i_can_move_out_of_check?(color)
@@ -49,6 +41,32 @@ class Game < ApplicationRecord
       end
     end
     state
+  end
+
+  def can_my_piece_block_check?(color)
+    king = find_king(color)
+    opponents = opponents_pieces(color)
+    friendlies = friendly_pieces(color)
+    @blockable_positions = []
+    opponents.each do |rival|
+      if king.y_position == rival.y_position
+        if king.x_position > rival.x_position
+        elsif king.x_position < rival.y_position
+      end
+      if king.x_position == rival.x_position
+        if king.y_position > rival.y_position
+        elsif king.y_position < rival.y_position
+      end
+      if king.x_position == rival.x_position
+        if king.y_position > rival.y_position
+        elsif king.y_position < rival.y_position
+      elsif king.x_position == rival.x_position
+        if king.y_position > rival.y_position
+        elsif king.y_position < rival.y_position
+      end
+
+    end
+
   end
 
   def capture_opponent_causing_check?(color)
@@ -81,27 +99,6 @@ class Game < ApplicationRecord
     pieces.where(color: opposing_color).to_a
   end
 
-  def available?
-    black_user.blank?
-  end
-
-  def black_pieces
-    pieces.where(color: 'BLACK')
-  end
-
-  def white_pieces
-    pieces.where(color: 'WHITE')
-  end
-
-  # def assign_pieces
-  #   pieces.where(color: true).each do |p|
-  #     p.update_attributes(player_id: white_user_id)
-  #   end
-  #   pieces.where(color: false).each do |p|
-  #     p.update_attributes(player_id: black_user_id)
-  #   end
-  # end
-
   def fill_board
     # fill white pieces
     (0..7).each do |i|
@@ -132,8 +129,28 @@ class Game < ApplicationRecord
     King.create(game_id: id, x_position: 4, y_position: 7, color: 'BLACK')
   end
 
+  def available?
+    black_user.blank?
+  end
+
+  def black_pieces
+    pieces.where(color: 'BLACK')
+  end
+
+  def white_pieces
+    pieces.where(color: 'WHITE')
+  end
+
   def space_occupied?(x, y)
     self.pieces.where(x_position: x, y_position: y).present?
+  end
+
+  def piece_image
+    "#{color.downcase}_#{piece_type.downcase}.png"
+  end
+
+  def find_king(color)
+    pieces.find_by(piece_type: "King", color: color)
   end
 
   def self.all_board_coordinates
