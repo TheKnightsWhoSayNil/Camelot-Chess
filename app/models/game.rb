@@ -11,7 +11,6 @@ class Game < ApplicationRecord
   scope :available, -> { where(black_user_id: nil) }
 
   def piece_image
-    color = game.white_user_id == user.id ? 'white' : 'black'
     "#{color.downcase}_#{piece_type.downcase}.png"
   end
 

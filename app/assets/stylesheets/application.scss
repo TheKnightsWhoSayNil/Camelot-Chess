@@ -1,16 +1,15 @@
 /* Bourbon */
 
-@import "bourbon",
-        "base/base",
-        "neat";
+@import "bourbon";
+@import "base/base";
+@import  "neat";
 
 /* CSS Styling */
 
-@import "devise",
-        "modal",
-        "gameboard",
-        "games",
-        "join",
-        "navbar",
-        "index",
-        "promotion";
+@import "devise";
+@import "modal";
+@import "gameboard";
+@import "games";
+@import "join";
+@import "navbar";
+@import "index";
