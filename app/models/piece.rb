@@ -1,5 +1,4 @@
 # Piece will hold all similar logic for all pieces.
-require 'pry'
 class Piece < ApplicationRecord
   after_initialize :set_default_state
   belongs_to :game
@@ -18,7 +17,7 @@ class Piece < ApplicationRecord
 
   def move_to!(x, y)
     if occupied_by_mycolor_piece?(x, y)
-      return false
+      false
     elsif valid_move?(x, y)
       if occupied_by_opposing_piece?(x, y)
         capture_piece_at!(x, y)
@@ -126,20 +125,20 @@ class Piece < ApplicationRecord
     piece_at(x, y).update_attributes(x_position: nil, y_position: nil)
   end
 
-  def unoccupied?(x,y)
-    !space_occupied?(x,y)
+  def unoccupied?(x, y)
+    !space_occupied?(x, y)
   end
 
   def occupied_by_mycolor_piece?(x, y)
-    space_occupied?(x, y) && (piece_at(x, y).color == self.color)
+    space_occupied?(x, y) && (piece_at(x, y).color == color)
   end
 
   def occupied_by_opposing_piece?(x, y)
-    space_occupied?(x, y) && (piece_at(x, y).color != self.color)
+    space_occupied?(x, y) && (piece_at(x, y).color != color)
   end
 
   def piece_at(x, y)
-    game.pieces.where(x_position: x, y_position: y).take
+    game.pieces.find_by(x_position: x, y_position: y)
   end
 
   def diagonal_move?(x, y)
