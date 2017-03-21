@@ -57,30 +57,6 @@ $( function() {
       <% end %>
     </tr>
   <% end %>
-<<<<<<< HEAD
-=======
-</table> -->
-
-<table class="game-board">
-  <% 7.downto(0) do |row| %>
-    <tr>
-      <% 0.upto(7) do |col| %>
-
-        <td class="piece-square" data-x="<%= col %>" data-y="<%= row %>">
-          <% @pieces.each do |piece| %>
-            <% if piece.x_position == col && piece.y_position == row %>
-              <%= link_to image_tag(piece.piece_image), game_piece_path(piece.game, piece) %>      
-            <% end %>
-          <% end %>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
->>>>>>> 1441801f03c44d52175e815a9bf218665c279e8d
-</table>
-
-
-
 
 <div class="buttons">
   <%= render 'partials/endGameButton' %>
