@@ -36,6 +36,10 @@ class Game < ApplicationRecord
     black_user.blank?
   end
 
+  def space_occupied?(x, y)
+    self.pieces.where(x_position: x, y_position: y).present?
+  end
+
   def black_pieces
     pieces.where(color: 'BLACK')
   end
