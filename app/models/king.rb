@@ -3,7 +3,7 @@ class King < Piece
   def valid_move?(x, y)
    super(x, y)
    return false if is_obstructed?(x, y)
-
+   
    move_range = [[-1,-1], [-1,0], [-1,1], [0,-1], [0,1], [1,-1], [1,0], [1,1]]
    move_coordinates = []
 
