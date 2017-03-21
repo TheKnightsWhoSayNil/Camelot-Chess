@@ -161,6 +161,10 @@ class Piece < ApplicationRecord
     end
   end
 
+  def find_piece(x, y)
+    game.pieces.where(x_position: x, y_position: y).take
+  end
+
   private
 
   def set_default_state
