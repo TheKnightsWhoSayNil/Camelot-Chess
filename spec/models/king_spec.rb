@@ -105,23 +105,76 @@ RSpec.describe King, type: :model do
     end
   end
 
-  describe 'castling' do
-    context 'valid castle moves' do
-      it 'returns true for castling' do
-        king = King.create(x_position: 4, y_position: 0, state: 'unmoved', game: game)
-        rook = Rook.create(x_position: 0, y_position: 0, state: 'unmoved', game: game)
-        expect(king.can_castle?(2, 0)).to eq(true)
+  describe 'castle_kingside' do
+      let(:game) do
+        Game.create(
+          white_user: FactoryGirl.create(:user),
+          black_user: FactoryGirl.create(:user))
       end
-    end
-=begin
-    context 'invalid castle moves' do
-      it 'returns false if has obstructions' do
-        king = King.create(x_position: 4, y_position: 0, state: 'unmoved', game: game)
-        rook = Rook.create(x_position: 0, y_position: 0, state: 'unmoved', game: game)
-        queen = Queen.create(x_position: 2, y_position: 0, game: game)
-        expect(king.can_castle?(2, 0)).to eq(false)
+
+    context 'white king' do
+      it 'moves rook to kingside castled position' do
+        game.pieces.delete_all
+        white_king = King.create(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+        white_rook = Rook.create(x_position: 7, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+        game.pieces << white_king
+        game.pieces << white_rook 
+
+        white_king.send(:castle_kingside)
+        white_rook.reload
+        expect(white_rook.x_position).to eq(5)
       end
-    end
-=end
+    end 
+
+    context 'black king' do
+      it 'moves rook to kingside castle position' do 
+        game.pieces.delete_all
+        black_king = King.create(x_position: 4, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
+        black_rook = Rook.create(x_position: 7, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
+        game.pieces << black_king
+        game.pieces << black_rook 
+
+        black_king.send(:castle_kingside)
+        black_rook.reload
+        expect(black_rook.x_position).to eq(5)
+      end 
+    end 
   end
+
+  describe 'castle_queenside' do
+      let(:game) do
+        Game.create(
+          white_user: FactoryGirl.create(:user),
+          black_user: FactoryGirl.create(:user))
+      end
+
+    context 'white king' do
+      it 'moves rook to queenside castled position' do
+        game.pieces.delete_all
+        white_king = King.create(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+        white_rook = Rook.create(x_position: 0, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+        game.pieces << white_king
+        game.pieces << white_rook
+
+        white_king.send(:castle_queenside)
+        white_rook.reload
+        expect(white_rook.x_position).to eq(3)
+      end
+    end
+
+    context 'black king' do
+      it 'moves rook to queenside castled position' do
+        game.pieces.delete_all
+        black_king = King.create(x_position: 4, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
+        black_rook = Rook.create(x_position: 0, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
+        game.pieces << black_king
+        game.pieces << black_rook
+
+        black_king.send(:castle_queenside)
+        black_rook.reload
+        expect(black_rook.x_position).to eq(3)
+      end
+    end
+  end
+
 end

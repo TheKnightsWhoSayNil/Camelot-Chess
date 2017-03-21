@@ -4,9 +4,7 @@
   <% 7.downto(0) do |row| %>
     <tr>
       <% 0.upto(7) do |col| %>
-
         <td class="piece-square" data-x="<%= col %>" data-y="<%= row %>">
-      
           <% @pieces.each do |piece| %>
             <% if piece.x_position == col && piece.y_position == row %>
               <%= link_to image_tag(piece.piece_image), game_piece_path(piece.game, piece) %>      
