@@ -302,68 +302,69 @@ RSpec.describe Game, type: :model do
   end
 
   describe 'can_i_move_out_of_check?' do
-      it 'True if WHITE king i_can_move_out_of_check' do
-        board = create(:game)
-        board.pieces.delete_all
+    it 'True if WHITE king i_can_move_out_of_check' do
+      board = create(:game)
+      board.pieces.delete_all
 
-        king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
-        queen = Queen.new(x_position: 5, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+      king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 5, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
 
-        board.pieces << queen
-        board.pieces << king
+      board.pieces << queen
+      board.pieces << king
 
-        expect(board.in_check?('WHITE')).to eq true
-        expect(board.send(:i_can_move_out_of_check?, 'WHITE')).to eq true
-      end
-
-      it 'True if BLACK king i_CANT_move_out_of_check' do
-        board = create(:game)
-        board.pieces.delete_all
-
-        king = King.new(x_position: 4, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'King')
-        queen = Queen.new(x_position: 5, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'Queen')
-
-        board.pieces << queen
-        board.pieces << king
-
-        expect(board.in_check?('BLACK')).to eq true
-        expect(board.send(:i_can_move_out_of_check?, 'BLACK')).to eq true
-      end
-
-      it 'False if WHITE king can not_move_out_of_check' do
-        board = create(:game)
-        board.pieces.delete_all
-
-        king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
-        queen = Queen.new(x_position: 5, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
-        queen2 = Queen.new(x_position: 5, y_position: 5, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
-        queen3 = Queen.new(x_position: 5, y_position: 3, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
-
-        board.pieces << queen
-        board.pieces << queen2
-        board.pieces << queen3
-        board.pieces << king
-
-        expect(board.in_check?('WHITE')).to eq true
-        expect(board.send(:i_can_move_out_of_check?, 'WHITE')).to eq false
-      end
-
-      it 'Expect king position attributes to update to original x_position, y_position' do
-        board = create(:game)
-        board.pieces.delete_all
-
-        king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
-        queen = Queen.new(x_position: 5, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
-
-        board.pieces << queen
-        board.pieces << king
-
-        expect(board.in_check?('WHITE')).to eq true
-        expect(board.send(:i_can_move_out_of_check?, 'WHITE')).to eq true
-        expect(king.x_position).to eq 4
-        expect(king.y_position).to eq 4
-      end
+      expect(board.in_check?('WHITE')).to eq true
+      expect(board.send(:i_can_move_out_of_check?, 'WHITE')).to eq true
     end
+
+    it 'True if BLACK king i_CANT_move_out_of_check' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      king = King.new(x_position: 4, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 5, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'Queen')
+
+      board.pieces << queen
+      board.pieces << king
+
+      expect(board.in_check?('BLACK')).to eq true
+      expect(board.send(:i_can_move_out_of_check?, 'BLACK')).to eq true
+    end
+
+    it 'False if WHITE king can not_move_out_of_check' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 5, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+      queen2 = Queen.new(x_position: 5, y_position: 5, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+      queen3 = Queen.new(x_position: 5, y_position: 3, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+
+      board.pieces << queen
+      board.pieces << queen2
+      board.pieces << queen3
+      board.pieces << king
+
+      expect(board.in_check?('WHITE')).to eq true
+      expect(board.send(:i_can_move_out_of_check?, 'WHITE')).to eq false
+    end
+
+    it 'Expect king position attributes to update to original x_position, y_position' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 5, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+
+      board.pieces << queen
+      board.pieces << king
+
+      expect(board.in_check?('WHITE')).to eq true
+      expect(board.send(:i_can_move_out_of_check?, 'WHITE')).to eq true
+      expect(king.x_position).to eq 4
+      expect(king.y_position).to eq 4
+    end
+  end
+
 
   def create_game_with_no_pieces
     board = create(:game)

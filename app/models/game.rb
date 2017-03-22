@@ -21,7 +21,7 @@ class Game < ApplicationRecord
     king = find_king(color)
     opponents = opponents_pieces(color)
     @enemies_causing_check = []
-    opponents.each do |piece|=
+    opponents.each do |piece|
       @enemies_causing_check << piece if piece.valid_move?(king.x_position, king.y_position) == true
     end
     return true if @enemies_causing_check.any?
@@ -64,9 +64,7 @@ class Game < ApplicationRecord
         if king.y_position > rival.y_position
         elsif king.y_position < rival.y_position
       end
-
     end
-
   end
 
   def capture_opponent_causing_check?(color)
@@ -162,4 +160,3 @@ class Game < ApplicationRecord
     end
     result
   end
-end
