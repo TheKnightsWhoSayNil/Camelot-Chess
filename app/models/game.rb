@@ -6,14 +6,9 @@ class Game < ApplicationRecord
 
   has_many :pieces
 
-  after_create :fill_board, :default_turn
+  after_create :fill_board
 
   scope :available, -> { where(black_user_id: nil) }
-
-  def default_turn(user_id)
-    self.turn = user_id
-    self.save!
-  end
 
   def piece_image
     "#{color.downcase}_#{piece_type.downcase}.png"
