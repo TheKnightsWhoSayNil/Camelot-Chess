@@ -161,8 +161,8 @@ class Piece < ApplicationRecord
     end
   end
 
-  def find_piece(x, y)
-    game.pieces.where(x_position: x, y_position: y).take
+  def find_piece(piece_type, x, y)
+    game.pieces.where(piece_type: piece_type, x_position: x, y_position: y).take
   end
 
   private

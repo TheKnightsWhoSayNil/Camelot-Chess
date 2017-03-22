@@ -33,24 +33,24 @@ class King < Piece
   end
 
   def can_castle_queenside?(x)
-    rook = find_piece(7, y_position)
+    rook = find_piece('Rook', 7, y_position)
     return false unless passes_castle_conditions?(rook)
     no_queenside_obstruction?
   end 
 
   def can_castle_kingside?(x)
-    rook = find_piece(0, y_position)
+    rook = find_piece('Rook', 0, y_position)
     return false unless passes_castle_conditions?(rook)
     no_kingside_obstruction?
   end 
 
   def castle_kingside
-    kingside_rook = find_piece(7, y_position)
+    kingside_rook = find_piece('Rook', 7, y_position)
     kingside_rook.update_attributes(x_position: 5)           
   end 
 
   def castle_queenside
-    queenside_rook = find_piece(0, y_position)
+    queenside_rook = find_piece('Rook', 0, y_position)
     queenside_rook.update_attributes(x_position: 3)
   end
 
