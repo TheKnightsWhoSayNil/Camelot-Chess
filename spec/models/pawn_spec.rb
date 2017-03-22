@@ -8,6 +8,28 @@ RSpec.describe Pawn, type: :model do
   )
   end
 
+  # Pawn promotion tests:
+  describe 'promotable? method' do
+    it 'Should show that a pawn is promotable' do
+      create_game_with_promotable_pawn
+
+      expect(@pawn.promotable?(7)).to eq(true)
+    end
+  end
+
+  describe 'promote! method' do
+    it 'Should allow pawn promotion move' do
+      create_game_with_promotable_pawn
+
+      @pawn.promote!(x_position: 1, y_position: 7, piece_type: 'Queen')
+      @pawn.reload
+      expect(@pawn.x_position).to eq(nil)
+      expect(@pawn.y_position).to eq(nil)
+      expect(@game.pieces.find_by(x_position: 1, y_position: 7).piece_type).to eq('Queen')
+    end
+  end
+
+# Valid move tests
   describe 'white pawn' do
     context 'valid move' do
       it 'can move one space forward' do
@@ -35,6 +57,16 @@ RSpec.describe Pawn, type: :model do
         game.pieces << pawn
 
         expect(pawn.valid_move?(1, 5)).to eq(false)
+      end
+      it 'can not move to a square occupied by the same color' do
+        game.pieces.delete_all
+        pawn = Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game: game)
+        rook = Rook.create(color: 'WHITE', x_position: 1, y_position: 2, game: game)
+
+        game.pieces << pawn
+        game.pieces << rook
+
+        expect(pawn.valid_move?(1, 2)).to eq(false)
       end
       it 'can not move horizontally' do
         game.pieces.delete_all
@@ -116,6 +148,16 @@ RSpec.describe Pawn, type: :model do
 
         expect(pawn.valid_move?(0, 3)).to eq false
       end
+      it 'can not move to a square occupied by the same color' do
+        game.pieces.delete_all
+        pawn = Pawn.create(color: 'BLACK', x_position: 2, y_position: 6, game: game)
+        rook = Rook.create(color: 'BLACK', x_position: 2, y_position: 5, game: game)
+
+        game.pieces << pawn
+        game.pieces << rook
+
+        expect(pawn.valid_move?(2, 5)).to eq(false)
+      end
       it 'can not move horizontally' do
         game.pieces.delete_all
         pawn = Pawn.create(color: 'BLACK', x_position: 1, y_position: 6, game: game)
@@ -191,4 +233,18 @@ RSpec.describe Pawn, type: :model do
       end
     end
   end
+
+  private
+
+  def create_game_with_promotable_pawn
+    @game = FactoryGirl.create(:game)
+    @game.pieces.find_by(x_position: 1, y_position: 7).destroy
+    @game.pieces.find_by(x_position: 2, y_position: 7).destroy
+    @pawn = @game.pieces.find_by(x_position: 1, y_position: 1)
+    @pawn.update_attributes(y_position: 6)
+    @pawn.reload
+    @game.pieces.find_by(x_position: 0, y_position: 0).destroy
+    @piece_type = 'Queen'
+  end
+
 end
