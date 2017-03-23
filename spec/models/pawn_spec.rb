@@ -15,6 +15,12 @@ RSpec.describe Pawn, type: :model do
 
       expect(@pawn.promotable?(7)).to eq(true)
     end
+
+    it 'Should show that a pawn is not promotable' do
+      create_game_with_promotable_pawn
+
+      expect(@pawn.promotable?(6)).to eq(false)
+    end
   end
 
   describe 'promote! method' do
