@@ -10,13 +10,6 @@ class Game < ApplicationRecord
 
   scope :available, -> { where(black_user_id: nil) }
 
-  def checkmate?(color)
-    return false unless in_check?(color)
-    return false if capture_opponent_causing_check?(color)
-    return false if i_can_move_out_of_check?(color)
-    true
-  end
-
   def in_check?(color)
     king = find_king(color)
     opponents = opponents_pieces(color)
@@ -26,6 +19,30 @@ class Game < ApplicationRecord
     end
     return true if @enemies_causing_check.any?
     false
+  end
+
+  def stalemate?(color)
+    your_pieces = my_pieces(color)
+    available_moves = []
+    your_pieces.each do |piece|
+      1.upto(8) do |x|
+        1.upto(8) do |y|
+          if piece.valid_move?(x, y) && !piece.move_causes_check?(x, y)
+            available_moves << [x, y]
+          end
+        end
+      end
+    end
+    return false if available_moves.any?
+    true
+  end
+
+  def checkmate?(color)
+    return false unless in_check?(color)
+    return false if capture_opponent_causing_check?(color)
+    return false if i_can_move_out_of_check?(color)
+    return false if can_be_blocked?(king)
+    true
   end
 
   def i_can_move_out_of_check?(color)
@@ -53,40 +70,6 @@ class Game < ApplicationRecord
     end
     return true if the_liberator.any?
     false
-  end
-
-  def stalemate?(color)
-    your_pieces = my_pieces(color)
-    available_moves = []
-    your_pieces.each do |piece|
-      1.upto(8) do |x|
-        1.upto(8) do |y|
-          if piece.valid_move?(x, y) && !piece.move_causes_check?(x, y)
-            available_moves << [x, y]
-          end
-        end
-      end
-    end
-    return false if available_moves.any?
-    true
-  end
-
-  def my_pieces(color)
-    friendly_pieces = if color == 'BLACK'
-                       'BLACK'
-                     else
-                       'WHITE'
-                     end
-    pieces.where(color: friendly_pieces).to_a
-  end
-
-  def opponents_pieces(color)
-    opposing_color = if color == 'BLACK'
-                       'WHITE'
-                     else
-                       'BLACK'
-                     end
-    pieces.where(color: opposing_color).to_a
   end
 
   def fill_board
@@ -117,6 +100,24 @@ class Game < ApplicationRecord
     Bishop.create(game_id: id, x_position: 5, y_position: 7, color: 'BLACK')
     Queen.create(game_id: id, x_position: 3, y_position: 7, color: 'BLACK')
     King.create(game_id: id, x_position: 4, y_position: 7, color: 'BLACK')
+  end
+
+  def my_pieces(color)
+    friendly_pieces = if color == 'BLACK'
+                       'BLACK'
+                     else
+                       'WHITE'
+                     end
+    pieces.where(color: friendly_pieces).to_a
+  end
+
+  def opponents_pieces(color)
+    opposing_color = if color == 'BLACK'
+                       'WHITE'
+                     else
+                       'BLACK'
+                     end
+    pieces.where(color: opposing_color).to_a
   end
 
   def available?

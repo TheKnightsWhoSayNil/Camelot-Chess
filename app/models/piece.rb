@@ -44,17 +44,6 @@ class Piece < ApplicationRecord
     (x >= 0 && y >= 0 && x <= 7 && y <= 7)
   end
 
-  def move_causes_check?(x, y)
-    state = false
-    ActiveRecord::Base.transaction do
-      move_to!(x, y)
-      state = game.in_check?(color)
-      raise ActiveRecord::Rollback
-    end
-    reload
-    state
-  end
-
   def horizontal_obstruction?(x_end, _y_end)
     # movement: right to left
     if x_position < x_end
@@ -116,6 +105,30 @@ class Piece < ApplicationRecord
     return diagonal_obstruction(x_end, y_end) if path == 'diagonal'
 
     false
+  end
+
+  def can_be_blocked?(color)
+    checked_king = game.find_king(color)
+    obstruction_array = obstructed_squares(checked_king.x_position, checked_king.y_position)
+    opponents = game.opponents_pieces(!color)
+    opponents.each do |opponent|
+      next if opponent.piece_type == 'King'
+      obstruction_array.each do |square|
+        return true if opponent.valid_move?(square[0], square[1])
+      end
+    end
+    false
+  end
+
+  def move_causes_check?(x, y)
+    state = false
+    ActiveRecord::Base.transaction do
+      move_to!(x, y)
+      state = game.in_check?(color)
+      raise ActiveRecord::Rollback
+    end
+    reload
+    state
   end
 
   def space_occupied?(x, y)
