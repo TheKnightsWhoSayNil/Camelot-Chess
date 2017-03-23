@@ -44,6 +44,17 @@ class Piece < ApplicationRecord
     (x >= 0 && y >= 0 && x <= 7 && y <= 7)
   end
 
+  def move_causes_check?(x, y)
+    state = false
+    ActiveRecord::Base.transaction do
+      move_to!(x, y)
+      state = game.in_check?(color)
+      raise ActiveRecord::Rollback
+    end
+    reload
+    state
+  end
+
   def horizontal_obstruction?(x_end, _y_end)
     # movement: right to left
     if x_position < x_end

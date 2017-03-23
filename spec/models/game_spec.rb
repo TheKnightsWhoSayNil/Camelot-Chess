@@ -365,6 +365,84 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  describe 'stalemate?' do
+      it 'white king has no valid moves and stalemate is true' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+        rook = Rook.new(x_position: 3, y_position: 1, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
+        rook1 = Rook.new(x_position: 5, y_position: 1, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
+        rook2 = Rook.new(x_position: 1, y_position: 3, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
+        rook3 = Rook.new(x_position: 1, y_position: 5, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
+
+        board.pieces << rook
+        board.pieces << rook1
+        board.pieces << rook2
+        board.pieces << rook3
+        board.pieces << king
+
+        expect(board.stalemate?('WHITE')).to eq(true)
+      end
+
+      it 'black king has no valid moves and stalemate is true' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        king = King.new(x_position: 4, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'King')
+        rook = Rook.new(x_position: 3, y_position: 1, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
+        rook1 = Rook.new(x_position: 5, y_position: 1, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
+        rook2 = Rook.new(x_position: 1, y_position: 3, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
+        rook3 = Rook.new(x_position: 1, y_position: 5, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
+
+        board.pieces << rook
+        board.pieces << rook1
+        board.pieces << rook2
+        board.pieces << rook3
+        board.pieces << king
+
+        expect(board.stalemate?('BLACK')).to eq(true)
+      end
+
+      it 'white king has valid moves and stalemate is false' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+        rook = Rook.new(x_position: 2, y_position: 1, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
+        rook1 = Rook.new(x_position: 5, y_position: 1, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
+        rook2 = Rook.new(x_position: 1, y_position: 3, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
+        rook3 = Rook.new(x_position: 1, y_position: 5, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
+
+        board.pieces << rook
+        board.pieces << rook1
+        board.pieces << rook2
+        board.pieces << rook3
+        board.pieces << king
+
+        expect(board.stalemate?('WHITE')).to eq(false)
+      end
+
+      it 'black king has valid moves and stalemate is false' do
+        board = create(:game)
+        board.pieces.delete_all
+
+        king = King.new(x_position: 4, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'King')
+        rook = Rook.new(x_position: 2, y_position: 1, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
+        rook1 = Rook.new(x_position: 5, y_position: 1, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
+        rook2 = Rook.new(x_position: 1, y_position: 3, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
+        rook3 = Rook.new(x_position: 1, y_position: 5, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
+
+        board.pieces << rook
+        board.pieces << rook1
+        board.pieces << rook2
+        board.pieces << rook3
+        board.pieces << king
+
+        expect(board.stalemate?('BLACK')).to eq(false)
+      end
+    end
+
 
   def create_game_with_no_pieces
     board = create(:game)

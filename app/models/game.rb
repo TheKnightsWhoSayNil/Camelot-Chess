@@ -12,8 +12,8 @@ class Game < ApplicationRecord
 
   def checkmate?(color)
     return false unless in_check?(color)
-    return false unless capture_opponent_causing_check?(color)
-    return false unless i_can_move_out_of_check?(color)
+    return false if capture_opponent_causing_check?(color)
+    return false if i_can_move_out_of_check?(color)
     true
   end
 
@@ -43,32 +43,8 @@ class Game < ApplicationRecord
     state
   end
 
-  def can_my_piece_block_check?(color)
-    king = find_king(color)
-    opponents = opponents_pieces(color)
-    friendlies = friendly_pieces(color)
-    @blockable_positions = []
-    opponents.each do |rival|
-      if king.y_position == rival.y_position
-        if king.x_position > rival.x_position
-        elsif king.x_position < rival.y_position
-      end
-      if king.x_position == rival.x_position
-        if king.y_position > rival.y_position
-        elsif king.y_position < rival.y_position
-      end
-      if king.x_position == rival.x_position
-        if king.y_position > rival.y_position
-        elsif king.y_position < rival.y_position
-      elsif king.x_position == rival.x_position
-        if king.y_position > rival.y_position
-        elsif king.y_position < rival.y_position
-      end
-    end
-  end
-
   def capture_opponent_causing_check?(color)
-    friendlies = friendly_pieces(color)
+    friendlies = my_pieces(color)
     the_liberator = []
     friendlies.each do |friend|
       @enemies_causing_check.each do |enemy|
@@ -79,7 +55,23 @@ class Game < ApplicationRecord
     false
   end
 
-  def friendly_pieces(color)
+  def stalemate?(color)
+    your_pieces = my_pieces(color)
+    available_moves = []
+    your_pieces.each do |piece|
+      1.upto(8) do |x|
+        1.upto(8) do |y|
+          if piece.valid_move?(x, y) && !piece.move_causes_check?(x, y)
+            available_moves << [x, y]
+          end
+        end
+      end
+    end
+    return false if available_moves.any?
+    true
+  end
+
+  def my_pieces(color)
     friendly_pieces = if color == 'BLACK'
                        'BLACK'
                      else
@@ -160,3 +152,4 @@ class Game < ApplicationRecord
     end
     result
   end
+end
