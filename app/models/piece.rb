@@ -16,9 +16,7 @@ class Piece < ApplicationRecord
   end
 
   def move_to!(x, y)
-    if x == piece.x_position && y == piece.y_position
-      true
-    elsif occupied_by_mycolor_piece?(x, y)
+    if occupied_by_mycolor_piece?(x, y)
       false
     elsif valid_move?(x, y)
       if occupied_by_opposing_piece?(x, y)
