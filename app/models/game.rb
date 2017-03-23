@@ -41,7 +41,6 @@ class Game < ApplicationRecord
     return false unless in_check?(color)
     return false if capture_opponent_causing_check?(color)
     return false if i_can_move_out_of_check?(color)
-    return false if can_be_blocked?(king)
     true
   end
 
