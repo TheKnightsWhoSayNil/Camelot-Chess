@@ -61,7 +61,7 @@ class Pawn < Piece
     if promotable?(y) && valid_move?(x, y)
       update_attributes_of_pawn(params)
     else
-      false ## no test for this case 
+      false
     end
   end
   
