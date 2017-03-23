@@ -8,7 +8,7 @@ RSpec.describe Pawn, type: :model do
   )
   end
 
-  # Pawn promotion tests: 
+  # Pawn promotion tests:
   describe 'promotable? method' do
     it 'Should show that a pawn is promotable' do
       create_game_with_promotable_pawn
@@ -252,5 +252,5 @@ RSpec.describe Pawn, type: :model do
     @game.pieces.find_by(x_position: 0, y_position: 0).destroy
     @piece_type = 'Queen'
   end
-  
+
 end

@@ -1,4 +1,3 @@
-# /app/models/pawn.rb
 class Pawn < Piece
   def valid_move?(x, y)
     if super(x, y)
@@ -51,7 +50,7 @@ class Pawn < Piece
       false
     end
   end
-  
+
   private
 
   # exchanges the pawn for a different piece by updating the attributes of pawn.
