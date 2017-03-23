@@ -177,4 +177,52 @@ RSpec.describe King, type: :model do
     end
   end
 
+  describe 'no_queenside_obstruction?' do 
+
+    it 'returns false when obstructed' do 
+      game.pieces.delete_all
+      white_king = King.create(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+      white_rook = Rook.create(x_position: 0, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+      white_bishop = Bishop.create(x_position: 2, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+      game.pieces << white_king
+      game.pieces << white_rook
+      game.pieces << white_bishop
+
+      expect(white_king.send(:no_queenside_obstruction?)).to eq(false)
+    end 
+  end 
+
+  describe 'no_kingside_obstruction?' do 
+
+    it 'returns false if obstructed' do 
+      game.pieces.delete_all
+      white_king = King.create(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+      white_rook = Rook.create(x_position: 7, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+      white_bishop = Bishop.create(x_position: 5, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+      game.pieces << white_king
+      game.pieces << white_rook
+      game.pieces << white_bishop
+
+      expect(white_king.send(:no_kingside_obstruction?)).to eq(false)
+    end 
+  end 
+
+  describe 'passes_castle_conditions?' do 
+    it 'returns false if king has moved' do 
+      king = game.pieces.where(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take 
+      rook = game.pieces.where(x_position: 7, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take
+      king.update_attributes(state: 'moved')
+
+      expect(king.passes_castle_conditions?(rook)).to eq(false)
+    end 
+
+    it 'returns false if rook has moved' do 
+      king = game.pieces.where(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take 
+      rook = game.pieces.where(x_position: 7, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take
+      rook.update_attributes(state: 'moved')
+
+      expect(king.passes_castle_conditions?(rook)).to eq(false)
+    end 
+  end 
+
 end
