@@ -6,24 +6,13 @@ class PiecesController < ApplicationController
     @pieces = @game.pieces
   end
 
-  def update
-    @piece = Piece.find_by_id(params[:id])    
-    if @piece.move_to!(@piece.x_position, @piece.y_position) == false      
-      render text: "Invalid move, please try again. ..."
-      #to do handle the reponse by drag&drop to revert to the starting position   
+  def update 
+    @piece = Piece.find_by_id(params[:id])
+    if @piece.move_to!(piece_params[:x_position].to_i, piece_params[:y_position].to_i) == false      
+      render text: "Invalid move, please try again. ..."  
     else     
-      redirect_to game_path(@piece.game)
-    end    
-  end  
-
-    
-    # @piece.update_attributes(piece_params)
-    # if @piece.valid?
-     # redirect_to game_path(@piece.game)
-    # else
-    #  return :show, status: :not_acceptable
-     
-
+      render text: "OK"
+    end
   end
 
   private

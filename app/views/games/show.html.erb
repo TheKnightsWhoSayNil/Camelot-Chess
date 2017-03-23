@@ -23,11 +23,23 @@ $( function() {
       console.log(x);
       console.log(y);
       console.log(urlUpdatePath);
+      
       $.ajax({
         type: 'PUT',
         url: urlUpdatePath,
-        data: { piece: { x_position: x, y_position: y }  }
+        data: { piece: { x_position: x, y_position: y }  },
+        success: function(response) {
+          if(response == 'OK') {
+            console.log(response);
+          } else {
+            alert(response);
+          }
+          // cause the page to refresh to allign the moved piece on the square.
+          Turbolinks.visit(window.location, { action: 'replace' }); 
+        }
+        
         });
+
       }
     });
     }
