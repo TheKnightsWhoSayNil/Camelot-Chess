@@ -9,7 +9,7 @@ RSpec.describe PiecesController, type: :controller do
 
       put :update, game_id: game.id, id: piece.id, piece: {x_position: 1, y_position: 1}
 
-      expect(response).to redirect_to game_path(game)
+      expect(response).to have_http_status :success
     end
   end
 end
