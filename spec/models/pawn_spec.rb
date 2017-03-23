@@ -15,16 +15,11 @@ RSpec.describe Pawn, type: :model do
 
       expect(@pawn.promotable?(7)).to eq(true)
     end
-  end
 
-  describe 'promotion method' do
-    it 'Should remove white pawn from board replace with Queen' do
+    it 'Should show that a pawn is not promotable' do
       create_game_with_promotable_pawn
 
-      @pawn.promotion(x_position: 1, y_position: 7, piece_type: 'Queen')
-      expect(@pawn.x_position).to eq(nil)
-      expect(@pawn.y_position).to eq(nil)
-      expect(@game.pieces.find_by(x_position: 1, y_position: 7).piece_type).to eq('Queen')
+      expect(@pawn.promotable?(6)).to eq(false)
     end
   end
 
