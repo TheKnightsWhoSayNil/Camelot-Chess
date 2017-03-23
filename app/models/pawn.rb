@@ -32,19 +32,6 @@ class Pawn < Piece
     game.space_occupied?(x, y) && ((y - y_position).abs == 1 && (x - x_position).abs == 1)
   end
 
-  def moving_backward?(y)
-    if color == 'WHITE'
-      if (y - y_position) < 0
-        return true
-      end
-    elsif color == 'BLACK'
-      if (y - y_position) > 0
-        return true
-      end
-    end
-    false
-  end
-
 #-----> PAWN PROMOTION <-----#
 
   # checks to see if a pawn is promotable.
