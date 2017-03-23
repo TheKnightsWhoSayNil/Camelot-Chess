@@ -78,3 +78,4 @@ class Pawn < Piece
   end
 
 end
+
