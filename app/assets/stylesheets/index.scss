@@ -24,6 +24,7 @@ body {
   background-size: cover;
   height: 600px;
   box-shadow: 0px 3px 8px #2a2a2a;
+  text-align: center;
 }
 
 h1.hero-text {
@@ -40,4 +41,60 @@ h4.hero-subtext {
   font-size: 1.5em;
   margin: 0;
   animation: fade-down 1.5s;
+}
+
+.code {
+  @include span-columns(6);
+  height: 600px;
+  width: 50%;
+  margin: 0;
+  background-color: #95ABA5;
+  color: #fff;
+}
+
+.code:nth-child(even) {
+  background-color: black;
+}
+
+.code p {
+  padding: 12px;
+}
+
+.about-camelot {
+  height: 28em;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  color: black;
+  clear: both;
+}
+
+.tools {
+  height: 28em;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  color: black;
+  clear: both;
+}
+
+.team {
+  height: 16em;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  background-color: grey;
+  color: black;
+  clear: both;
+}
+
+.arrow-left {
+  width: 0; 
+  height: 0; 
+  border-bottom: 50px solid transparent;  /* left arrow slant */
+  border-top: 50px solid transparent; /* right arrow slant */
+  border-left: 50px solid #95ABA5; /* bottom, add background color here */
+  font-size: 0;
+  line-height: 0;
+  margin-top: 275px;
 }
