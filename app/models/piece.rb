@@ -21,9 +21,9 @@ class Piece < ApplicationRecord
     elsif valid_move?(x, y)
       if occupied_by_opposing_piece?(x, y)
         capture_piece_at!(x, y)
-        update_attributes(x_position: x, y_position: y)
+        update_attributes(x_position: x, y_position: y, state: 'moved')
       elsif unoccupied?(x, y)
-        update_attributes(x_position: x, y_position: y)
+        update_attributes(x_position: x, y_position: y, state: 'moved')
       end
     else
       false
