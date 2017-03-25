@@ -35,7 +35,7 @@ class Pawn < Piece
 
   # checks to see if a pawn is promotable.
   def promotable?(y)
-    return true if y == 7 && color || y == 0 && !color
+    return true if y == 7 && color == "WHITE" || y == 0 && !color == "BLACK"
     false
   end
 
