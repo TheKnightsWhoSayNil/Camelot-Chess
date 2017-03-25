@@ -1,0 +1,20 @@
+
+
+
+
+
+Build a method that returns a boolean (true/false) on the Game Model  ….that indicates whether or not the current state of the game is in check.
+1. get king w/ specific color
+2. get all of opponents pieces which is opposite color
+3. go through each piece and see if piece has a valid_move? on the king if valid return true if not valid return false
+
+
+scenario:
+I'm black player
+black king is in front of white rook (in check)
+
+
+game.in_check?(black) --> true
+  (implies the next move belongs to non-black)
+
+

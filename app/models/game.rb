@@ -11,14 +11,17 @@ class Game < ApplicationRecord
   scope :available, -> { where(black_user_id: nil) }
 
   def in_check?(color)
-    king = find_king(color)
-    opponents = opponents_pieces(color)
     @enemies_causing_check = []
-    opponents.each do |piece|
-      @enemies_causing_check << piece if piece.valid_move?(king.x_position, king.y_position) == true
+    king = find_king(color)
+
+    if king
+      opponents = opponents_pieces(color)
+      opponents.each do |piece|
+        @enemies_causing_check << piece if piece.valid_move?(king.x_position, king.y_position) == true
+      end
     end
-    return true if @enemies_causing_check.any?
-    false
+
+    return @enemies_causing_check.any?
   end
 
   def stalemate?(color)

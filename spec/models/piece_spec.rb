@@ -120,8 +120,10 @@ RSpec.describe Piece, type: :model do
       it "captures the opponent's piece, and moves to the new square" do
         game.pieces.delete_all
 
-        queen = Queen.create(x_position: 1, y_position: 1, game: game, color: 'WHITE', piece_type: 'Queen')
-        black_bishop = Bishop.create(x_position: 1, y_position: 2, game: game, color: 'BLACK', piece_type: 'Bishop')
+        queen = Queen.create(x_position: 1, y_position: 1, color: 'WHITE', piece_type: 'Queen')
+        black_bishop = Bishop.create(x_position: 1, y_position: 2, color: 'BLACK', piece_type: 'Bishop')
+
+        game.pieces << [queen, black_bishop]
 
         queen.move_to!(1, 2)
         black_bishop.reload
@@ -168,6 +170,13 @@ RSpec.describe Piece, type: :model do
 
         expect(result).to match_array [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0]]
       end
+    end
+  end
+
+  describe 'move_causes_check?' do
+    it 'doesnt change the board when checking out a move' do
+      board = create(:game)
+      board.pieces.delete_all
     end
   end
 
