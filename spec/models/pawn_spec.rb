@@ -46,6 +46,15 @@ RSpec.describe Pawn, type: :model do
 
         expect(pawn.valid_move?(1, 2)).to eq(true)
       end
+      it 'can move one space forward' do
+        game.pieces.delete_all
+        pawn = Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game: game)
+
+        game.pieces << pawn
+        pawn.move_to!(1, 2)
+        
+        expect(pawn.y_position).to eq(2)
+      end
       it 'can move two spaces forward' do
         game.pieces.delete_all
         pawn = Pawn.create(color: 'WHITE', x_position: 0, y_position: 1, game: game)
