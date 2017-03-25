@@ -129,10 +129,6 @@ class Piece < ApplicationRecord
     state
   end
 
-  def space_occupied?(x, y)
-    game.pieces.where(x_position: x, y_position: y).present?
-  end
-
   def check_path(x_position, y_position, x_end, y_end)
     if y_position == y_end
       'horizontal'
