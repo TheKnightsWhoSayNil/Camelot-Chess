@@ -72,6 +72,7 @@ class Pawn < Piece
       y_position: y,
       piece_type: "Queen",
       state: 'promoted-piece',
+      color: color
     )
   end
 
