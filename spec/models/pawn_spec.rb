@@ -24,10 +24,10 @@ RSpec.describe Pawn, type: :model do
   end
 
   describe 'promote! method' do
-    it 'Should allow pawn promotion move' do
+    it 'Should show the pawn becomes queen once promoted' do
       create_game_with_promotable_pawn
 
-      @pawn.promote!(x_position: 1, y_position: 7, piece_type: 'Queen')
+      @pawn.promote!(x_position: 1, y_position: 7)
       @pawn.reload
       expect(@pawn.x_position).to eq(nil)
       expect(@pawn.y_position).to eq(nil)
@@ -250,7 +250,6 @@ RSpec.describe Pawn, type: :model do
     @pawn.update_attributes(y_position: 6)
     @pawn.reload
     @game.pieces.find_by(x_position: 0, y_position: 0).destroy
-    @piece_type = 'Queen'
   end
 
 end

@@ -70,9 +70,8 @@ class Pawn < Piece
     game.pieces.create(
       x_position: x,
       y_position: y,
-      piece_type: type,
+      piece_type: "Queen",
       state: 'promoted-piece',
-      color: color,
     )
   end
 
