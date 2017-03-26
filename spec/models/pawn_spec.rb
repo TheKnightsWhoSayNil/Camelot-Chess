@@ -8,12 +8,18 @@ RSpec.describe Pawn, type: :model do
   )
   end
 
-  # Pawn promotion tests: 
+  # Pawn promotion tests:
   describe 'promotable? method' do
     it 'Should show that a pawn is promotable' do
       create_game_with_promotable_pawn
 
       expect(@pawn.promotable?(7)).to eq(true)
+    end
+
+    it 'Should show that a pawn is not promotable' do
+      create_game_with_promotable_pawn
+
+      expect(@pawn.promotable?(6)).to eq(false)
     end
   end
 
@@ -39,6 +45,15 @@ RSpec.describe Pawn, type: :model do
         game.pieces << pawn
 
         expect(pawn.valid_move?(1, 2)).to eq(true)
+      end
+      it 'can move one space forward' do
+        game.pieces.delete_all
+        pawn = Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game: game)
+
+        game.pieces << pawn
+        pawn.move_to!(1, 2)
+        
+        expect(pawn.y_position).to eq(2)
       end
       it 'can move two spaces forward' do
         game.pieces.delete_all
@@ -246,5 +261,5 @@ RSpec.describe Pawn, type: :model do
     @game.pieces.find_by(x_position: 0, y_position: 0).destroy
     @piece_type = 'Queen'
   end
-  
+
 end

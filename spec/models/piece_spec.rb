@@ -120,15 +120,17 @@ RSpec.describe Piece, type: :model do
       it "captures the opponent's piece, and moves to the new square" do
         game.pieces.delete_all
 
-        queen = Queen.create(x_position: 1, y_position: 1, game: game, color: 'WHITE', piece_type: 'Queen')
-        black_bishop = Bishop.create(x_position: 1, y_position: 2, game: game, color: 'BLACK', piece_type: 'Bishop')
+        queen = Queen.create(x_position: 1, y_position: 1, color: 'WHITE', piece_type: 'Queen')
+        black_bishop = Bishop.create(x_position: 1, y_position: 2, color: 'BLACK', piece_type: 'Bishop')
+
+        game.pieces << [queen, black_bishop]
 
         queen.move_to!(1, 2)
         black_bishop.reload
 
         expect(queen.x_position).to eq(1)
         expect(queen.y_position).to eq(2)
-        
+
         black_bishop.reload
 
         expect(black_bishop.x_position).to eq(nil)
@@ -170,4 +172,70 @@ RSpec.describe Piece, type: :model do
       end
     end
   end
+
+  describe 'move_causes_check?' do
+    it 'doesnt change the board when checking out a move' do
+      board = create(:game)
+      board.pieces.delete_all
+    end
+  end
+
+  describe 'capture_opponent_causing_check?' do
+    it 'True if white king enemies causing check are capturable' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 5, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+
+      board.pieces << queen
+      board.pieces << king
+
+      expect(board.in_check?('WHITE')).to eq true
+      expect(board.send(:capture_opponent_causing_check?, 'WHITE')).to eq true
+    end
+
+    it 'True if black king enemies causing check are capturable' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      king = King.new(x_position: 4, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 5, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'Queen')
+
+      board.pieces << queen
+      board.pieces << king
+
+      expect(board.in_check?('BLACK')).to eq true
+      expect(board.send(:capture_opponent_causing_check?, 'BLACK')).to eq true
+    end
+
+    it 'False if white king enemies causing check are not capturable' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 6, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'Queen')
+
+      board.pieces << queen
+      board.pieces << king
+
+      expect(board.in_check?('WHITE')).to eq true
+      expect(board.send(:capture_opponent_causing_check?, 'WHITE')).to eq false
+    end
+
+    it 'False if black king enemies causing check are not capturable' do
+      board = create(:game)
+      board.pieces.delete_all
+
+      king = King.new(x_position: 4, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'King')
+      queen = Queen.new(x_position: 6, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'Queen')
+
+      board.pieces << queen
+      board.pieces << king
+
+      expect(board.in_check?('BLACK')).to eq true
+      expect(board.send(:capture_opponent_causing_check?, 'BLACK')).to eq false
+    end
+  end
+
 end

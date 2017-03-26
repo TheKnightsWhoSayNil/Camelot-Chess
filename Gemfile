@@ -7,6 +7,7 @@ end
 
 ruby '2.4.0'
 
+
 gem 'figaro'
 
 gem 'rails_12factor', group: :production

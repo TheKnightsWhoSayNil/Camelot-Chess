@@ -1,16 +1,14 @@
-# /app/models/pawn.rb
 class Pawn < Piece
   def valid_move?(x, y)
-    super(x, y)
     if super(x, y)
       if is_capture?(x, y)
         capture_piece_at!(x, y)
         return true
-      elsif moving_backward?(y) || (one_square?(x, y) || two_squares?(x, y))
-        return false
+      else 
+        return (one_square?(x, y) || two_squares?(x, y))
       end
     end
-    super(x, y)
+    false
   end
 
   def in_starting_position?
@@ -22,47 +20,22 @@ class Pawn < Piece
   end
 
   def one_square?(x, y)
-    if game.space_occupied?(x, y)
-      return true
-    end
-    !in_starting_position? && ((x - x_position).abs > 0 || (y - y_position).abs > 1)
+    unoccupied?(x, y) && (x - x_position).abs == 0 && (y - y_position).abs == 1
   end
 
   def two_squares?(x, y)
-    if game.space_occupied?(x, y)
-      return true
-    end
-    in_starting_position? && ((x - x_position). abs > 0 || (y - y_position).abs > 2)
+    unoccupied?(x, y) && in_starting_position? && ((x - x_position). abs == 0 && (y - y_position).abs == 2)
   end
 
   def is_capture?(x, y)
-    if game.space_occupied?(x, y)
-      if (y - y_position).abs == 1 && (x - x_position).abs == 1
-        true
-      end
-    else
-      false
-    end
-  end
-
-  def moving_backward?(y)
-    if color == 'WHITE'
-      if (y - y_position) < 0
-        return true
-      end
-    elsif color == 'BLACK'
-      if (y - y_position) > 0
-        return true
-      end
-    end
-    false
+    game.space_occupied?(x, y) && ((y - y_position).abs == 1 && (x - x_position).abs == 1)
   end
 
 #-----> PAWN PROMOTION <-----#
 
   # checks to see if a pawn is promotable.
   def promotable?(y)
-    return true if y == 7 && color || y == 0 && !color
+    return true if y == 7 && color == "WHITE" || y == 0 && !color == "BLACK"
     false
   end
 
@@ -74,10 +47,10 @@ class Pawn < Piece
     if promotable?(y) && valid_move?(x, y)
       update_attributes_of_pawn(params)
     else
-      super(params)
+      false
     end
   end
-  
+
   private
 
   # exchanges the pawn for a different piece by updating the attributes of pawn.
@@ -104,3 +77,4 @@ class Pawn < Piece
   end
 
 end
+
