@@ -255,6 +255,7 @@ RSpec.describe Pawn, type: :model do
     @game = FactoryGirl.create(:game)
     @game.pieces.find_by(x_position: 1, y_position: 7).destroy
     @game.pieces.find_by(x_position: 2, y_position: 7).destroy
+    @game.pieces.find_by(x_position: 2, y_position: 6).destroy
     @pawn = @game.pieces.find_by(x_position: 1, y_position: 1)
     @pawn.update_attributes(y_position: 6)
     @pawn.reload
