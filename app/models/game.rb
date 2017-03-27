@@ -11,14 +11,17 @@ class Game < ApplicationRecord
   scope :available, -> { where(black_user_id: nil) }
 
   def in_check?(color)
-    king = find_king(color)
-    opponents = opponents_pieces(color)
     @enemies_causing_check = []
-    opponents.each do |piece|
-      @enemies_causing_check << piece if piece.valid_move?(king.x_position, king.y_position) == true
+    king = find_king(color)
+
+    if king
+      opponents = opponents_pieces(color)
+      opponents.each do |piece|
+        @enemies_causing_check << piece if piece.valid_move?(king.x_position, king.y_position) == true
+      end
     end
-    return true if @enemies_causing_check.any?
-    false
+
+    return @enemies_causing_check.any?
   end
 
   def stalemate?(color)
@@ -74,31 +77,31 @@ class Game < ApplicationRecord
   def fill_board
     # fill white pieces
     (0..7).each do |i|
-      Pawn.create(game_id: id, x_position: i, y_position: 1, color: 'WHITE')
+      Pawn.create(game_id: id, x_position: i, y_position: 1, color: 'WHITE', state: 'unmoved')
     end
 
-    Rook.create(game_id: id, x_position: 0, y_position: 0, color: 'WHITE')
-    Rook.create(game_id: id, x_position: 7, y_position: 0, color: 'WHITE')
-    Knight.create(game_id: id, x_position: 1, y_position: 0, color: 'WHITE')
-    Knight.create(game_id: id, x_position: 6, y_position: 0, color: 'WHITE')
-    Bishop.create(game_id: id, x_position: 2, y_position: 0, color: 'WHITE')
-    Bishop.create(game_id: id, x_position: 5, y_position: 0, color: 'WHITE')
-    Queen.create(game_id: id, x_position: 3, y_position: 0, color: 'WHITE')
-    King.create(game_id: id, x_position: 4, y_position: 0, color: 'WHITE')
+    Rook.create(game_id: id, x_position: 0, y_position: 0, color: 'WHITE', state: 'unmoved')
+    Rook.create(game_id: id, x_position: 7, y_position: 0, color: 'WHITE', state: 'unmoved')
+    Knight.create(game_id: id, x_position: 1, y_position: 0, color: 'WHITE', state: 'unmoved')
+    Knight.create(game_id: id, x_position: 6, y_position: 0, color: 'WHITE', state: 'unmoved')
+    Bishop.create(game_id: id, x_position: 2, y_position: 0, color: 'WHITE', state: 'unmoved')
+    Bishop.create(game_id: id, x_position: 5, y_position: 0, color: 'WHITE', state: 'unmoved')
+    Queen.create(game_id: id, x_position: 3, y_position: 0, color: 'WHITE', state: 'unmoved')
+    King.create(game_id: id, x_position: 4, y_position: 0, color: 'WHITE', state: 'unmoved')
 
     # fill black pieces
     (0..7).each do |i|
-      Pawn.create(game_id: id, x_position: i, y_position: 6, color: 'BLACK')
+      Pawn.create(game_id: id, x_position: i, y_position: 6, color: 'BLACK', state: 'unmoved')
     end
 
-    Rook.create(game_id: id, x_position: 0, y_position: 7, color: 'BLACK')
-    Rook.create(game_id: id, x_position: 7, y_position: 7, color: 'BLACK')
-    Knight.create(game_id: id, x_position: 1, y_position: 7, color: 'BLACK')
-    Knight.create(game_id: id, x_position: 6, y_position: 7, color: 'BLACK')
-    Bishop.create(game_id: id, x_position: 2, y_position: 7, color: 'BLACK')
-    Bishop.create(game_id: id, x_position: 5, y_position: 7, color: 'BLACK')
-    Queen.create(game_id: id, x_position: 3, y_position: 7, color: 'BLACK')
-    King.create(game_id: id, x_position: 4, y_position: 7, color: 'BLACK')
+    Rook.create(game_id: id, x_position: 0, y_position: 7, color: 'BLACK', state: 'unmoved')
+    Rook.create(game_id: id, x_position: 7, y_position: 7, color: 'BLACK', state: 'unmoved')
+    Knight.create(game_id: id, x_position: 1, y_position: 7, color: 'BLACK', state: 'unmoved')
+    Knight.create(game_id: id, x_position: 6, y_position: 7, color: 'BLACK', state: 'unmoved')
+    Bishop.create(game_id: id, x_position: 2, y_position: 7, color: 'BLACK', state: 'unmoved')
+    Bishop.create(game_id: id, x_position: 5, y_position: 7, color: 'BLACK', state: 'unmoved')
+    Queen.create(game_id: id, x_position: 3, y_position: 7, color: 'BLACK', state: 'unmoved')
+    King.create(game_id: id, x_position: 4, y_position: 7, color: 'BLACK', state: 'unmoved')
   end
 
   def my_pieces(color)

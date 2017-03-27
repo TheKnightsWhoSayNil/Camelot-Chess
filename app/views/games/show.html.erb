@@ -6,7 +6,7 @@
 
 // AJAX PUT requyest to URL with x, y (as params)
       // handle response from this request
-      // e.g. return 
+      // e.g. return
       // { ok: true }
       // check if OK, if not show error or move back
 
@@ -32,7 +32,7 @@ $( function() {
       console.log(x);
       console.log(y);
       console.log(urlUpdatePath);
-      
+
       $.ajax({
         type: 'PUT',
         url: urlUpdatePath,
@@ -47,7 +47,7 @@ $( function() {
           //Turbolinks.visit(window.location, { action: 'replace' });
           location.reload(true); 
         }
-        
+
         });
 
       }
