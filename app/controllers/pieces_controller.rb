@@ -9,9 +9,9 @@ class PiecesController < ApplicationController
   def update 
     @piece = Piece.find_by_id(params[:id])
     if @piece.move_to!(piece_params[:x_position].to_i, piece_params[:y_position].to_i) == false      
-      render text: "Invalid move, please try again."
-    else    
-      render text: "Valid Move"
+      render text: "Invalid move, please try again."  
+    else     
+      render text: "OK"
     end
   end
 
