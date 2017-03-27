@@ -18,7 +18,7 @@ class Piece < ApplicationRecord
   def move_to!(x, y)
     if valid_move?(x, y) && space_available?(x,y) && not_into_check?(x,y)
       capture_piece_at!(x, y) if occupied_by_opposing_piece?(x, y)
-      change_location(x,y)
+      change_location(x, y)
     else
       false
     end
