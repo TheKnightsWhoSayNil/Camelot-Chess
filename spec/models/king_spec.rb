@@ -121,8 +121,12 @@ RSpec.describe King, type: :model do
         game.pieces << white_rook 
 
         white_king.send(:castle_kingside)
+        white_king.reload
         white_rook.reload
+
+
         expect(white_rook.x_position).to eq(5)
+        expect(white_king.x_position).to eq(6)
       end
     end 
 
@@ -135,8 +139,11 @@ RSpec.describe King, type: :model do
         game.pieces << black_rook 
 
         black_king.send(:castle_kingside)
+        black_king.reload
         black_rook.reload
+
         expect(black_rook.x_position).to eq(5)
+        expect(black_king.x_position).to eq(6)
       end 
     end 
   end
@@ -158,7 +165,10 @@ RSpec.describe King, type: :model do
 
         white_king.send(:castle_queenside)
         white_rook.reload
+        white_king.reload
+
         expect(white_rook.x_position).to eq(3)
+        expect(white_king.x_position).to eq(2)
       end
     end
 
@@ -172,7 +182,10 @@ RSpec.describe King, type: :model do
 
         black_king.send(:castle_queenside)
         black_rook.reload
+        black_king.reload
+
         expect(black_rook.x_position).to eq(3)
+        expect(black_king.x_position).to eq(2)
       end
     end
   end
