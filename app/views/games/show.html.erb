@@ -13,9 +13,18 @@
 $( function() {
   $( ".piece" ).draggable({
     start: function(event, ui) {
-    var urlUpdatePath = $(event.target).data('url')
+    var urlUpdatePath = $(event.target).data('url');
+
+    $( ".offboard").droppable({
+      accept: ".piece",
+      drop: function(){
+        alert("Cool down and stay on the Chess Board.");
+        location.reload(true);
+      }
+    });
    
     $( ".piece-square" ).droppable({
+    greedy: true,  
     accept: ".piece",
     drop: function( event, ui ) {
       var x = $(event.target).data('x');
@@ -35,7 +44,8 @@ $( function() {
             alert(response);
           }
           // cause the page to refresh to allign the moved piece on the square.
-          Turbolinks.visit(window.location, { action: 'replace' }); 
+          // Turbolinks.visit(window.location, { action: 'replace' });
+          location.reload(true);
         }
         
         });
@@ -48,27 +58,32 @@ $( function() {
 </script>
 
 
-<h2 class="game-title">Chess Board</h2>
+<div class="offboard">
 
-<table class="game-board">
-  <% 7.downto(0) do |row| %>
-    <tr>
-      <% 0.upto(7) do |col| %>
+  <h2 class="game-title">Chess Board</h2>
 
-        <td class="piece-square ui-droppable" data-x="<%= col %>" data-y="<%= row %>">
-          <% @pieces.each do |piece| %>
-            <% if piece.x_position == col && piece.y_position == row %>
-              <div class="piece" data-url="<%= game_piece_path(piece.game, piece) %>">
-                <%= image_tag(piece.piece_image) %>
-              </div>
+  <table class="game-board">
+    <% 7.downto(0) do |row| %>
+      <tr>
+        <% 0.upto(7) do |col| %>
+
+          <td class="piece-square ui-droppable" data-x="<%= col %>" data-y="<%= row %>">
+            <% @pieces.each do |piece| %>
+              <% if piece.x_position == col && piece.y_position == row %>
+                <div class="piece" data-url="<%= game_piece_path(piece.game, piece) %>">
+                  <%= image_tag(piece.piece_image) %>
+                </div>
+              <% end %>
             <% end %>
-          <% end %>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
 
 
 <div class="buttons">
   <%= render 'partials/endGameButton' %>
+</div>
+
 </div>
