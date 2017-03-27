@@ -4,7 +4,7 @@ class Pawn < Piece
     if super(x, y)
       if is_capture?(x, y)
         capture_piece_at!(x, y)
-        return true
+        update_attributes(x_position: x, y_position: y)
       elsif promotable?(x, y)
         update_attributes(x_position: x, y_position: y)
         promote!(x, y)
