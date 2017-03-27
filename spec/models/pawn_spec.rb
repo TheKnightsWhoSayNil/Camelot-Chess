@@ -143,26 +143,44 @@ RSpec.describe Pawn, type: :model do
         expect(pawn.valid_move?(99, 99)).to eq(false)
       end
     end
-    context 'can make a valid capture move' do
+    context 'CAPTURE is valid' do
       it 'when the piece is one square diagonally from it' do
-        game.pieces.delete_all
-        pawn = Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game: game)
-        rook = Rook.create(color: 'BLACK', x_position: 2, y_position: 2, game: game)
+        board = create(:game)
+        board.pieces.delete_all
 
-        game.pieces << pawn
-        game.pieces << rook
+        pawn = Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game_id: board.id)
+        rook = Rook.create(color: 'BLACK', x_position: 2, y_position: 2, game_id: board.id)
 
-        expect(pawn.valid_move?(2, 2)).to eq(true)
+        board.pieces << pawn
+        board.pieces << rook
+
+        pawn.valid_move?(2,2)
+        rook.reload
+        pawn.reload
+
+        expect(rook.x_position).to eq(nil)
+        expect(rook.x_position).to eq(nil)
+        expect(pawn.x_position).to eq(2)
+        expect(pawn.x_position).to eq(2)
       end
       it 'when the piece is one square diagonally from it' do
-        game.pieces.delete_all
-        pawn = Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game: game)
-        rook = Rook.create(color: 'BLACK', x_position: 0, y_position: 2, game: game)
+        board = create(:game)
+        board.pieces.delete_all
 
-        game.pieces << pawn
-        game.pieces << rook
+        pawn = Pawn.create(color: 'WHITE', x_position: 1, y_position: 1, game_id: board.id)
+        rook = Rook.create(color: 'BLACK', x_position: 0, y_position: 2, game_id: board.id)
 
-        expect(pawn.valid_move?(0, 2)).to eq(true)
+        board.pieces << pawn
+        board.pieces << rook
+
+        pawn.valid_move?(0, 2)
+        rook.reload
+        pawn.reload
+
+        expect(rook.x_position).to eq(nil)
+        expect(rook.x_position).to eq(nil)
+        expect(pawn.x_position).to eq(0)
+        expect(pawn.y_position).to eq(2)
       end
     end
     context 'invalid capture move' do
@@ -226,33 +244,49 @@ RSpec.describe Pawn, type: :model do
       end
       it 'the pawn has officially lost its mind' do
         game.pieces.delete_all
+
         pawn = Pawn.create(color: 'BLACK', x_position: 1, y_position: 6, game: game)
 
         game.pieces << pawn
-
         expect(pawn.valid_move?(99, 99)).to eq(false)
       end
     end
-    context 'can make a valid capture move' do
+    context 'CAPTURE move' do
       it 'when the piece is one square diagonally from it' do
         game.pieces.delete_all
+
         pawn = Pawn.create(color: 'BLACK', x_position: 1, y_position: 6, game: game)
         rook = Rook.create(color: 'WHITE', x_position: 0, y_position: 5, game: game)
 
         game.pieces << pawn
         game.pieces << rook
 
-        expect(pawn.valid_move?(0, 5)).to eq(true)
+        pawn.valid_move?(0, 5)
+        pawn.reload
+        rook.reload
+
+        expect(rook.x_position).to eq(nil)
+        expect(rook.x_position).to eq(nil)
+        expect(pawn.x_position).to eq(0)
+        expect(pawn.y_position).to eq(5)
       end
       it 'when the piece is one square diagonally from it' do
         game.pieces.delete_all
+        
         pawn = Pawn.create(color: 'BLACK', x_position: 1, y_position: 6, game: game)
         rook = Rook.create(color: 'WHITE', x_position: 2, y_position: 5, game: game)
 
         game.pieces << pawn
         game.pieces << rook
 
-        expect(pawn.valid_move?(2, 5)).to eq(true)
+        pawn.valid_move?(2, 5)
+        pawn.reload
+        rook.reload
+
+        expect(rook.x_position).to eq(nil)
+        expect(rook.x_position).to eq(nil)
+        expect(pawn.x_position).to eq(2)
+        expect(pawn.y_position).to eq(5)
       end
     end
 

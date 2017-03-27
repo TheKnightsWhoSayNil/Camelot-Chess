@@ -4,9 +4,9 @@ class Pawn < Piece
     if super(x, y)
       if is_capture?(x, y)
         capture_piece_at!(x, y)
-        update_attributes(x_position: x, y_position: y)
+        change_location(x, y)
       elsif promotable?(x, y)
-        update_attributes(x_position: x, y_position: y)
+        change_location(x, y)
         promote!(x, y)
       else
         return (one_square?(x, y) || two_squares?(x, y))
@@ -57,6 +57,10 @@ class Pawn < Piece
   end
 
   private
+
+  def change_location(x,y)
+    update_attributes(x_position: x, y_position: y)
+  end
 
   def piece_at(x, y)
     game.pieces.find_by(x_position: x, y_position: y)
