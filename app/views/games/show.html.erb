@@ -12,6 +12,7 @@
 
 $( function() {
   $( ".piece" ).draggable({
+    containment: ".game-board",
     start: function(event, ui) {
     var urlUpdatePath = $(event.target).data('url')
    
@@ -35,7 +36,8 @@ $( function() {
             alert(response);
           }
           // cause the page to refresh to allign the moved piece on the square.
-          Turbolinks.visit(window.location, { action: 'replace' }); 
+          //Turbolinks.visit(window.location, { action: 'replace' }); 
+          location.reload();
         }
         
         });
@@ -67,6 +69,7 @@ $( function() {
       <% end %>
     </tr>
   <% end %>
+</table>
 
 
 <div class="buttons">
