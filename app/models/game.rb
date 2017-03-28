@@ -6,7 +6,7 @@ class Game < ApplicationRecord
 
   has_many :pieces
 
-  after_create :fill_board
+  after_create :fill_board, :first_turn! 
 
   scope :available, -> { where(black_user_id: nil) }
 
@@ -14,14 +14,19 @@ class Game < ApplicationRecord
     update(user_turn: 'WHITE')
   end 
 
+  def pass_turn!(color)
+    player_turn = color == 'WHITE' ? 'BLACK' : 'WHITE'
+    update(user_turn: player_turn)
+  end 
+=begin
   def other_user(user)
-    user == white_user ? black_user.id : white_user.id
+    user == white_user ? black_user : white_user
   end
 
   def pass_turn(user)
-    update_attributes(active_player_id: other_player(player))
+    update_attributes(user_turn: other_user(user))
   end
-
+=end 
   
 
   def in_check?(color)
