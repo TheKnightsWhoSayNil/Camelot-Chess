@@ -12,16 +12,9 @@
 
 $( function() {
   $( ".piece" ).draggable({
+    containment: ".game-board",
     start: function(event, ui) {
     var urlUpdatePath = $(event.target).data('url');
-
-    $(".offboard").droppable({
-      accept: ".piece",
-      drop: function(){
-        alert('Cool down stay on the Chess Board!');
-        location.reload(true);
-      }
-    });
    
     $( ".piece-square" ).droppable({
     greedy: true,
@@ -58,8 +51,6 @@ $( function() {
 </script>
 
 
-<div class="offboard">
-
 <h2 class="game-title">Chess Board</h2>
 
 <table class="game-board">
@@ -85,4 +76,4 @@ $( function() {
   <%= render 'partials/endGameButton' %>
 </div>
 
-</div>
+
