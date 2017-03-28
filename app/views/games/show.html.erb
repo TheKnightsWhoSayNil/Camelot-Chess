@@ -13,7 +13,7 @@
 $( function() {
   $( ".piece" ).draggable({
     start: function(event, ui) {
-    var urlUpdatePath = $(event.target).data('url');
+      var urlUpdatePath = $(event.target).data('url');
 
     $(".offboard").droppable({
       accept: ".piece",

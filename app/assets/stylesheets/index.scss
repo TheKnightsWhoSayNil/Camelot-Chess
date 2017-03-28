@@ -18,7 +18,7 @@ body {
 
 /* MIXINS */
 
-@mixin centerer {
+/*@mixin centerer {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -63,12 +63,13 @@ h4.hero-subtext {
   text-align: center;
   color: black;
   clear: both;
-  position: relative;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .about-container {
-  @include span-columns(5);
-  @include centerer;
+  display: inline-block;
+  width: 40%;
   margin: 0 auto;
   float: none;
   text-align: left;
@@ -78,7 +79,6 @@ h4.hero-subtext {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 36px;
-  padding-top: 36px;
   margin: 0;
 }
 
@@ -106,21 +106,37 @@ h4.hero-subtext {
   background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
   clear: both;
-  position: relative;
 }
 
 .skills-container {
-  @include span-columns(10);
-  @include centerer;
+  display: block;
+  width: 100%;
   margin: 0 auto;
   float: none;
-  padding-top: 26px;
-  transform: translate(-42%, -50%);
+  padding-top: 12px;
+}
+
+.skills-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  padding-top: 56px;
+  margin: 0;
+}
+
+.skills-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  margin: 0;
 }
 
 .skills {
-  @include span-columns(2);
-  padding-top: 32px;
+  display: inline-block;
+  height: auto;
+  width: auto;
+  margin: 20px;
+  padding-top: 20px;
 }
 
 .skills h3 {
@@ -132,7 +148,6 @@ h4.hero-subtext {
 .skills-logos {
   height: 90px;
   width: 90px;
-  vertical-align: middle;
 }
 
 /* CODE SECTION */
@@ -226,13 +241,20 @@ h4.hero-subtext {
   text-align: center;
   color: black;
   clear: both;
-  position: relative;
+}
+
+.tools-container {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  float: none;
+  padding-top: 12px;
 }
 
 .tools-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 36px;
-  font-weight: bold;
+  font-weight: 600;
   padding-top: 56px;
   margin: 0;
 }
@@ -244,20 +266,16 @@ h4.hero-subtext {
   margin: 0;
 }
 
-.logos-container {
-  @include span-columns(10);
-  @include centerer;
-  margin: 0 auto;
-  float: none;
-}
-
 .tools {
-  @include span-columns(2);
-  padding-top: 36px;
+  display: inline-block;
+  height: auto;
+  width: auto;
+  margin: 20px;
+  padding-top: 20px;
 }
 
 .tools h3 {
-  padding-top: 10px;
+  padding-top: 4px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
 }
@@ -265,7 +283,6 @@ h4.hero-subtext {
 .tools-logos {
   height: 110px;
   width: 110px;
-  vertical-align: middle;
 }
 
 /* TEAM SECTION */
@@ -278,34 +295,48 @@ h4.hero-subtext {
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
-  clear: both;
-  position: relative;
 }
 
 .team-container {
-  @include span-columns(12);
-  @include centerer;
+  display: block;
+  width: 100%;
   margin: 0 auto;
   float: none;
-  padding-top: 38px;
-  transform: translate(-50%, -50%);
+  padding-top: 14px;
+}
+
+.team-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  padding-top: 56px;
+  margin: 0;
+}
+
+.team-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  margin: 0;
 }
 
 .team {
-  @include span-columns(2);
-  padding-top: 32px;
+  display: inline-block;
+  height: auto;
+  width: auto;
+  margin: 20px;
+  padding-top: 20px;
 }
 
 .team h3 {
-  padding-top: 10px;
+  padding-top: 8px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
 }
 
 .team-logos {
-  height: 180px;
-  width: 180px;
+  height: 200px;
+  width: 200px;
   border: 2px solid #fff;
   border-radius: 100%;
-  vertical-align: middle;
 }
