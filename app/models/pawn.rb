@@ -1,4 +1,3 @@
-require 'pry'
 class Pawn < Piece
   def valid_move?(x, y)
     if super(x, y)
