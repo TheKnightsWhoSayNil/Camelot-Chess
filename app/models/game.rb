@@ -10,6 +10,20 @@ class Game < ApplicationRecord
 
   scope :available, -> { where(black_user_id: nil) }
 
+  def first_turn! 
+    update(user_turn: 'WHITE')
+  end 
+
+  def other_user(user)
+    user == white_user ? black_user.id : white_user.id
+  end
+
+  def pass_turn(user)
+    update_attributes(active_player_id: other_player(player))
+  end
+
+  
+
   def in_check?(color)
     @enemies_causing_check = []
     king = find_king(color)
