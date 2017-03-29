@@ -1,9 +1,14 @@
 # /app/models/king.rb
 class King < Piece
   def valid_move?(x, y)
-    super(x, y)
-    return false if is_obstructed?(x, y)
-    standard_king_move?(x, y) || castle!
+    if super(x, y)
+      if legal_castle_move?
+        castle!
+      else
+        return standard_king_move?(x, y)
+      end
+    end
+    false
   end
 
   def checkmate?
@@ -44,7 +49,10 @@ class King < Piece
       king = game.pieces.where(piece_type: 'King', x_position: 4, state: 'unmoved')
       rook.update_all(x_position: 5, state: 'moved')
       king.update_all(x_position: 6, state: 'moved')
+      rook.reload
+      king.reload
     end
+    false
   end
 
   def can_castle_queenside?
@@ -59,7 +67,10 @@ class King < Piece
       king = game.pieces.where(piece_type: 'King', x_position: 4, state: 'unmoved')
       rook.update_all(x_position: 3, state: 'moved')
       king.update_all(x_position: 2, state: 'moved')
+      rook.reload
+      king.reload
     end
+    false
   end
 
   def no_kingside_obstruction?

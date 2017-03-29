@@ -126,12 +126,14 @@ RSpec.describe King, type: :model do
         game.pieces << white_rook 
 
         white_king.send(:castle_kingside)
+        
         white_king.reload
         white_rook.reload
 
 
         expect(white_rook.x_position).to eq(5)
         expect(white_king.x_position).to eq(6)
+        
       end
     end 
 
