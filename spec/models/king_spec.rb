@@ -56,7 +56,9 @@ RSpec.describe King, type: :model do
         expect(king.valid_move?(3, 8)).to eq(false)
       end
       it 'be an invalid move' do
+        game.pieces.delete_all
         king = King.create(x_position: 3, y_position: 5, state: 'moved', game: game)
+        king.reload
         expect(king.valid_move?(1, 5)).to eq(false)
       end
       it 'be an invalid move' do
@@ -223,22 +225,22 @@ RSpec.describe King, type: :model do
     end 
   end 
 
-  # describe 'passes_castle_conditions?' do 
-  #   it 'returns false if king has moved' do 
-  #     king = game.pieces.where(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take 
-  #     rook = game.pieces.where(x_position: 7, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take
-  #     king.update_attributes(state: 'moved')
+  describe 'legal_castle conditions?' do 
+    it 'returns false if king has moved' do 
+      king = game.pieces.where(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take 
+      rook = game.pieces.where(x_position: 7, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take
+      king.update_attributes(state: 'moved')
 
-  #     expect(king.castle!).to eq(false)
-  #   end 
+      expect(king.can_castle_kingside?).to eq(false)
+    end 
 
-  #   it 'returns false if rook has moved' do 
-  #     king = game.pieces.where(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take 
-  #     rook = game.pieces.where(x_position: 7, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take
-  #     rook.update_attributes(state: 'moved')
+    it 'returns false if rook has moved' do 
+      king = game.pieces.where(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take 
+      rook = game.pieces.where(x_position: 7, y_position: 0, state: 'unmoved', game: game, color: 'WHITE').take
+      rook.update_attributes(state: 'moved')
 
-  #     expect(king.castle!).to eq(false)
-  #   end 
-  # end 
+      expect(king.can_castle_kingside?).to eq(false)
+    end 
+  end 
 
 end

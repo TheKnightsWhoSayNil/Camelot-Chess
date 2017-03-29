@@ -3,7 +3,7 @@ class King < Piece
   def valid_move?(x, y)
     super(x, y)
     return false if is_obstructed?(x, y)
-    standard_king_move(x, y) || castle!
+    standard_king_move?(x, y) || castle!
   end
 
   def checkmate?
@@ -12,6 +12,19 @@ class King < Piece
 
   def legal_castle_move?
     return false unless self.state == 'unmoved'
+  end
+
+  def standard_king_move?(x, y)
+    dx = (x - x_position).abs
+    dy = (y - y_position).abs
+   
+    if dx >= 2 || dy >= 2
+      return false
+    elsif dx == 0 && dy == 0
+      return false
+    else (dx <= 1) && (dy <= 1) && (dx + dy > 0)
+      return true
+    end
   end
 
   def castle!
@@ -61,18 +74,5 @@ class King < Piece
       return false if space_occupied?(x, y_position)
     end 
     true 
-  end
-
-  private
-
-  def change_location(x, y)
-    update_attributes(x_position: x, y_position: y)
-  end
-
-  def standard_king_move(x, y)
-    dx = (x - x_position).abs
-    dy = (y - y_position).abs
-
-    (dx <= 1) && (dy <= 1) && (dx + dy > 0)
   end
 end
