@@ -64,9 +64,8 @@ RSpec.describe Pawn, type: :model do
       it 'can be promoted when moving to y_position: 0' do
         board = create(:game)
         board.pieces.delete_all
-
-        pawn = Pawn.create(color: 'BLACK', x_position: 1, y_position: 1, game_id: board.id, user_turn: "BLACK")
-        binding.pry
+        board.update_attributes(user_turn: 'BLACK')
+        pawn = Pawn.create(color: 'BLACK', x_position: 1, y_position: 6, game_id: board.id)
         board.pieces << pawn
         pawn.move_to!(1, 0)
         pawn.reload
