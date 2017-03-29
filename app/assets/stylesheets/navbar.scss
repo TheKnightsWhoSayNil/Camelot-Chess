@@ -5,7 +5,7 @@ header.navigation {
   $dark-gray: #333 !default;
   $large-screen: 53.75em !default;
   $navigation-padding: 1em;
-  $navigation-background: $dark-gray;
+  $navigation-background: transparent;
   $navigation-color: white;
   $navigation-color-hover: transparentize(white, 0.2);
   $navigation-height: 70px;
@@ -24,6 +24,7 @@ header.navigation {
     @include clearfix;
     position: relative;
     z-index: 9999;
+    background-color: rgba(0,0,0,0.06);
   }
 
   .logo {
@@ -68,7 +69,7 @@ header.navigation {
     z-index: 9999999;
 
     @include media ($horizontal-bar-mode) {
-      float: left;
+      float: none;
     }
   }
 
@@ -77,7 +78,7 @@ header.navigation {
     display: none;
     margin: 0 auto;
     overflow: visible;
-    padding: 0;
+    padding-left: 60px;
     width: 100%;
     z-index: 9999;
 
@@ -88,11 +89,15 @@ header.navigation {
     @include media ($horizontal-bar-mode) {
       display: inline;
       margin: 0;
-      padding: 0;
+      padding-left: 60px;
     }
   }
 
   // The nav items
+
+  ul li.nav-link.right {
+      float: right;
+    }
 
   ul li.nav-link {
     background: $navigation-background;
@@ -105,6 +110,7 @@ header.navigation {
     z-index: 9999;
     color: $navigation-color; 
     text-decoration: none;
+
 
     @include media ($horizontal-bar-mode) {
       background: transparent;
