@@ -15,7 +15,7 @@ class PiecesController < ApplicationController
       else
         render text: "OK"
       end
-  end 
+  end
 
   private
 

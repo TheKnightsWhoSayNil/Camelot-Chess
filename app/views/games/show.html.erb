@@ -6,16 +6,18 @@
 
 // AJAX PUT requyest to URL with x, y (as params)
       // handle response from this request
-      // e.g. return 
+      // e.g. return
       // { ok: true }
       // check if OK, if not show error or move back
 
 $( function() {
   $( ".piece" ).draggable({
+    containment: ".game-board",
     start: function(event, ui) {
-    var urlUpdatePath = $(event.target).data('url')
+    var urlUpdatePath = $(event.target).data('url');
    
     $( ".piece-square" ).droppable({
+    greedy: true,
     accept: ".piece",
     drop: function( event, ui ) {
       var x = $(event.target).data('x');
@@ -23,7 +25,7 @@ $( function() {
       console.log(x);
       console.log(y);
       console.log(urlUpdatePath);
-      
+
       $.ajax({
         type: 'PUT',
         url: urlUpdatePath,
@@ -35,9 +37,10 @@ $( function() {
             alert(response);
           }
           // cause the page to refresh to allign the moved piece on the square.
-          Turbolinks.visit(window.location, { action: 'replace' }); 
+          //Turbolinks.visit(window.location, { action: 'replace' });
+          location.reload(true); 
         }
-        
+
         });
 
       }
@@ -67,8 +70,10 @@ $( function() {
       <% end %>
     </tr>
   <% end %>
-
+</table>
 
 <div class="buttons">
   <%= render 'partials/endGameButton' %>
 </div>
+
+

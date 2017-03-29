@@ -24,7 +24,7 @@ class Piece < ApplicationRecord
       else
         false
       end
-    end 
+    end
   end
 
   def not_into_check?(x,y)
@@ -42,7 +42,7 @@ class Piece < ApplicationRecord
   end
 
   def within_chessboard?(x, y)
-    (x >= 0 && y >= 0 && x <= 7 && y <= 7)
+    (x >= 0 && y >= 0 && x <= 7 && y <= 7 && x != nil && y != nil)
   end
 
   def horizontal_obstruction?(x_end, _y_end)

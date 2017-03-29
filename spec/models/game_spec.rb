@@ -193,7 +193,8 @@ RSpec.describe Game, type: :model do
         expect(board.in_check?('BLACK')).to eq(false)
       end
       it 'should return false if both kings are not in check' do
-        board = create_games_with_two_players
+        board = create(:game)
+        board.pieces.delete_all
 
         expect(board.in_check?('WHITE')).to eq(false)
         expect(board.in_check?('BLACK')).to eq(false)
