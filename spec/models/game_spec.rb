@@ -1,5 +1,14 @@
 require 'rails_helper'
 RSpec.describe Game, type: :model do
+  describe 'user_turn' do
+    before(:each) do
+      @game = create(:game)
+    end
+
+    it 'default game user_turn is white' do
+      expect(@game.user_turn).to eq('WHITE')
+    end
+  end
   describe 'SCOPES' do
     context 'Game.available' do
       it 'shows the available games' do
