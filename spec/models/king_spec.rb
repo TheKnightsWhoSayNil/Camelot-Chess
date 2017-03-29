@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry'
 RSpec.describe King, type: :model do
   let(:game) do
     Game.create(
