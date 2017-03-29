@@ -1,5 +1,14 @@
 require 'rails_helper'
 RSpec.describe Game, type: :model do
+  describe 'user_turn' do
+    before(:each) do
+      @game = create(:game)
+    end
+
+    it 'default game user_turn is white' do
+      expect(@game.user_turn).to eq('WHITE')
+    end
+  end
   describe 'SCOPES' do
     context 'Game.available' do
       it 'shows the available games' do
@@ -415,6 +424,34 @@ RSpec.describe Game, type: :model do
       expect(board.stalemate?('BLACK')).to eq(false)
     end
   end
+
+  describe 'user_turn' do 
+    before(:each) do
+      @game = create(:game)
+    end
+
+    it 'default game user_turn is white' do
+      expect(@game.user_turn).to eq('WHITE')
+    end 
+
+    it 'turn switches to black when starting with white' do 
+      color = 'WHITE'
+
+      @game.pass_turn!(color)
+      @game.reload 
+
+      expect(@game.user_turn).to eq('BLACK')
+    end 
+
+    it 'turn switches to white after black' do 
+      color = 'BLACK'
+
+      @game.pass_turn!(color)
+      @game.reload 
+
+      expect(@game.user_turn).to eq('WHITE')
+    end 
+  end     
 
   def create_game_with_no_pieces
     @game = FactoryGirl.create(:game)

@@ -16,11 +16,14 @@ class Piece < ApplicationRecord
   end
 
   def move_to!(x, y)
-    if valid_move?(x, y) && space_available?(x,y) && not_into_check?(x,y)
-      capture_piece_at!(x, y) if occupied_by_opposing_piece?(x, y)
-      change_location(x, y)
-    else
-      false
+    if color == game.user_turn
+      if valid_move?(x, y) && space_available?(x,y) && not_into_check?(x,y)
+        capture_piece_at!(x, y) if occupied_by_opposing_piece?(x, y)
+        change_location(x, y)
+        game.pass_turn!(game.user_turn)
+      else
+        false
+      end
     end
   end
 
