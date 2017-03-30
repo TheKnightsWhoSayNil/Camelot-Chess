@@ -346,11 +346,11 @@ RSpec.describe Game, type: :model do
     it 'TRUE stalemate when WHITE King has no valid moves' do
       board = create_game_with_no_pieces
 
-      king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
-      rook = Rook.new(x_position: 3, y_position: 1, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
-      rook1 = Rook.new(x_position: 5, y_position: 1, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
-      rook2 = Rook.new(x_position: 1, y_position: 3, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
-      rook3 = Rook.new(x_position: 1, y_position: 5, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
+      king = King.new(x_position: 4, y_position: 4, color: 'WHITE', state: 'moved', game_id: board.id, piece_type: 'King')
+      rook = Rook.new(x_position: 3, y_position: 1, color: 'BLACK', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook1 = Rook.new(x_position: 5, y_position: 1, color: 'BLACK', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook2 = Rook.new(x_position: 1, y_position: 3, color: 'BLACK', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook3 = Rook.new(x_position: 1, y_position: 5, color: 'BLACK', state: 'moved', game_id: board.id, piece_type: 'Rook')
 
       board.pieces << rook
       board.pieces << rook1
@@ -364,11 +364,11 @@ RSpec.describe Game, type: :model do
       board = create(:game)
       board.pieces.delete_all
 
-      king = King.new(x_position: 4, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'King')
-      rook = Rook.new(x_position: 3, y_position: 1, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
-      rook1 = Rook.new(x_position: 5, y_position: 1, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
-      rook2 = Rook.new(x_position: 1, y_position: 3, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
-      rook3 = Rook.new(x_position: 1, y_position: 5, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
+      king = King.new(x_position: 4, y_position: 4, color: 'BLACK', state: 'moved', game_id: board.id, piece_type: 'King')
+      rook = Rook.new(x_position: 3, y_position: 1, color: 'WHITE', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook1 = Rook.new(x_position: 5, y_position: 1, color: 'WHITE', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook2 = Rook.new(x_position: 1, y_position: 3, color: 'WHITE', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook3 = Rook.new(x_position: 1, y_position: 5, color: 'WHITE', state: 'moved', game_id: board.id, piece_type: 'Rook')
 
       board.pieces << rook
       board.pieces << rook1
@@ -382,11 +382,11 @@ RSpec.describe Game, type: :model do
       board = create(:game)
       board.pieces.delete_all
 
-      king = King.new(x_position: 4, y_position: 4, color: 'WHITE', game_id: board.id, piece_type: 'King')
-      rook = Rook.new(x_position: 2, y_position: 1, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
-      rook1 = Rook.new(x_position: 5, y_position: 1, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
-      rook2 = Rook.new(x_position: 1, y_position: 3, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
-      rook3 = Rook.new(x_position: 1, y_position: 5, color: 'BLACK', game_id: board.id, piece_type: 'Rook')
+      king = King.new(x_position: 4, y_position: 4, color: 'WHITE', state: 'moved', game_id: board.id, piece_type: 'King')
+      rook = Rook.new(x_position: 2, y_position: 1, color: 'BLACK', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook1 = Rook.new(x_position: 5, y_position: 1, color: 'BLACK', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook2 = Rook.new(x_position: 1, y_position: 3, color: 'BLACK', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook3 = Rook.new(x_position: 1, y_position: 5, color: 'BLACK', state: 'moved', game_id: board.id, piece_type: 'Rook')
 
       board.pieces << rook
       board.pieces << rook1
@@ -400,11 +400,11 @@ RSpec.describe Game, type: :model do
       board = create(:game)
       board.pieces.delete_all
 
-      king = King.new(x_position: 4, y_position: 4, color: 'BLACK', game_id: board.id, piece_type: 'King')
-      rook = Rook.new(x_position: 2, y_position: 1, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
-      rook1 = Rook.new(x_position: 5, y_position: 1, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
-      rook2 = Rook.new(x_position: 1, y_position: 3, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
-      rook3 = Rook.new(x_position: 1, y_position: 5, color: 'WHITE', game_id: board.id, piece_type: 'Rook')
+      king = King.new(x_position: 4, y_position: 4, color: 'BLACK', state: 'moved', game_id: board.id, piece_type: 'King')
+      rook = Rook.new(x_position: 2, y_position: 1, color: 'WHITE', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook1 = Rook.new(x_position: 5, y_position: 1, color: 'WHITE', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook2 = Rook.new(x_position: 1, y_position: 3, color: 'WHITE', state: 'moved', game_id: board.id, piece_type: 'Rook')
+      rook3 = Rook.new(x_position: 1, y_position: 5, color: 'WHITE', state: 'moved', game_id: board.id, piece_type: 'Rook')
 
       board.pieces << rook
       board.pieces << rook1
