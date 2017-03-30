@@ -82,6 +82,7 @@ RSpec.describe Piece, type: :model do
       white_user: FactoryGirl.create(:user),
       black_user: FactoryGirl.create(:user))
     end
+
     context "when the square is unoccupied" do
       it "will the move to the new coordinates" do
         game.pieces.delete_all
@@ -237,5 +238,22 @@ RSpec.describe Piece, type: :model do
       expect(board.send(:capture_opponent_causing_check?, 'BLACK')).to eq false
     end
   end
+  describe 'Move_To Changes Turn' do
+    before(:each) do
+      @game = create(:game)
+    end
 
+    it 'Changes the turn to Black after a valid move' do
+      pawn = @game.pieces.where(piece_type: 'Pawn', color: 'WHITE', x_position: 1, y_position: 1).take
+      pawn.move_to!(1,2)
+      @game.reload
+      expect(@game.user_turn).to eq('BLACK')
+    end
+    it 'Does NOT change the turn to Black after an attempted move' do
+      pawn = @game.pieces.where(piece_type: 'Pawn', color: 'WHITE', x_position: 1, y_position: 1).take
+      pawn.move_to!(1,5)
+      @game.reload
+      expect(@game.user_turn).to eq('WHITE')
+    end
+  end
 end
