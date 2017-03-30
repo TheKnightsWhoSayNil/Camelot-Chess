@@ -11,18 +11,8 @@
   }
 }
 
-
 body {
   margin: 0;
-}
-
-/* MIXINS */
-
-/*@mixin centerer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 /* HERO SECTION */
@@ -307,7 +297,6 @@ h4.hero-subtext {
   width: 100%;
   margin: 0 auto;
   float: none;
-  padding-top: 14px;
 }
 
 .team-title {
@@ -349,31 +338,27 @@ h4.hero-subtext {
 /* FOOTER SECTION */
 
 .footer {
-  height: 40px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 50px;
   width: 100%;
-  margin: 0;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: #fff;
   color: #fff;
-  
+  text-align: center;
 }
 
-.footer-container {
+.footer-wrapper {
+  position: absolute;
+  height: 50px;
   width: 100%;
-  margin: 0 auto;
-  float: none;
+  background-color: rgba(0,0,0,0.84);
 }
 
 .footer-header {
-  float: left;
+  padding-top: 14px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 24px;
-  font-weight: 400;
-}
-
-.rules {
-  float: right;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 24px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 200;
+  display: inline-block;
 }
