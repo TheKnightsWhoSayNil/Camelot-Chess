@@ -278,6 +278,11 @@ h4.hero-subtext {
 .tools-logos {
   height: 110px;
   width: 110px;
+
+  @media all and (max-width: 71.25em) {
+    height: 80px;
+    width: 80px
+  }
 }
 
 /* TEAM SECTION */
@@ -333,6 +338,11 @@ h4.hero-subtext {
   width: 200px;
   border: 2px solid #fff;
   border-radius: 100%;
+
+  @media all and (max-width: 77.5em) {
+    height: 128px;
+    width: 128px;
+  }
 }
 
 /* FOOTER SECTION */
