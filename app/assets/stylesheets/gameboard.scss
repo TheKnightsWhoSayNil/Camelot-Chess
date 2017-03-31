@@ -24,6 +24,17 @@
   vertical-align: middle;
 }
 
+.piece {
+  width: 58px;
+  height: 58px;
+  padding-right: 1px;
+  padding-bottom: 2px;
+}
+
+.game-board td.ui-droppable-hover {
+  border: 2px solid brown;
+}
+
 .game-board tr:nth-child(odd) td:nth-child(even),
 .game-board tr:nth-child(even) td:nth-child(odd) {
   background-image: url('/assets/blacksquare.png');
@@ -31,10 +42,12 @@
 
 
 td img {
-  width: 50px;
-  height: 50px;
+  width: 58px;
+  height: 58px;
   vertical-align: middle;
-  text-align: center
+  text-align: center;
+  padding-right: 1px;
+  padding-bottom: 2px;
 }
 
 td {

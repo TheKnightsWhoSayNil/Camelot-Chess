@@ -12,19 +12,22 @@
 
 $( function() {
   $( ".piece" ).draggable({
+    snap: ".piece-square",
+    grid: [60, 60],
     containment: ".game-board",
-    start: function(event, ui) {
-    var urlUpdatePath = $(event.target).data('url')
-   
-    $( ".piece-square" ).droppable({
+  });
+
+    
+  $( ".piece-square" ).droppable({
     accept: ".piece",
     drop: function( event, ui ) {
       var x = $(event.target).data('x');
       var y = $(event.target).data('y');
+      var urlUpdatePath = $('.ui-draggable-dragging').data('url');
       console.log(x);
       console.log(y);
       console.log(urlUpdatePath);
-      
+         
       $.ajax({
         type: 'PUT',
         url: urlUpdatePath,
@@ -35,18 +38,18 @@ $( function() {
           } else {
             alert(response);
           }
-          // cause the page to refresh to allign the moved piece on the square.
+          // cause the page to refresh to align the moved piece on the square.
           //Turbolinks.visit(window.location, { action: 'replace' }); 
-          location.reload();
+          //location.reload();
         }
         
         });
-
+ 
       }
     });
-    }
+  
   });
-});
+
 </script>
 
 
