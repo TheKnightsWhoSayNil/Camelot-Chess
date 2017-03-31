@@ -50,18 +50,6 @@ RSpec.describe Knight, type: :model do
         game.pieces.delete_all
         knight = Knight.create(color: true, x_position: 1, y_position: 2, game: game)
 
-        expect(knight.valid_move?(-1, 3)).to eq(false)
-      end
-      it 'be a valid move' do
-        game.pieces.delete_all
-        knight = Knight.create(color: true, x_position: 1, y_position: 2, game: game)
-
-        expect(knight.valid_move?(-1, 1)).to eq(false)
-      end
-      it 'be a valid move' do
-        game.pieces.delete_all
-        knight = Knight.create(color: true, x_position: 1, y_position: 2, game: game)
-
         expect(knight.valid_move?(2, 5)).to eq(false)
       end
       it 'be a valid move' do

@@ -8,11 +8,9 @@ class Knight < Piece
     move_coordinates = []
 
     move_range.each do |dx, dy|
-      if within_chessboard?(x_position + dx, y_position + dy)
-        move_coordinates << [(x_position + dx), (y_position + dy)]
-      end
+      move_coordinates << [(x_position + dx), (y_position + dy)]
     end
-
     move_coordinates.include?([x,y])
   end
+  
 end
