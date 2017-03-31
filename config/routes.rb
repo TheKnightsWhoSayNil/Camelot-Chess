@@ -7,4 +7,5 @@ Rails.application.routes.draw do
     end
     resources :pieces, only: [:show, :update]
   end
+  resources :users, only: :show
 end

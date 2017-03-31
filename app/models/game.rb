@@ -9,6 +9,10 @@ class Game < ApplicationRecord
   after_create :fill_board, :first_turn!
 
   scope :available, -> { where(black_user_id: nil) }
+  
+  def available?
+    black_user.blank?
+  end
 
   def first_turn!
     update(user_turn: 'WHITE')
