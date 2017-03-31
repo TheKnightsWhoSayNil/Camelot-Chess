@@ -150,7 +150,7 @@ RSpec.describe King, type: :model do
         game.pieces << white_king
         game.pieces << white_rook
 
-        white_king.valid_move?(6, 0)
+        white_king.move_to!(6, 0)
 
         white_king.reload
         white_rook.reload
@@ -195,7 +195,7 @@ RSpec.describe King, type: :model do
         game.pieces << black_king
         game.pieces << black_rook
 
-        black_king.valid_move?(6, 0)
+        black_king.move_to!(6, 0)
 
         black_king.reload
         black_rook.reload
@@ -220,7 +220,7 @@ RSpec.describe King, type: :model do
         game.pieces << white_king
         game.pieces << white_rook
 
-        white_king.valid_move?(2, 0)
+        white_king.move_to!(2, 0)
 
         white_rook.reload
         white_king.reload
@@ -236,7 +236,7 @@ RSpec.describe King, type: :model do
         game.pieces << white_king
         game.pieces << white_rook
 
-        white_king.valid_move?(6, 0)
+        white_king.move_to!(6, 0)
 
         white_rook.reload
         white_king.reload
@@ -254,7 +254,7 @@ RSpec.describe King, type: :model do
         game.pieces << white_king
         game.pieces << white_rook
 
-        white_king.send(:castle_queenside)
+        white_king.move_to!(2, 0)
         white_rook.reload
         white_king.reload
 
@@ -271,7 +271,7 @@ RSpec.describe King, type: :model do
         game.pieces << black_king
         game.pieces << black_rook
 
-        black_king.send(:castle_queenside)
+        black_king.move_to!(2, 0)
         black_rook.reload
         black_king.reload
 

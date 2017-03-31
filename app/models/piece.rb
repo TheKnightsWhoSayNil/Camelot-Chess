@@ -20,6 +20,14 @@ class Piece < ApplicationRecord
     if valid_move?(x, y) && space_available?(x, y) && not_into_check?(x, y)
       capture_piece_at!(x, y) if occupied_by_opposing_piece?(x, y)
       change_location(x, y)
+    elsif piece_type == 'King' && valid_move?(x, y) && space_available?(x, y) && not_into_check(x, y)
+      if legal_castle_move?
+        if castle!
+          return true
+        end
+      else
+        return standard_king_move?(x, y)
+      end 
     else
       false
     end
