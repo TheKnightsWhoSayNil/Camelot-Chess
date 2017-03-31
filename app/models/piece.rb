@@ -16,18 +16,19 @@ class Piece < ApplicationRecord
   end
 
   def move_to!(x, y)
-    if occupied_by_mycolor_piece?(x, y)
-      false
-    elsif valid_move?(x, y)
-      if occupied_by_opposing_piece?(x, y)
-        capture_piece_at!(x, y)
-        update_attributes(x_position: x, y_position: y)
-      elsif unoccupied?(x, y)
-        update_attributes(x_position: x, y_position: y)
+    if color == game.user_turn
+      if valid_move?(x, y) && space_available?(x,y) && not_into_check?(x,y)
+        capture_piece_at!(x, y) if occupied_by_opposing_piece?(x, y)
+        change_location(x, y)
+        game.pass_turn!(game.user_turn)
+      else
+        false
       end
-    else
-      false
     end
+  end
+
+  def not_into_check?(x,y)
+    !move_causes_check?(x,y)
   end
 
   def valid_move?(x, y)
@@ -41,7 +42,7 @@ class Piece < ApplicationRecord
   end
 
   def within_chessboard?(x, y)
-    (x >= 0 && y >= 0 && x <= 7 && y <= 7)
+    (x >= 0 && y >= 0 && x <= 7 && y <= 7 && x != nil && y != nil)
   end
 
   def horizontal_obstruction?(x_end, _y_end)
@@ -123,7 +124,7 @@ class Piece < ApplicationRecord
   def move_causes_check?(x, y)
     state = false
     ActiveRecord::Base.transaction do
-      move_to!(x, y)
+      change_location(x,y)
       state = game.in_check?(color)
       raise ActiveRecord::Rollback
     end
@@ -190,6 +191,18 @@ class Piece < ApplicationRecord
   end
 
   private
+
+  def change_location(x,y)
+    update_attributes(x_position: x, y_position: y)
+  end
+
+  def space_available?(x,y)
+    !occupied_by_mycolor_piece?(x, y)
+  end
+
+  def space_occupied?(x, y)
+    game.pieces.where(x_position: x, y_position: y).present?
+  end
 
   def set_default_state
     self.state ||= 'unmoved'

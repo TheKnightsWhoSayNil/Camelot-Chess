@@ -1,10 +1,14 @@
+require 'pry'
 class Pawn < Piece
   def valid_move?(x, y)
     if super(x, y)
       if is_capture?(x, y)
         capture_piece_at!(x, y)
-        return true
-      else 
+        change_location(x, y)
+      elsif promotable?(x, y)
+        change_location(x, y)
+        promote!(x, y)
+      else
         return (one_square?(x, y) || two_squares?(x, y))
       end
     end
@@ -34,18 +38,19 @@ class Pawn < Piece
 #-----> PAWN PROMOTION <-----#
 
   # checks to see if a pawn is promotable.
-  def promotable?(y)
-    return true if y == 7 && color || y == 0 && !color
+  def promotable?(x, y)
+    x
+    return true if y == 7 && color == "WHITE" || y == 0 && color == "BLACK"
     false
   end
 
   # performs the pawn promotion by checking to see if the pawn meets the necessary requirements.
-  def promote!(params)
-    x = params[:x_position].to_i
-    y = params[:y_position].to_i
-
-    if promotable?(y) && valid_move?(x, y)
-      update_attributes_of_pawn(params)
+  def promote!(x, y)
+    if promotable?(x, y)
+      piece = piece_at(x, y)
+      piece.update_attributes(x_position: nil, y_position: nil)
+      piece.reload
+      game.pieces.create(piece_type: "Queen", x_position: x, y_position: y, state: 'promoted-piece', color: color)
     else
       false
     end
@@ -53,28 +58,12 @@ class Pawn < Piece
 
   private
 
-  # exchanges the pawn for a different piece by updating the attributes of pawn.
-  def update_attributes_of_pawn(params)
-    x = params[:x_position].to_i
-    y = params[:y_position].to_i
-    type = params[:piece_type]
+  def change_location(x,y)
+    update_attributes(x_position: x, y_position: y)
+  end
 
-    # removes pawn from the board by updating it's attributes to nil.
-    update_attributes(
-      x_position: nil,
-      y_position: nil,
-      state: 'retired-pawn'
-    )
-
-    # creates the new piece and places it on the board by updating it's attributes.
-    game.pieces.create(
-      x_position: x,
-      y_position: y,
-      piece_type: type,
-      state: 'promoted-piece',
-      color: color,
-    )
+  def piece_at(x, y)
+    game.pieces.find_by(x_position: x, y_position: y)
   end
 
 end
-
