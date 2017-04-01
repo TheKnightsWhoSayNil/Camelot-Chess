@@ -87,6 +87,7 @@ RSpec.describe Piece, type: :model do
     context 'black king' do
       it 'moves rook to queenside castled position' do
         game.pieces.delete_all
+        game.pass_turn!(game.user_turn)
         black_king = King.create(x_position: 4, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
         black_rook = Rook.create(x_position: 0, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
         game.pieces << black_king

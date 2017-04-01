@@ -22,12 +22,10 @@ class Piece < ApplicationRecord
         game.pass_turn!(game.user_turn)
         change_location(x, y)
       elsif !occupied_by_opposing_piece?(x, y)
-        change_location(x, y)
-        game.pass_turn!(game.user_turn)
+        false
       elsif piece_type == 'King' && valid_move?(x, y) && space_available?(x, y) && not_into_check(x, y)
         if legal_castle_move?
           if castle!
-            true
             game.pass_turn!(game.user_turn)
           end
         else

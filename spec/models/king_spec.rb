@@ -206,6 +206,8 @@ RSpec.describe King, type: :model do
 
         expect(white_king.x_position).to eq(6)
         expect(white_rook.x_position).to eq(5)
+
+        game.pass_turn!(game.user_turn)
         
         black_king.move_to!(6, 7)
 
@@ -221,6 +223,7 @@ RSpec.describe King, type: :model do
     context 'black king' do
       it 'moves rook to kingside castle position' do
         game.pieces.delete_all
+        game.pass_turn!(game.user_turn)
         black_king = King.create(x_position: 4, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
         black_rook = Rook.create(x_position: 7, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
         game.pieces << black_king
@@ -298,6 +301,7 @@ RSpec.describe King, type: :model do
     context 'black king' do
       it 'moves rook to queenside castled position' do
         game.pieces.delete_all
+        game.pass_turn!(game.user_turn)
         black_king = King.create(x_position: 4, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
         black_rook = Rook.create(x_position: 0, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
         game.pieces << black_king
