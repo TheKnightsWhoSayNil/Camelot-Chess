@@ -50,27 +50,28 @@ $( function() {
 });
 </script>
 
+<div class="game-board-container">
+  <h2 class="game-title"><%= @game.name %></h2>
 
-<h2 class="game-title">Chess Board</h2>
+  <table class="game-board">
+    <% 7.downto(0) do |row| %>
+      <tr>
+        <% 0.upto(7) do |col| %>
 
-<table class="game-board">
-  <% 7.downto(0) do |row| %>
-    <tr>
-      <% 0.upto(7) do |col| %>
-
-        <td class="piece-square ui-droppable" data-x="<%= col %>" data-y="<%= row %>">
-          <% @pieces.each do |piece| %>
-            <% if piece.x_position == col && piece.y_position == row %>
-              <div class="piece" data-url="<%= game_piece_path(piece.game, piece) %>">
-                <%= image_tag(piece.piece_image) %>
-              </div>
+          <td class="piece-square ui-droppable" data-x="<%= col %>" data-y="<%= row %>">
+            <% @pieces.each do |piece| %>
+              <% if piece.x_position == col && piece.y_position == row %>
+                <div class="piece" data-url="<%= game_piece_path(piece.game, piece) %>">
+                  <%= image_tag(piece.piece_image) %>
+                </div>
+              <% end %>
             <% end %>
-          <% end %>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
 <%= render 'partials/forfeit_button' %>
 
