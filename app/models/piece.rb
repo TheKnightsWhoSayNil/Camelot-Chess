@@ -16,20 +16,27 @@ class Piece < ApplicationRecord
   end
 
   def move_to!(x, y)
-    ## Need conditional logic to check if piece is King and it's trying to castle
-    if valid_move?(x, y) && space_available?(x, y) && not_into_check?(x, y)
-      capture_piece_at!(x, y) if occupied_by_opposing_piece?(x, y)
-      change_location(x, y)
-    elsif piece_type == 'King' && valid_move?(x, y) && space_available?(x, y) && not_into_check(x, y)
-      if legal_castle_move?
-        if castle!
-          return true
-        end
+    if color == game.user_turn
+      if valid_move?(x, y) && space_available?(x, y) && not_into_check?(x, y)
+        capture_piece_at!(x, y) if occupied_by_opposing_piece?(x, y)
+        game.pass_turn!(game.user_turn)
+        change_location(x, y)
+      elsif !occupied_by_opposing_piece?(x, y)
+        change_location(x, y)
+        game.pass_turn!(game.user_turn)
+      elsif piece_type == 'King' && valid_move?(x, y) && space_available?(x, y) && not_into_check(x, y)
+        if legal_castle_move?
+          if castle!
+            true
+            game.pass_turn!(game.user_turn)
+          end
+        else
+          standard_king_move?(x, y)
+          game.pass_turn!(game.user_turn)
+        end 
       else
-        return standard_king_move?(x, y)
-      end 
-    else
-      false
+        false
+      end
     end
   end
 
@@ -48,7 +55,7 @@ class Piece < ApplicationRecord
   end
 
   def within_chessboard?(x, y)
-    (x >= 0 && y >= 0 && x <= 7 && y <= 7)
+    (x >= 0 && y >= 0 && x <= 7 && y <= 7 && x != nil && y != nil)
   end
 
   def horizontal_obstruction?(x_end, _y_end)

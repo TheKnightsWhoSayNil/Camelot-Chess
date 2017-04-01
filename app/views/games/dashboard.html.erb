@@ -1,0 +1,17 @@
+
+<div class="booyah-box">
+  <div class="row">
+    <div class="col-4">
+    </div>
+
+    <div class="col-8">
+      <h1>Player Profile</h1>
+      <% @game.each do |game| %>
+        <%= link_to(game_path(game.id)) do %>
+          <%= game.id %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+   <div class="clear"></div>
+</div>

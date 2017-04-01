@@ -6,9 +6,22 @@ class Game < ApplicationRecord
 
   has_many :pieces
 
-  after_create :fill_board
+  after_create :fill_board, :first_turn!
 
   scope :available, -> { where(black_user_id: nil) }
+  
+  def available?
+    black_user.blank?
+  end
+
+  def first_turn!
+    update(user_turn: 'WHITE')
+  end
+
+  def pass_turn!(color)
+    player_turn = color == 'WHITE' ? 'BLACK' : 'WHITE'
+    update(user_turn: player_turn)
+  end
 
   def in_check?(color)
     @enemies_causing_check = []

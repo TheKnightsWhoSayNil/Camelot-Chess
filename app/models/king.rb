@@ -12,6 +12,7 @@ class King < Piece
     false
   end
 
+
   def checkmate?
     # example logic
   end
