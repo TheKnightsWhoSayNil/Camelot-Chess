@@ -83,6 +83,25 @@ RSpec.describe Piece, type: :model do
       black_user: FactoryGirl.create(:user))
     end
 
+
+    context 'black king' do
+      it 'moves rook to queenside castled position' do
+        game.pieces.delete_all
+        game.pass_turn!(game.user_turn)
+        black_king = King.create(x_position: 4, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
+        black_rook = Rook.create(x_position: 0, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
+        game.pieces << black_king
+        game.pieces << black_rook
+
+        black_king.move_to!(2, 0)
+        black_rook.reload
+        black_king.reload
+
+        expect(black_rook.x_position).to eq(3)
+        expect(black_king.x_position).to eq(2)
+      end
+    end
+
     context "when the square is unoccupied" do
       it "will the move to the new coordinates" do
         game.pieces.delete_all

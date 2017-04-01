@@ -17,10 +17,21 @@ class Piece < ApplicationRecord
 
   def move_to!(x, y)
     if color == game.user_turn
-      if valid_move?(x, y) && space_available?(x,y) && not_into_check?(x,y)
+      if valid_move?(x, y) && space_available?(x, y) && not_into_check?(x, y)
         capture_piece_at!(x, y) if occupied_by_opposing_piece?(x, y)
-        change_location(x, y)
         game.pass_turn!(game.user_turn)
+        change_location(x, y)
+      elsif !occupied_by_opposing_piece?(x, y)
+        false
+      elsif piece_type == 'King' && valid_move?(x, y) && space_available?(x, y) && not_into_check(x, y)
+        if legal_castle_move?
+          if castle!
+            game.pass_turn!(game.user_turn)
+          end
+        else
+          standard_king_move?(x, y)
+          game.pass_turn!(game.user_turn)
+        end 
       else
         false
       end
@@ -184,10 +195,6 @@ class Piece < ApplicationRecord
         !is_obstructed?(coordinate_pair[0], coordinate_pair[1]) &&
         !occupied_by_mycolor_piece?(coordinate_pair[0], coordinate_pair[1])
     end
-  end
-
-  def find_piece(piece_type, x, y)
-    game.pieces.where(piece_type: piece_type, x_position: x, y_position: y).take
   end
 
   private

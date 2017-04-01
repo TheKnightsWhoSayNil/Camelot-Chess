@@ -11,8 +11,7 @@
         <li class="nav-link"><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
         <li class="nav-link"><%= link_to 'Join Game', games_path %></li>
         <li class="nav-link email"><%= link_to 'Create Game', new_game_path %></li>
-        <li class="nav-link">Hello, <%= current_user.email %></li>
-
+        <li class="nav-link"><%= link_to 'My Profile', user_path(current_user) %></li>
         <% else %>
         <li class="nav-link"><%= link_to 'Sign Up', new_user_registration_path %></li>
         <li class="nav-link"><%= link_to 'Sign In', new_user_session_path %></li>
