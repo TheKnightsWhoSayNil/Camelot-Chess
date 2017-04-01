@@ -35,10 +35,48 @@
   }
 }
 
-.forfeit {
+.play-btn {
+  appearance: none;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: $base-font-size;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 600;
+  line-height: 1;
+  padding: $small-spacing $base-spacing;
+  text-decoration: none;
+  transition: background-color $base-duration $base-timing;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus {
+    background-color: shade(#fff, 20%);
+    border-color: shade(#fff, 20%);
+    color: #fff;
+  }
+
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background-color: $action-color;
+    }
+  }
+}
+
+.forfeit-btn {
   appearance: none;
   border: 2px solid #FF4769;
-  border-radius: $base-border-radius;
+  border-radius: 30%;
   color: black;
   cursor: pointer;
   display: inline-block;
@@ -60,6 +98,7 @@
     border-color: shade(#FF4769, 30%);
     color: #fff;
   }
+
 
   &:disabled {
     cursor: not-allowed;

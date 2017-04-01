@@ -1,5 +1,10 @@
 /* HOMEPAGE */
 
+@keyframes fade-in {
+  0% { opacity: -1 }
+  100% { opacity: 1 }
+}
+
 @keyframes fade-down {
   from { 
     opacity: 0;
@@ -49,11 +54,16 @@ h4.hero-subtext {
   animation: fade-down 1.5s;
 }
 
+.play {
+  padding-top: 24px;
+  animation: fade-in 3.5s;
+}
+
 /* ABOUT SECTION */
 
 .about-section {
   height: 500px;
-  width: 100%;
+  width: 90%;
   margin: 0;
   text-align: center;
   color: black;
@@ -94,11 +104,11 @@ h4.hero-subtext {
 
 .skills-section {
   height: 400px;
-  width: 100%;
-  margin: 0;
+  width: 90%;
+  border-radius: 12px;
+  margin: 0 auto;
   text-align: center;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(to bottom, rgba(13, 175, 129, 0.1) 0%, rgba(13, 175, 129, 0.1) 100%), url('chess7.jpg') no-repeat center top;
   color: #fff;
   clear: both;
 }
@@ -113,8 +123,9 @@ h4.hero-subtext {
 
 .skills-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 36px;
-  font-weight: 600;
+  font-size: 44px;
+  font-weight: 400;
+  padding-bottom: 8px;
   padding-top: 56px;
   margin: 0;
 }
@@ -147,20 +158,46 @@ h4.hero-subtext {
 
 /* CODE SECTION */
 
-.code-header {
-  background-color: #fff;
-  color: black;
+.code-section {
+  height: 880px;
   width: 100%;
-  height: 120px;
-  margin: 0;
+  margin: 20px auto 40px auto;
   text-align: center;
+  color: black;
+  clear: both;
+}
+
+.code-container {
+  height: 800px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: black;
+  padding-top: 12px;
+}
+
+.snippet {
+  display: inline-block;
+  width: 40%;
+  height: 40%;
+  margin: 20px;
+  border: 2px solid rgba(0,0,0,0.6);
+  border-radius: 65px;
+}
+
+
+.code-header {
+  width: 100%;
+  margin: 0;
+  padding-top: 24px;
 }
 
 .code-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 36px;
-  font-weight: bold;
   margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 44px;
+  font-weight: 400;
+  padding-bottom: 8px;
   padding-top: 16px;
 }
 
@@ -231,10 +268,12 @@ h4.hero-subtext {
 
 .tools-section {
   height: 400px;
-  width: 100%;
-  margin: 0;
+  width: 90%;
+  border-radius: 12px;
+  margin: 0 auto;
   text-align: center;
-  color: black;
+  background: linear-gradient(to bottom, rgba(13, 175, 129, 0.1) 0%, rgba(13, 175, 129, 0.1) 100%), url('chess7.jpg') no-repeat center top;
+  color: #fff;
   clear: both;
 }
 
@@ -248,8 +287,9 @@ h4.hero-subtext {
 
 .tools-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 36px;
-  font-weight: 600;
+  font-size: 42px;
+  font-weight: 400;
+  padding-bottom: 8px;
   padding-top: 56px;
   margin: 0;
 }
@@ -285,15 +325,22 @@ h4.hero-subtext {
   }
 }
 
+/* BUFFER SECTION */
+
+.buffer-section {
+  height: 120px;
+  width: 90%;
+}
+
 /* TEAM SECTION */
 
 .team-section {
-  height: 500px;
-  width: 100%;
-  margin: 0;
+  height: 440px;
+  width: 90%;
+  border-radius: 12px;
+  margin: 0 auto;
   text-align: center;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0,0,0,0.75);
   color: #fff;
 }
 
@@ -306,8 +353,9 @@ h4.hero-subtext {
 
 .team-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 36px;
-  font-weight: 600;
+  font-size: 42px;
+  font-weight: 400;
+  padding-bottom: 8px;
   padding-top: 56px;
   margin: 0;
 }
@@ -334,8 +382,8 @@ h4.hero-subtext {
 }
 
 .team-logos {
-  height: 200px;
-  width: 200px;
+  height: 180px;
+  width: 180px;
   border: 2px solid #fff;
   border-radius: 100%;
 
@@ -348,13 +396,12 @@ h4.hero-subtext {
 /* FOOTER SECTION */
 
 .footer {
-  position: absolute;
   left: 0;
   bottom: 0;
-  height: 50px;
+  height: 70px;
   width: 100%;
   background-color: #fff;
-  color: #fff;
+  color: back;
   text-align: center;
 }
 
@@ -362,11 +409,10 @@ h4.hero-subtext {
   position: absolute;
   height: 50px;
   width: 100%;
-  background-color: rgba(0,0,0,0.84);
 }
 
 .footer-header {
-  padding-top: 14px;
+  padding-top: 24px;
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
   font-weight: 200;
