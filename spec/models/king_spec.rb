@@ -163,6 +163,30 @@ RSpec.describe King, type: :model do
     end
 
     context 'white king' do
+      it 'moves rook to kingside castled position' do
+        game.pieces.delete_all
+        white_king = King.create(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+        white_rook = Rook.create(x_position: 7, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+        black_king = King.create(x_position: 4, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
+        black_rook = Rook.create(x_position: 7, y_position: 7, state: 'unmoved', game: game, color: 'BLACK')
+        
+        game.pieces << white_king
+        game.pieces << white_rook
+        game.pieces << black_king
+        game.pieces << black_rook
+
+        white_king.move_to!(6, 0)
+
+        white_king.reload
+        white_rook.reload
+        
+        expect(white_king.x_position).to eq(6)
+        expect(white_rook.x_position).to eq(5)
+        
+      end
+    end
+
+    context 'white king' do
       it 'moves rook to kingside castled position when king and rook of opposing color are on the board' do
         game.pieces.delete_all
         white_king = King.create(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
@@ -175,14 +199,21 @@ RSpec.describe King, type: :model do
         game.pieces << black_king
         game.pieces << black_rook
 
-        white_king.valid_move?(6, 0)
+        white_king.move_to!(6, 0)
 
         white_king.reload
         white_rook.reload
 
-
-        expect(white_rook.x_position).to eq(5)
         expect(white_king.x_position).to eq(6)
+        expect(white_rook.x_position).to eq(5)
+        
+        black_king.move_to!(6, 7)
+
+        black_king.reload
+        black_rook.reload
+
+        expect(black_king.x_position).to eq(6)
+        expect(black_rook.x_position).to eq(5)
 
       end
     end
@@ -217,6 +248,7 @@ RSpec.describe King, type: :model do
         game.pieces.delete_all
         white_king = King.create(x_position: 4, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
         white_rook = Rook.create(x_position: 0, y_position: 0, state: 'unmoved', game: game, color: 'WHITE')
+
         game.pieces << white_king
         game.pieces << white_rook
 

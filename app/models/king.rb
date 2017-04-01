@@ -36,10 +36,17 @@ class King < Piece
   def castle_kingside
     rook = game.pieces.where(piece_type: 'Rook', x_position: 7).take
     king = game.pieces.where(piece_type: 'King', x_position: 4).take
-    rook.update_attributes(x_position: 5, state: 'moved')
-    king.update_attributes(x_position: 6, state: 'moved')
+
+    if rook.color == 'WHITE' && king.color == 'WHITE'
+      rook.update_attributes(x_position: 5, state: 'moved')
+      king.update_attributes(x_position: 6, state: 'moved')
+    else rook.color == 'BLACK' && king.color == 'BLACK'
+      rook.update_attributes(x_position: 5, state: 'moved')
+      king.update_attributes(x_position: 6, state: 'moved')
+    end
     rook.reload
     king.reload
+    
   end
 
   def can_castle_queenside?
@@ -52,10 +59,16 @@ class King < Piece
   end
 
   def castle_queenside
-    rook = game.pieces.where(piece_type: 'Rook', x_position: 0, state: 'unmoved').take
-    king = game.pieces.where(piece_type: 'King', x_position: 4, state: 'unmoved').take
-    rook.update_attributes(x_position: 3, state: 'moved')
-    king.update_attributes(x_position: 2, state: 'moved')
+    rook = game.pieces.where(piece_type: 'Rook', x_position: 0).take
+    king = game.pieces.where(piece_type: 'King', x_position: 4).take
+
+    if rook.color == 'WHITE' && king.color == 'WHITE'
+      rook.update_attributes(x_position: 3, state: 'moved')
+      king.update_attributes(x_position: 2, state: 'moved')
+    else rook.color == 'BLACK' && king.color == 'BLACK'
+      rook.update_attributes(x_position: 3, state: 'moved')
+      king.update_attributes(x_position: 2, state: 'moved')
+    end
     rook.reload
     king.reload
   end
@@ -91,7 +104,7 @@ class King < Piece
   def legal_castle_move?
     king = game.pieces.where(piece_type: 'King').take
     rook = game.pieces.where(piece_type: 'Rook').take
-    if (king.state == 'unmoved') && (rook != nil) && (rook.state == 'unmoved') 
+    if (king.state == 'unmoved') && (rook != nil) && (rook.state == 'unmoved')
       return true
     else
       return false
