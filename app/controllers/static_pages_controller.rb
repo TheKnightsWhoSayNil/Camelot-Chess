@@ -1,6 +1,6 @@
 # Controller that displays the main static page
 class StaticPagesController < ApplicationController
   def index
-    # Currently Empty
+    @clear_navbar = true
   end
 end

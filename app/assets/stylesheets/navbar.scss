@@ -24,8 +24,12 @@ header.navigation {
     @include clearfix;
     position: relative;
     z-index: 9999;
-    background-color: rgba(0,0,0,0.06);
+    background-color: rgba(0,0,0,0.8);
   }
+
+  .navigation-wrapper.clear {
+    background-color: rgba(0,0,0,0.06);
+}
 
   .logo {
     float: left;
