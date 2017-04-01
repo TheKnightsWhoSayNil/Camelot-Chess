@@ -1,12 +1,19 @@
 //-----CHESS BOARD & PIECES-----//
 
+
+.game-board-container {
+  height: 600px;
+  margin-top: 40px;
+}
+
 .game-title {
   text-align: center;
+
 }
 
 .game-board {
-  height: 484px;
-  width: 484px;
+  height: 504px;
+  width: 504px;
   margin: 0 auto;
   border: 2px solid;
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);

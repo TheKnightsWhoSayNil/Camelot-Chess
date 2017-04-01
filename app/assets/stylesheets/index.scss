@@ -1,4 +1,9 @@
-//-----HOMEPAGE-----//
+/* HOMEPAGE */
+
+@keyframes fade-in {
+  0% { opacity: -1 }
+  100% { opacity: 1 }
+}
 
 @keyframes fade-down {
   from { 
@@ -11,10 +16,11 @@
   }
 }
 
-
 body {
   margin: 0;
 }
+
+/* HERO SECTION */
 
 .hero {
   background: linear-gradient(to bottom, rgba(13, 175, 129, 0.1) 0%, rgba(13, 175, 129, 0.1) 100%), url('chess7.jpg') no-repeat center center fixed;
@@ -24,20 +30,391 @@ body {
   background-size: cover;
   height: 600px;
   box-shadow: 0px 3px 8px #2a2a2a;
+  text-align: center;
+  margin-top: -70px;
+  line-height: 30px;
 }
 
 h1.hero-text {
   color: #fff;
   font-size: 6.5em;
+  font-weight: 300;
   margin: 0;
   padding-top: 1.8em;
   font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
   animation: fade-down 1.5s;
 }
 
 h4.hero-subtext {
   color: #fff;
   font-size: 1.5em;
+  font-weight: 200;
   margin: 0;
   animation: fade-down 1.5s;
+}
+
+.play {
+  padding-top: 24px;
+  animation: fade-in 3.5s;
+}
+
+/* ABOUT SECTION */
+
+.about-section {
+  height: 500px;
+  width: 90%;
+  margin: 0;
+  text-align: center;
+  color: black;
+  clear: both;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.about-container {
+  display: inline-block;
+  width: 40%;
+  margin: 0 auto;
+  float: none;
+  text-align: left;
+}
+
+.about-header {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  margin: 0;
+}
+
+.about-subheader {
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+  font-size: 30px;
+  margin: 0;
+}
+
+.about-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+}
+
+/* SKILLS SECTION */
+
+.skills-section {
+  height: 400px;
+  width: 90%;
+  border-radius: 12px;
+  margin: 0 auto;
+  text-align: center;
+  background: linear-gradient(to bottom, rgba(13, 175, 129, 0.1) 0%, rgba(13, 175, 129, 0.1) 100%), url('chess7.jpg') no-repeat center top;
+  color: #fff;
+  clear: both;
+}
+
+.skills-container {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  float: none;
+  padding-top: 12px;
+}
+
+.skills-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 44px;
+  font-weight: 400;
+  padding-bottom: 8px;
+  padding-top: 56px;
+  margin: 0;
+}
+
+.skills-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  margin: 0;
+}
+
+.skills {
+  display: inline-block;
+  height: auto;
+  width: auto;
+  margin: 20px;
+  padding-top: 20px;
+}
+
+.skills h3 {
+  padding-top: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.skills-logos {
+  height: 90px;
+  width: 90px;
+}
+
+/* CODE SECTION */
+
+.code-section {
+  height: 880px;
+  width: 100%;
+  margin: 20px auto 40px auto;
+  text-align: center;
+  color: black;
+  clear: both;
+}
+
+.code-container {
+  height: 800px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  color: black;
+  padding-top: 12px;
+}
+
+.snippet {
+  display: inline-block;
+  width: 40%;
+  height: 40%;
+  margin: 20px;
+  border: 2px solid rgba(0,0,0,0.6);
+  border-radius: 65px;
+}
+
+
+.code-header {
+  width: 100%;
+  margin: 0;
+  padding-top: 24px;
+}
+
+.code-title {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 44px;
+  font-weight: 400;
+  padding-bottom: 8px;
+  padding-top: 16px;
+}
+
+.code-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  margin: 0;
+}
+
+.code1 {
+  @include span-columns(6);
+  height: 600px;
+  width: 50%;
+  margin: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
+
+.code1:nth-child(even) {
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.code2 {
+  @include span-columns(6);
+  height: 600px;
+  width: 50%;
+  margin: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+}
+
+.code2:nth-child(even) {
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.code p {
+  padding: 12px;
+}
+
+.arrow-left {
+  width: 0; 
+  height: 0; 
+  border-bottom: 50px solid transparent;  /* left arrow slant */
+  border-top: 50px solid transparent; /* right arrow slant */
+  border-left: 50px solid rgba(0, 0, 0, 0.8); /* bottom, add background color here */
+  font-size: 0;
+  line-height: 0;
+  margin-top: 275px;
+}
+
+.arrow-right {
+  width: 100%; 
+  height: 0; 
+  border-bottom: 50px solid transparent;  /* left arrow slant */
+  border-top: 50px solid transparent; /* right arrow slant */
+  border-right: 50px solid rgba(0, 0, 0, 0.8); /* bottom, add background color here */
+  font-size: 0;
+  line-height: 0;
+  margin-top: 275px;
+}
+
+/* TOOLS SECTION */
+
+.tools-section {
+  height: 400px;
+  width: 90%;
+  border-radius: 12px;
+  margin: 0 auto;
+  text-align: center;
+  background: linear-gradient(to bottom, rgba(13, 175, 129, 0.1) 0%, rgba(13, 175, 129, 0.1) 100%), url('chess7.jpg') no-repeat center top;
+  color: #fff;
+  clear: both;
+}
+
+.tools-container {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  float: none;
+  padding-top: 12px;
+}
+
+.tools-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 42px;
+  font-weight: 400;
+  padding-bottom: 8px;
+  padding-top: 56px;
+  margin: 0;
+}
+
+.tools-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  margin: 0;
+}
+
+.tools {
+  display: inline-block;
+  height: auto;
+  width: auto;
+  margin: 20px;
+  padding-top: 20px;
+}
+
+.tools h3 {
+  padding-top: 4px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.tools-logos {
+  height: 110px;
+  width: 110px;
+
+  @media all and (max-width: 71.25em) {
+    height: 80px;
+    width: 80px
+  }
+}
+
+/* BUFFER SECTION */
+
+.buffer-section {
+  height: 120px;
+  width: 90%;
+}
+
+/* TEAM SECTION */
+
+.team-section {
+  height: 440px;
+  width: 90%;
+  border-radius: 12px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: rgba(0,0,0,0.75);
+  color: #fff;
+}
+
+.team-container {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  float: none;
+}
+
+.team-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 42px;
+  font-weight: 400;
+  padding-bottom: 8px;
+  padding-top: 56px;
+  margin: 0;
+}
+
+.team-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  margin: 0;
+}
+
+.team {
+  display: inline-block;
+  height: auto;
+  width: auto;
+  margin: 20px;
+  padding-top: 20px;
+}
+
+.team h3 {
+  padding-top: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}
+
+.team-logos {
+  height: 180px;
+  width: 180px;
+  border: 2px solid #fff;
+  border-radius: 100%;
+
+  @media all and (max-width: 77.5em) {
+    height: 128px;
+    width: 128px;
+  }
+}
+
+/* FOOTER SECTION */
+
+.footer {
+  left: 0;
+  bottom: 0;
+  height: 70px;
+  width: 100%;
+  background-color: #fff;
+  color: back;
+  text-align: center;
+}
+
+.footer-wrapper {
+  position: absolute;
+  height: 50px;
+  width: 100%;
+}
+
+.footer-header {
+  padding-top: 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 200;
+  display: inline-block;
 }

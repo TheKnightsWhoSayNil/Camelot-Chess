@@ -5,7 +5,7 @@ header.navigation {
   $dark-gray: #333 !default;
   $large-screen: 53.75em !default;
   $navigation-padding: 1em;
-  $navigation-background: $dark-gray;
+  $navigation-background: transparent;
   $navigation-color: white;
   $navigation-color-hover: transparentize(white, 0.2);
   $navigation-height: 70px;
@@ -24,7 +24,12 @@ header.navigation {
     @include clearfix;
     position: relative;
     z-index: 9999;
+    background-color: rgba(0,0,0,0.65);
   }
+
+  .navigation-wrapper.clear {
+    background-color: rgba(0,0,0,0.06);
+}
 
   .logo {
     float: left;
@@ -68,16 +73,18 @@ header.navigation {
     z-index: 9999999;
 
     @include media ($horizontal-bar-mode) {
-      float: left;
+      float: none;
     }
   }
 
   ul.navigation-menu {
+    float: right;
     clear: both;
     display: none;
     margin: 0 auto;
     overflow: visible;
-    padding: 0;
+    padding-left: 80px;
+    padding-right: 50px;
     width: 100%;
     z-index: 9999;
 
@@ -88,13 +95,23 @@ header.navigation {
     @include media ($horizontal-bar-mode) {
       display: inline;
       margin: 0;
-      padding: 0;
+      padding-left: 80px;
+      padding-right: 50px;
     }
   }
 
   // The nav items
 
+  ul li.nav-link.left {
+      float: left;
+    }
+
+  ul li.nav-link.email {
+    padding-left: 0.8em;
+  }
+
   ul li.nav-link {
+    float: right;
     background: $navigation-background;
     display: block;
     line-height: $navigation-height;
@@ -106,7 +123,9 @@ header.navigation {
     color: $navigation-color; 
     text-decoration: none;
 
+
     @include media ($horizontal-bar-mode) {
+      float: right;
       background: transparent;
       display: inline;
       line-height: $navigation-height;

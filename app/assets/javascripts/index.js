@@ -1,4 +1,4 @@
-$(document).ready(function(main) {
-  $('.hero').hide();
-  $('.hero').fadeIn(800);
-});
+//$(document).ready(function(main) {
+ // $('.hero').hide();
+ // $('.hero').fadeIn(800);
+//});
