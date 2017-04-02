@@ -17,25 +17,37 @@ $( function() {
       console.log(x);
       console.log(y);
       console.log(urlUpdatePath);
-         
+      
+      var sendAJAXRequest = function(x, y, promo_choice) {  
       $.ajax({
         type: 'PUT',
         url: urlUpdatePath,
-        data: { piece: { x_position: x, y_position: y }  },
+        data: { 
+          piece: { x_position: x, y_position: y }
+          promo_choice: promo_choice
+        },
         success: function(response) {
           if(response == 'OK') {
             console.log(response);
           } else {
             alert(response);
           }
-          // cause the page to refresh to align the moved piece on the square.
-          //Turbolinks.visit(window.location, { action: 'replace' }); 
-          //location.reload();
         }
-        });
-      }
-    }); 
+      });
+    };
+
+  if (is_pawn_promotion()) {
+  // code to display a modal with a choice of knight bishop rook or queen
+  var promotionButtons = $('...') // this should be a jQuery selection of the buttons that would be clicked on in the modal
+  promotionButtons.on('click', function() {
+    sendAJAXRequest(x_dropped_at, y_dropped_at, promotion_choice);
   });
+  } else {
+    sendAJAXRequest(x_dropped_at, y_dropped_at);
+  }
+
+  }); 
+});
 
 </script>
 
