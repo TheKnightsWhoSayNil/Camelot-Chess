@@ -6,11 +6,11 @@
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
     <nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu">
-        <li class="nav-link left"><%= link_to 'Camelot Chess', root_path %></li>
+      <li class="nav-link left"><%= link_to 'Home', root_path %></li>
         <% if user_signed_in? %>
         <li class="nav-link"><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
         <li class="nav-link"><%= link_to 'Join Game', games_path %></li>
-        <li class="nav-link email"><%= link_to 'Create Game', new_game_path %></li>
+        <li class="nav-link"><%= link_to 'Create Game', new_game_path %></li>
         <li class="nav-link"><%= link_to 'My Profile', user_path(current_user) %></li>
         <% else %>
         <li class="nav-link"><%= link_to 'Sign Up', new_user_registration_path %></li>

@@ -1,73 +1,66 @@
-<div class="title-user-dashboard">
-    <h1> Hey, <%= current_user.username %>! </h1>
-    <h2> You've been a member since <%= current_user.created_at.strftime("%B %d, %Y") %> </h2>
-</div>
+  <div class="dashboard-container">
+    <div class="dashboard-user-section">
+      <div class="dashboard-user-title">
+        <h1> Welcome, <%= current_user.username %>! </h1>
+        <h2> Member since <%= current_user.created_at.strftime("%B %d, %Y") %> </h2>
+        <h2> Last logged in on <%=current_user.last_sign_in_at.strftime("%B %d, %Y") %></h2>
+      </div>
+    </div>
 
-<br />
-<br />
-<hr  />
-
-<div class="title-user-games">
-    <h1>Your Games</h1>
-</div>
-
-<div class="cards">
-    <% if user_signed_in? %>
-    <% if @my_games.present? %>
-    <% @my_games.each do |my_game| %>
-      <div class="card">
-            <div class="card-header">
-                <h3> Game Name: <%= my_game.name %></h3>
-            </div>
-            <div class="card-copy">
-                <% if my_game.white_user.id == current_user.id %>
+    <div class="my-games-section">
+      <div class="my-games-title">
+        <h1>My Current Games</h1>
+      </div>
+      <div class="cards">
+        <% if user_signed_in? %>
+          <% if @my_games.present? %>
+            <% @my_games.each do |my_game| %>
+              <div class="card">
+                <div class="card-header">
+                  <h3> Game: <%= my_game.name %></h3>
+                </div>
+                <div class="card-copy">
+                  <% if my_game.white_user.id == current_user.id %>
                     <span class="badge-default"> Your opponent is: <%= my_game.black_user %> <br /></span>
-                <% else %>
-                    <span class="badge-default"> Your opponent is: <%= my_game.white_user.email %> <br /></span>
-                <% end %>
-                <br />
-                <br />
-                <span class="badge-default"> Created on: <%= my_game.created_at.strftime("%m/%d/%Y") %> <br /></span>
-                <br />
-                <br />
-                <%= button_to 'Open Game', game_path(my_game), :class => 'btn btn-success', :method => :get %>
-            </div>
-        </div>
-     <% end %>
-    <% end %>
-    <% end %>
-</div>
+                  <% else %>
+                    <span class="badge-default"> Your opponent is: <%= my_game.white_user.username %> <br /></span>
+                  <% end %>
+                  <span class="badge-default"> Created on: <%= my_game.created_at.strftime("%m/%d/%Y") %> <br /></span>
+                  <%= button_to 'Play Game', game_path(my_game), :class=> 'btn btn-success card-btn', :method => :get %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-<br />
-<br />
-<hr  />
+    <div class="open-games-section">
+      <div class="my-games-title">
+        <h1>My Open Games</h1>
+      </div>
+      <div class="cards">
+        <% if user_signed_in? %>
+          <% if @open_games.present? %>
+            <% @open_games.each do |my_game| %>
+              <div class="card">
+                <div class="card-header">
+                  <h3> Game: <%= my_game.name %></h3>
+                </div>
+                <div class="card-copy">
+                  <% if my_game.white_user.id == current_user.id %>
+                    <span class="badge-default"> Waiting on opponent... <br /></span>
+                  <% elsif my_game.black_user.id == current_user.id %>
+                    <span class="badge-default"> Waiting on opponent... <br /></span>
+                  <% end %>
+                    <span class="badge-default"> Created on: <%= my_game.created_at.strftime("%m/%d/%Y") %> <br /></span>
+                  <%= button_to 'View Game', game_path(my_game), :class => 'btn btn-success card-btn', :method => :get %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-<div class="title-user-games">
-    <h1>Your Open Games</h1>
-</div>
-<div class="cards">
-    <% if user_signed_in? %>
-    <% if @open_games.present? %>
-    <% @open_games.each do |my_game| %>
-      <div class="card">
-            <div class="card-header">
-                <h3> Game Name: <%= my_game.name %></h3>
-            </div>
-            <div class="card-copy">
-                <% if my_game.white_user.id == current_user.id %>
-                    <span class="badge-default"> Your opponent is: <%= my_game.black_user %> <br /></span>
-                <% elsif my_game.black_user.id == current_user.id %>
-                    <span class="badge-default"> Your opponent is: <%= my_game.white_user.id %> <br /></span>
-                <% end %>
-                <br />
-                <br />
-                <span class="badge-default"> Created on: <%= my_game.created_at.strftime("%m/%d/%Y") %> <br /></span>
-                <br />
-                <br />
-                <%= button_to 'Open Game', game_path(my_game), :class => 'btn btn-success', :method => :get %>
-            </div>
-        </div>
-     <% end %>
-    <% end %>
-    <% end %>
-</div>
+  </div>

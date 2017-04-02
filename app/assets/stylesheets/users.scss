@@ -1,17 +1,59 @@
-.title-user-games {
+.dashboard-container {
+  margin: 40px auto;
+  width: 70%;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, rgba(13, 175, 129, 0.1) 0%, rgba(13, 175, 129, 0.1) 100%), url('chess7.jpg') no-repeat center center fixed;
+}
+
+.dashboard-user-section {
+  width: 40%;
+  margin: auto;
+  margin-top: 60px;
+  padding-bottom: 20px;
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+}
+
+.dashboard-user-title {
   h1 {
-    font-size: 200%;
-    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+  }
+
+  h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
   }
 }
 
-.title-user-dashboard {
+.my-games-section {
+  margin: 60px auto 40px auto;
+  width: 60%;
+}
+
+.my-games-title {
+  width: 60%;
+  background-color: rgba(0,0,0,0.35);
+  margin: 0 auto;
+  border-radius: 10px;
+
   h1 {
-    font-size: 250%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 200%;
+    font-weight: 400;
     text-align: center;
+    color: #fff;
+    padding: 8px;
   }
-  h2 {
-    font-size: 225%;
-    text-align: center;
-  }
+}
+
+.open-games-section {
+  margin: 40px auto;
+  width: 60%;
 }
