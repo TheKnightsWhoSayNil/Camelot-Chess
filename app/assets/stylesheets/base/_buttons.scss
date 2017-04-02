@@ -114,3 +114,35 @@
 .buttons {
   padding-left: 20px;
 }
+
+.btn.btn-success.card-btn {
+  background-color: transparent;
+  border: 2px solid #1565c0;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.75em 1.5em;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 150ms ease;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus {
+    background-color: #1565c0;
+    border: 2px solid #1565c0;
+  }
+}
+
+form.button_to {
+    padding-left: 10px;
+    padding-top: 10px
+}

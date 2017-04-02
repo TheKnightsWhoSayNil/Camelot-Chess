@@ -24,7 +24,7 @@ header.navigation {
     @include clearfix;
     position: relative;
     z-index: 9999;
-    background-color: rgba(0,0,0,0.65);
+    background-color: rgba(0,0,0,0.85);
   }
 
   .navigation-wrapper.clear {
@@ -105,10 +105,6 @@ header.navigation {
   ul li.nav-link.left {
       float: left;
     }
-
-  ul li.nav-link.email {
-    padding-left: 0.8em;
-  }
 
   ul li.nav-link {
     float: right;

@@ -28,7 +28,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 600px;
+  height: 660px;
   box-shadow: 0px 3px 8px #2a2a2a;
   text-align: center;
   margin-top: -70px;
@@ -40,9 +40,9 @@ h1.hero-text {
   font-size: 6.5em;
   font-weight: 300;
   margin: 0;
-  padding-top: 1.8em;
+  padding-top: 2em;
   font-family: 'Montserrat', sans-serif;
-  line-height: 1.6;
+  line-height: 1.4;
   animation: fade-down 1.5s;
 }
 
@@ -55,7 +55,7 @@ h4.hero-subtext {
 }
 
 .play {
-  padding-top: 24px;
+  padding-top: 1.6em;
   animation: fade-in 3.5s;
 }
 
@@ -340,7 +340,7 @@ h4.hero-subtext {
   border-radius: 12px;
   margin: 0 auto;
   text-align: center;
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(0,0,0,0.85);
   color: #fff;
 }
 
@@ -391,30 +391,4 @@ h4.hero-subtext {
     height: 128px;
     width: 128px;
   }
-}
-
-/* FOOTER SECTION */
-
-.footer {
-  left: 0;
-  bottom: 0;
-  height: 70px;
-  width: 100%;
-  background-color: #fff;
-  color: back;
-  text-align: center;
-}
-
-.footer-wrapper {
-  position: absolute;
-  height: 50px;
-  width: 100%;
-}
-
-.footer-header {
-  padding-top: 24px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
-  font-weight: 200;
-  display: inline-block;
 }
