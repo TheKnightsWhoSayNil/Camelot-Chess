@@ -214,7 +214,7 @@ RSpec.describe King, type: :model do
         black_king.reload
         black_rook.reload
 
-        expect(black_king.x_position).to eq(4)
+        expect(black_king.x_position).to eq(6)
         expect(black_rook.x_position).to eq(5)
 
       end
