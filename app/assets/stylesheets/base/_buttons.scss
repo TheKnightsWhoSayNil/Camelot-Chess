@@ -56,7 +56,8 @@
   white-space: nowrap;
 
   &:hover,
-  &:focus {
+  &:focus,
+  &:active {
     background-color: shade(#fff, 20%);
     border-color: shade(#fff, 20%);
     color: #fff;
@@ -76,7 +77,7 @@
 .forfeit-btn {
   appearance: none;
   border: 2px solid #FF4769;
-  border-radius: 30%;
+  border-radius: 10px;
   color: black;
   cursor: pointer;
   display: inline-block;
@@ -91,6 +92,7 @@
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  outline: none;
 
   &:hover,
   &:focus {
@@ -110,7 +112,7 @@
   }
 }
 
-//- This will change once we are sure about a wireframe for the game/show page -//
+/* This will change once we are sure about a wireframe for the game/show page */
 .buttons {
   padding-left: 20px;
 }
@@ -125,7 +127,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
   -webkit-font-smoothing: antialiased;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1;
   padding: 0.75em 1.5em;
   text-align: center;
@@ -134,11 +136,21 @@
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  outline: none;
 
   &:hover,
   &:focus {
     background-color: #1565c0;
     border: 2px solid #1565c0;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background-color: #1565c0;
+    }
   }
 }
 

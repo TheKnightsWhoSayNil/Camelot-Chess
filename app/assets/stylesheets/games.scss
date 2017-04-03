@@ -1,11 +1,11 @@
-//-----AVAILABLE GAMES-----//
+/* AVAILABLE GAMES */
+
+.available-games-section {
+  margin: 60px auto 40px auto;
+  width: 60%;
+}
 
 .available-list {
-  $base-border-radius: 3px !default;
-  $base-spacing: 1.5em !default;
-  $action-color: #477DCA !default;
-  $dark-gray: #333 !default;
-  $base-font-color: $dark-gray !default;
   $comment-gutter: 1.4em;
   $comment-image-padding: 0.7em;
   $comment-image-width: 4em;
@@ -14,34 +14,16 @@
   $comment-detail-color: transparentize($comment-color, 0.5);
   $comment-image-vert-alignment: top;
 
-  border-bottom: 1px solid transparentize($comment-color, 0.9);
-  display: table;
-  margin-bottom: $base-spacing;
-  padding-bottom: 1em;
-  width: 100%;
-
-  .game-list {
-    display: table-cell;
-    vertical-align: $comment-image-vert-alignment;
-  }
-
-  .game-list {
-    width: 100%;
-
-    h1 {
-      font-size: 1em;
-      margin: 0 0 0.5em 0;
-    }
-
-    p {
-      line-height: 1.5em;
-      margin-bottom: 0.5em;
-    }
-
-    p.comment-detail {
-      color: $comment-detail-color;
-      font-size: 0.9em;
-      font-style: italic;
-    }
+  width: 60%;
+  background-color: rgba(0, 0, 0, 0.35);
+  margin: 0 auto;
+  border-radius: 10px;
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 200%;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+    padding: 8px;
   }
 }
