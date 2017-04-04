@@ -3,9 +3,8 @@
 .dashboard-container {
   margin: 40px auto;
   width: 70%;
-  border: 1px solid black;
+  border: 1px solid rgba(0,0,0,0.4);
   border-radius: 10px;
-  background: linear-gradient(to bottom, rgba(13, 175, 129, 0.1) 0%, rgba(13, 175, 129, 0.1) 100%), url('chess7.jpg') no-repeat center center fixed;
 }
 
 .dashboard-user-section {
