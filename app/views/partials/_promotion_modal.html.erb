@@ -1,0 +1,34 @@
+<div class="modal">
+  <label for="promo-modal">
+    <div class="modal-trigger">Click for Modal</div>
+  </label>
+  <input class="modal-state" id="promo-modal" type="checkbox" />
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" for="promo-modal"></div>
+        <div class="promo-modal-text">
+          <h1>Pawn Promotion</h1>
+          <h1>Please make your selection: </h1>
+        </div>
+        <br/>
+        <form action="#" class="promotion-choice">
+          <div class="promo-selection-container">
+            <% @pieces.each do |name| %>
+              <% if name.piece_type == 'Queen' && name.color == name.game.user_turn %>
+                <div class="promo-selection-choice">
+                  <label for="<%= name %>">
+                    <%= image_tag(name.piece_image) %>
+                  </label>
+                  <input type="radio" name="piece-type" value="<%= name %>" id="<%= name %>">
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <br/>
+          <div class="promo-selection-submit">
+            <input type="submit">
+          </div>
+        </form>
+    </div>
+  </div>
+</div>

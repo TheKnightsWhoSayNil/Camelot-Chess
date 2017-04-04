@@ -40,10 +40,10 @@ $( function() {
   // code to display a modal with a choice of knight bishop rook or queen
   var promotionButtons = $('...') // this should be a jQuery selection of the buttons that would be clicked on in the modal
   promotionButtons.on('click', function() {
-    sendAJAXRequest(x_dropped_at, y_dropped_at, promotion_choice);
+    sendAJAXRequest(x, y, promo_choice);
   });
   } else {
-    sendAJAXRequest(x_dropped_at, y_dropped_at);
+    sendAJAXRequest(x, y);
   }
 
   }); 
@@ -74,7 +74,7 @@ $( function() {
   </table>
 </div>
 
-<%= render 'partials/forfeit_button' %>
+<%= render 'partials/promotion_modal' %>
 
 
 
