@@ -7,7 +7,7 @@ $( function() {
     containment: ".game-board",
   });
 
-    
+
   $( ".piece-square" ).droppable({
     accept: ".piece",
     drop: function( event, ui ) {
@@ -17,7 +17,7 @@ $( function() {
       console.log(x);
       console.log(y);
       console.log(urlUpdatePath);
-         
+
       $.ajax({
         type: 'PUT',
         url: urlUpdatePath,
@@ -29,15 +29,15 @@ $( function() {
             alert(response);
           }
           // cause the page to refresh to align the moved piece on the square.
-          //Turbolinks.visit(window.location, { action: 'replace' }); 
+          //Turbolinks.visit(window.location, { action: 'replace' });
           //location.reload();
         }
-        
+
         });
- 
+
       }
     });
-  
+
   });
 
 </script>
@@ -66,6 +66,3 @@ $( function() {
 </div>
 
 <%= render 'partials/forfeit_button' %>
-
-
-

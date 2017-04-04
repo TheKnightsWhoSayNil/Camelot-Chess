@@ -1,15 +1,17 @@
 # /app/models/king.rb
 class King < Piece
   def valid_move?(x, y)
-    if super(x, y)
+    if super(x, y) && piece_type == 'King'
+      binding.pry
       if legal_castle_move?
-        castle!
-        true
-      else
-        return standard_king_move?(x, y)
+        binding.pry
+        return true
+      elsif standard_king_move?(x, y)
+        binding.pry
+        return true
       end
+      false
     end
-    false
   end
 
 
@@ -47,7 +49,7 @@ class King < Piece
     end
     rook.reload
     king.reload
-    
+
   end
 
   def can_castle_queenside?
@@ -103,8 +105,8 @@ class King < Piece
   end
 
   def legal_castle_move?
-    king = game.pieces.where(piece_type: 'King').take
-    rook = game.pieces.where(piece_type: 'Rook').take
+    king = game.pieces.where(piece_type: 'King', color: color).take
+    rook = game.pieces.where(piece_type: 'Rook', color: color).take
     if (king.state == 'unmoved') && (rook != nil) && (rook.state == 'unmoved')
       return true
     else

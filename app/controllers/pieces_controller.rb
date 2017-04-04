@@ -9,15 +9,17 @@ class PiecesController < ApplicationController
 
   def update
     @piece = Piece.find_by_id(params[:id])
-
-      if @piece.color != @piece.game.user_turn
-        render text: "It is the other player's turn"
-      elsif @piece.move_to!(piece_params[:x_position].to_i, piece_params[:y_position].to_i) == false
-        render text: "Invalid Move (Or Valid Capture)"
+    if @piece.color != @piece.game.user_turn
+      render text: "It is the other player's turn"
+    elsif @piece.color == @piece.game.user_turn
+      if @piece.move_to!(piece_params[:x_position].to_i, piece_params[:y_position].to_i) == 'empty'
+        render text: "Valid Move yay!"
+      elsif @piece.move_to!(piece_params[:x_position].to_i, piece_params[:y_position].to_i) == 'capture'
+        render text: "Capture!"
       else
-        render text: "Valid Move"
+        render text: "Invalid"
       end
-    
+    end
   end
 
   private

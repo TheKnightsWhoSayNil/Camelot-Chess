@@ -2,8 +2,7 @@ class Pawn < Piece
   def valid_move?(x, y)
     if super(x, y)
       if is_capture?(x, y)
-        capture_piece_at!(x, y)
-        change_location(x, y)
+        return 'capture'
       elsif promotable?(x, y)
         change_location(x, y)
         promote!(x, y)

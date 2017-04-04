@@ -12,5 +12,5 @@ class Knight < Piece
     end
     move_coordinates.include?([x,y])
   end
-  
+
 end

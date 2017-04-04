@@ -9,7 +9,7 @@ class Game < ApplicationRecord
   after_create :fill_board, :first_turn!
 
   scope :available, -> { where(black_user_id: nil) }
-  
+
   def available?
     black_user.blank?
   end
@@ -20,7 +20,7 @@ class Game < ApplicationRecord
 
   def pass_turn!(color)
     player_turn = color == 'WHITE' ? 'BLACK' : 'WHITE'
-    update(user_turn: player_turn)
+    update_attributes(user_turn: player_turn)
   end
 
   def in_check?(color)

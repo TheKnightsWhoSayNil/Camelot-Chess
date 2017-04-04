@@ -17,24 +17,34 @@ class Piece < ApplicationRecord
 
   def move_to!(x, y)
     if color == game.user_turn
-      if valid_move?(x, y) && space_available?(x, y) && not_into_check?(x, y)
-        capture_piece_at!(x, y) if occupied_by_opposing_piece?(x, y)
-        game.pass_turn!(game.user_turn)
-        change_location(x, y)
-      elsif !occupied_by_opposing_piece?(x, y)
-        false
-      elsif piece_type == 'King' && valid_move?(x, y) && space_available?(x, y) && not_into_check(x, y)
+      binding.pry
+      if piece_type == 'King' && not_into_check?(x, y)
         if legal_castle_move?
-          if castle!
-            game.pass_turn!(game.user_turn)
-          end
+          castle!
+          binding.pry
+          game.pass_turn!(game.user_turn)
         else
           standard_king_move?(x, y)
+          binding.pry
           game.pass_turn!(game.user_turn)
-        end 
+        end
+      elsif valid_move?(x, y) && space_available?(x, y) && not_into_check?(x, y)
+        if occupied_by_opposing_piece?(x, y)
+          capture_piece_at!(x, y)
+          change_location(x, y)
+          game.pass_turn!(game.user_turn)
+          return 'empty'
+        elsif !occupied_by_opposing_piece?(x, y)
+          change_location(x, y)
+          game.pass_turn!(game.user_turn)
+          return 'empty'
+        end
       else
+        binding.pry
         false
       end
+    elsif color != game.user_turn
+      return false
     end
   end
 
@@ -158,7 +168,7 @@ class Piece < ApplicationRecord
   end
 
   def capture_piece_at!(x, y)
-    piece_at(x, y).update_attributes(x_position: nil, y_position: nil)
+    piece_at(x, y).destroy
   end
 
   def unoccupied?(x, y)
@@ -197,15 +207,15 @@ class Piece < ApplicationRecord
     end
   end
 
-  private
+  def space_available?(x,y)
+    !occupied_by_mycolor_piece?(x, y)
+  end
 
   def change_location(x,y)
     update_attributes(x_position: x, y_position: y)
   end
 
-  def space_available?(x,y)
-    !occupied_by_mycolor_piece?(x, y)
-  end
+  private
 
   def space_occupied?(x, y)
     game.pieces.where(x_position: x, y_position: y).present?
