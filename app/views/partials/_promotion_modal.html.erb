@@ -7,19 +7,19 @@
     <div class="modal-inner">
       <div class="modal-close" for="promo-modal"></div>
         <div class="promo-modal-text">
-          <h1>Pawn Promotion</h1>
-          <h1>Please make your selection: </h1>
+          <h1>Pawn Promotion!</h1>
+          <h1>Make your selection: </h1>
         </div>
-        <br/>
-        <form action="#" class="promotion-choice">
+        <form action="#" class="pawn-promotion">
           <div class="promo-selection-container">
             <% @pieces.each do |name| %>
               <% if name.piece_type == 'Queen' && name.color == name.game.user_turn %>
-                <div class="promo-selection-choice">
+                <div class="promo-selection">
                   <label for="<%= name %>">
                     <%= image_tag(name.piece_image) %>
+                    <%= name.piece_type %>
                   </label>
-                  <input type="radio" name="piece-type" value="<%= name %>" id="<%= name %>">
+                  <input type="radio" name="promo-choice" value="<%= name %>" id="<%= name %>">
                 </div>
               <% end %>
             <% end %>

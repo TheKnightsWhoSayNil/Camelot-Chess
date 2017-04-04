@@ -12,7 +12,7 @@ $( function() {
       var x = $(event.target).data('x');
       var y = $(event.target).data('y');
       var urlUpdatePath = $('.ui-draggable-dragging').data('url');
-      
+
       var sendAJAXRequest = function(x, y, promo_choice) {  
         $.ajax({
           type: 'PUT',
@@ -32,8 +32,7 @@ $( function() {
       };
 
       if (is_pawn_promotion()) {
-        openModal('#promo-modal', function(pieceType) {
-          piece.piece_type = pieceType;
+        openModal('#promo-modal') {
           var promotionButtons = $('...')
           promotionButtons.on('click', function() {
           sendAJAXRequest(x, y, promo_choice);
@@ -41,7 +40,7 @@ $( function() {
         } else {
           sendAJAXRequest(x, y);
         }
-      });
+      };
 
 
   function openModal (modalId, callback) {
@@ -64,7 +63,7 @@ $( function() {
     });
 
     $('.promo-selection-submit').on('click', function() {
-        callback( $('.promo-selection-choice input').val() );
+        callback( $('.promo-selection').val() );
     });
   } 
 
