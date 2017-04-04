@@ -1,12 +1,7 @@
-.available-list {
-  text-align: center;
-  h1 {
-    font-size: 250%;
-  }
-}
-
+/* CARDS */
 
 $small-font-size: 0.75em;
+
 $badges: (
   "alert": #fff6bf,
   "default": #08D4D0,
@@ -87,7 +82,6 @@ $badges: (
     line-height: 1.5em;
     padding: 1.0em 1.5em 0em 1.5em;
     transition: all 0.2s ease-in-out;
-
     h3 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;

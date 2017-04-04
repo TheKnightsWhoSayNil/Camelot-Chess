@@ -108,8 +108,8 @@ h4.hero-subtext {
   border-radius: 12px;
   margin: 0 auto;
   text-align: center;
-  background: linear-gradient(to bottom, rgba(13, 175, 129, 0.1) 0%, rgba(13, 175, 129, 0.1) 100%), url('chess7.jpg') no-repeat center top;
-  color: #fff;
+  border: 4px solid #38CF9C;
+  color: black;
   clear: both;
 }
 
@@ -181,7 +181,8 @@ h4.hero-subtext {
   width: 40%;
   height: 40%;
   margin: 20px;
-  border: 2px solid rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.25);
+  border: 1px solid rgba(0,0,0,0.45);
   border-radius: 65px;
 }
 
@@ -272,8 +273,8 @@ h4.hero-subtext {
   border-radius: 12px;
   margin: 0 auto;
   text-align: center;
-  background: linear-gradient(to bottom, rgba(13, 175, 129, 0.1) 0%, rgba(13, 175, 129, 0.1) 100%), url('chess7.jpg') no-repeat center top;
-  color: #fff;
+  border: 4px solid #38CF9C;
+  color: black;
   clear: both;
 }
 
@@ -319,7 +320,7 @@ h4.hero-subtext {
   height: 110px;
   width: 110px;
 
-  @media all and (max-width: 71.25em) {
+  @media all and (max-width: 75em) {
     height: 80px;
     width: 80px
   }
@@ -328,7 +329,7 @@ h4.hero-subtext {
 /* BUFFER SECTION */
 
 .buffer-section {
-  height: 120px;
+  height: 100px;
   width: 90%;
 }
 
@@ -340,7 +341,8 @@ h4.hero-subtext {
   border-radius: 12px;
   margin: 0 auto;
   text-align: center;
-  background-color: rgba(0,0,0,0.85);
+  background-color: rgba(0,0,0,0.5);
+  border: 1px solid rgba(0,0,0,0.55);
   color: #fff;
 }
 
