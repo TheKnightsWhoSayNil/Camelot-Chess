@@ -2,6 +2,7 @@
 class Piece < ApplicationRecord
   after_initialize :set_default_state
   belongs_to :game
+#  before_save :update_en_passant_position 
 
   self.inheritance_column = :piece_type
   scope :bishops, -> { where(piece_type: "Bishop") }

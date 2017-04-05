@@ -11,8 +11,23 @@ class King < Piece
     end
     false
   end
-
-
+=begin
+  def move_to!(x, y)
+    return unless color == game.user_turn
+    if valid_move?(x, y) && space_available?(x, y) && not_into_check?(x, y)
+      if legal_castle_move?
+        if castle!
+          game.pass_turn!(game.user_turn)
+        end
+      else
+        standard_king_move?(x, y)
+        game.pass_turn!(game.user_turn)
+      end
+    else 
+      super
+    end 
+  end 
+=end
   def checkmate?
     # example logic
   end
@@ -47,7 +62,7 @@ class King < Piece
     end
     rook.reload
     king.reload
-    
+
   end
 
   def can_castle_queenside?
