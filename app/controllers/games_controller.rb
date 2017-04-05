@@ -38,12 +38,24 @@ class GamesController < ApplicationController
       @game.save
       redirect_to game_path(@game)
     else
-      render :text, :status => :unprocessable_entity
+      #render :text, :status => :unprocessable_entity
       redirect_to games_path
     end
   end
 
   private
+
+  helper_method :current_color
+
+  def current_color
+    if @black_player == current_user.id
+      "BLACK"
+    elsif @white_player == current_user.id
+      "WHITE"
+    else 
+      nil
+    end 
+  end
 
   def assign_black_pieces_to_current_user
     @game.black_pieces.each do |piece|
