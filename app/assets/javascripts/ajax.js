@@ -13,20 +13,9 @@ $( function() {
       var y = $(event.target).data('y');
       var urlUpdatePath = $('.ui-draggable-dragging').data('url');
       var is_pawn_promotion = function() {
-        return $('.piece').data('piece-type') === 'Pawn') &&
+        return $(".piece").draggable === 'Pawn' &&
           (y === 0 || y === 7); 
       };
-
-      if (is_pawn_promotion()) {
-        openModal('#promo-modal');
-          var promoSubmitButton = $(".promo-selection-submit");
-          promoSubmitButton.on('click', function() {
-            var type = $('.promo-selection.input[selected]').val();
-            sendAJAXRequest(x, y, type);
-          });
-      } else { 
-        sendAJAXRequest(x, y);
-      }
     
       var sendAJAXRequest = function(x, y, type) {  
         $.ajax({
@@ -45,7 +34,19 @@ $( function() {
           }
         });
       };
-    }
+
+          if (is_pawn_promotion()) {
+              openModal('#promo-modal');
+              var promoSubmitButton = $(".promo-selection-submit");
+              promoSubmitButton.on('click', function() {
+              var type = $('.promo-selection.input[selected]').val();
+              sendAJAXRequest(x, y, type);
+              });
+          } else { 
+            sendAJAXRequest(x, y);
+          }
+        }
+      });
   });
 
 
@@ -70,4 +71,3 @@ $( function() {
       e.stopPropagation();
     });
   } 
-});
