@@ -12,7 +12,6 @@ class King < Piece
     false
   end
 
-
   def checkmate?
     # example logic
   end
@@ -47,7 +46,7 @@ class King < Piece
     end
     rook.reload
     king.reload
-    
+
   end
 
   def can_castle_queenside?

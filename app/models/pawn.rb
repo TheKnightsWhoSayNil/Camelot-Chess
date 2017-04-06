@@ -1,4 +1,5 @@
 class Pawn < Piece
+
   def valid_move?(x, y)
     if super(x, y)
       if is_capture?(x, y)
@@ -14,12 +15,34 @@ class Pawn < Piece
     false
   end
 
+  def last_piece_moved
+    game.pieces.order(:updated_at).last 
+  end 
+
+  def valid_en_passant?(x, y)
+    last_piece_moved.piece_type == 'Pawn' && 
+    last_piece_moved.en_passant_y == y && last_piece_moved.en_passant_x == x_position
+  end 
+
+  def move_to!(x, y)
+    return unless color == game.user_turn
+    update_en_passant_position(x, y) 
+    capture_passant(x, y) #if valid_en_passant?(x, y)
+    super
+  end 
+
+  def capture_passant(x, y)
+    capture_piece_at!(last_piece_moved.x_position, last_piece_moved.y_position) if valid_en_passant?(x, y)
+  end 
+
+  def update_en_passant_position(x, y)
+    return unless in_starting_position?
+    dy = y - y_position 
+    update_attributes(en_passant_x: x_position, en_passant_y: (y_position - dy/2))
+  end 
+
   def in_starting_position?
-    if (color == 'WHITE' && y_position == 1) || (color == 'BLACK' && y_position == 6)
-      true
-    else
-      false
-    end
+    (color == 'WHITE' && y_position == 1) || (color == 'BLACK' && y_position == 6)
   end
 
   def one_square?(x, y)
