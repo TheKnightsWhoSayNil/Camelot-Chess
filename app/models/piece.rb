@@ -1,4 +1,5 @@
 # Piece will hold all similar logic for all pieces.
+require 'pry'
 class Piece < ApplicationRecord
   after_initialize :set_default_state
   belongs_to :game
@@ -17,30 +18,31 @@ class Piece < ApplicationRecord
 
   def move_to!(x, y)
     if color == game.user_turn
-      binding.pry
-      if piece_type == 'King' && not_into_check?(x, y)
-        if legal_castle_move?
-          castle!
-          binding.pry
-          game.pass_turn!(game.user_turn)
-        else
-          standard_king_move?(x, y)
-          binding.pry
-          game.pass_turn!(game.user_turn)
-        end
-      elsif valid_move?(x, y) && space_available?(x, y) && not_into_check?(x, y)
+      if valid_move?(x, y) && space_available?(x, y) && not_into_check?(x, y)
         if occupied_by_opposing_piece?(x, y)
           capture_piece_at!(x, y)
           change_location(x, y)
           game.pass_turn!(game.user_turn)
           return 'empty'
+        elsif piece_type == 'King' && legal_castle_move?
+          castle!
+          game.pass_turn!(game.user_turn)
+          return 'castle'
+          if !legal_castle_move?
+            if standard_king_move?(x, y)
+              return true
+              game.pass_turn!(game.user_turn)
+              return 'empty'
+            else
+              false
+            end
+          end
         elsif !occupied_by_opposing_piece?(x, y)
           change_location(x, y)
           game.pass_turn!(game.user_turn)
           return 'empty'
         end
       else
-        binding.pry
         false
       end
     elsif color != game.user_turn
@@ -145,7 +147,7 @@ class Piece < ApplicationRecord
   def move_causes_check?(x, y)
     state = false
     ActiveRecord::Base.transaction do
-      change_location(x,y)
+      change_location(x, y)
       state = game.in_check?(color)
       raise ActiveRecord::Rollback
     end
@@ -162,7 +164,7 @@ class Piece < ApplicationRecord
       'horizontal'
     elsif x_position == x_end
       'vertical'
-    elsif (y_end - y_position).abs == (x_end - x_position).abs
+    elsif (y_enotnd - y_position).abs == (x_end - x_position).abs
       'diagonal'
     end
   end

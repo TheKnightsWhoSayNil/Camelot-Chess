@@ -1,19 +1,16 @@
 # /app/models/king.rb
+require 'pry'
 class King < Piece
   def valid_move?(x, y)
-    if super(x, y) && piece_type == 'King'
-      binding.pry
-      if legal_castle_move?
-        binding.pry
+    if super(x, y)
+      if standard_king_move?(x, y)
         return true
-      elsif standard_king_move?(x, y)
-        binding.pry
+      elsif legal_castle_move?
         return true
       end
-      false
     end
+    false
   end
-
 
   def checkmate?
     # example logic
@@ -37,19 +34,13 @@ class King < Piece
   end
 
   def castle_kingside
-    rook = game.pieces.where(piece_type: 'Rook', x_position: 7).take
-    king = game.pieces.where(piece_type: 'King', x_position: 4).take
-
-    if rook.color == 'WHITE' && king.color == 'WHITE'
-      rook.update_attributes(x_position: 5, state: 'moved')
-      king.update_attributes(x_position: 6, state: 'moved')
-    else rook.color == 'BLACK' && king.color == 'BLACK'
-      rook.update_attributes(x_position: 5, state: 'moved')
-      king.update_attributes(x_position: 6, state: 'moved')
-    end
+    rook = game.pieces.where(piece_type: 'Rook', x_position: 7, color: self.color).take
+    
+    rook.update_attributes(x_position: 5, state: 'moved')
+    self.update_attributes(x_position: 6, state: 'moved')
+    
     rook.reload
-    king.reload
-
+    self.reload
   end
 
   def can_castle_queenside?
@@ -62,18 +53,13 @@ class King < Piece
   end
 
   def castle_queenside
-    rook = game.pieces.where(piece_type: 'Rook', x_position: 0).take
-    king = game.pieces.where(piece_type: 'King', x_position: 4).take
-
-    if rook.color == 'WHITE' && king.color == 'WHITE'
-      rook.update_attributes(x_position: 3, state: 'moved')
-      king.update_attributes(x_position: 2, state: 'moved')
-    else rook.color == 'BLACK' && king.color == 'BLACK'
-      rook.update_attributes(x_position: 3, state: 'moved')
-      king.update_attributes(x_position: 2, state: 'moved')
-    end
+    rook = game.pieces.where(piece_type: 'Rook', x_position: 0, color: self.color).take
+    
+    rook.update_attributes(x_position: 3, state: 'moved')
+    self.update_attributes(x_position: 2, state: 'moved')
+    
     rook.reload
-    king.reload
+    self.reload
   end
 
   def no_kingside_obstruction?
@@ -105,8 +91,8 @@ class King < Piece
   end
 
   def legal_castle_move?
-    king = game.pieces.where(piece_type: 'King', color: color).take
-    rook = game.pieces.where(piece_type: 'Rook', color: color).take
+    king = game.pieces.where(piece_type: 'King').take
+    rook = game.pieces.where(piece_type: 'Rook').take
     if (king.state == 'unmoved') && (rook != nil) && (rook.state == 'unmoved')
       return true
     else

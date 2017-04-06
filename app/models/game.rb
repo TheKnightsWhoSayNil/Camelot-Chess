@@ -26,7 +26,7 @@ class Game < ApplicationRecord
   def in_check?(color)
     @enemies_causing_check = []
     king = find_king(color)
-
+    
     if king
       opponents = opponents_pieces(color)
       opponents.each do |piece|

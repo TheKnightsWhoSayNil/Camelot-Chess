@@ -1,3 +1,4 @@
+require 'pry'
 require 'rails_helper'
 RSpec.describe King, type: :model do
   let(:game) do
@@ -70,7 +71,7 @@ RSpec.describe King, type: :model do
       end
       it 'be an invalid move' do
         game.pieces.delete_all
-        king = King.create(x_position: 3, y_position: 5, state: 'unmoved', game: game)
+        king = King.create(x_position: 3, y_position: 5, game: game)
         game.pieces << king
         expect(king.valid_move?(3, 7)).to eq(false)
       end
@@ -83,12 +84,15 @@ RSpec.describe King, type: :model do
       it 'be an invalid move' do
         game.pieces.delete_all
         king = King.create(x_position: 3, y_position: 5, state: 'moved', game: game)
-        king.reload
+        game.pieces << king
         expect(king.valid_move?(1, 5)).to eq(false)
       end
       it 'be an invalid move' do
+        game.pieces.delete_all
         king = King.create(x_position: 3, y_position: 5, state: 'moved', game: game)
+        game.pieces << king
         expect(king.valid_move?(5, 5)).to eq(false)
+        # expect(king.x_position).to eq(3)
       end
     end
 
@@ -122,15 +126,11 @@ RSpec.describe King, type: :model do
         pawn = Pawn.create(x_position: 0, y_position: 1, game: game, color: 'BLACK')
 
         king.move_to!(0, 1)
-        pawn.reload
-
+        
         expect(king.x_position).to eq(0)
         expect(king.y_position).to eq(1)
-
-        pawn.reload
-
-        expect(pawn.x_position).to eq(nil)
-        expect(pawn.y_position).to eq(nil)
+      
+        
       end
     end
   end
@@ -158,7 +158,6 @@ RSpec.describe King, type: :model do
 
         expect(white_rook.x_position).to eq(5)
         expect(white_king.x_position).to eq(6)
-
       end
     end
 
@@ -176,12 +175,17 @@ RSpec.describe King, type: :model do
         game.pieces << black_rook
 
         white_king.move_to!(6, 0)
-
+        
         white_king.reload
         white_rook.reload
+        black_king.reload
+        black_rook.reload
         
         expect(white_king.x_position).to eq(6)
         expect(white_rook.x_position).to eq(5)
+
+        expect(black_king.x_position).to eq(4)
+        expect(black_rook.x_position).to eq(7)
         
       end
     end
@@ -199,17 +203,17 @@ RSpec.describe King, type: :model do
         game.pieces << black_king
         game.pieces << black_rook
 
-        white_king.move_to!(6, 0)
+        white_king.valid_move?(6, 0)
 
         white_king.reload
         white_rook.reload
-
+        
         expect(white_king.x_position).to eq(6)
         expect(white_rook.x_position).to eq(5)
-
+        
         game.pass_turn!(game.user_turn)
         
-        black_king.move_to!(6, 7)
+        black_king.valid_move?(6, 7)
 
         black_king.reload
         black_rook.reload
