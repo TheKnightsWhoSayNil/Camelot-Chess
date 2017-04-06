@@ -13,7 +13,7 @@ $( function() {
       var y = $(event.target).data('y');
       var urlUpdatePath = $('.ui-draggable-dragging').data('url');
       var is_pawn_promotion = function() {
-        return (draggable.data('piece-type') === 'Pawn') &&
+        return $('.piece').data('piece-type') === 'Pawn') &&
           (y === 0 || y === 7); 
       };
 
@@ -21,7 +21,7 @@ $( function() {
         openModal('#promo-modal');
           var promoSubmitButton = $(".promo-selection-submit");
           promoSubmitButton.on('click', function() {
-            var type = $('input.promo-radio[selected]').val();
+            var type = $('.promo-selection.input[selected]').val();
             sendAJAXRequest(x, y, type);
           });
       } else { 
@@ -33,7 +33,8 @@ $( function() {
           type: 'PUT',
           url: urlUpdatePath,
           data: { 
-            piece: { x_position: x, y_position: y }
+            piece: { x_position: x, y_position: y }, 
+            piece_type: type,
           },
           success: function(response) {
             if(response == 'OK') {
@@ -44,29 +45,29 @@ $( function() {
           }
         });
       };
-
-//<div class="piece" data-piece-type="Pawn"></div>
-
-      function openModal (modalId, callback) {
-        var $modal = $(modalId);
-
-        $modal.prop("checked", true);
-
-          if ($modal.is(":checked")) {
-            $("body").addClass("modal-open");
-          } else {
-            $("body").removeClass("modal-open");
-          }
-
-        $(".modal-fade-screen, .modal-close").on("click", function() {
-          $(".modal-state:checked").prop("checked", false).change();
-        });
-
-        $(".modal-inner").on("click", function(e) {
-          e.stopPropagation();
-        });
-      } 
     }
   });
-}
 
+
+  // Modal
+
+  function openModal (modalId) {
+    var $modal = $(modalId);
+
+    $modal.prop("checked", true);
+
+      if ($modal.is(":checked")) {
+        $("body").addClass("modal-open");
+      } else {
+        $("body").removeClass("modal-open");
+      }
+
+    $(".modal-fade-screen, .modal-close").on("click", function() {
+      $(".modal-state:checked").prop("checked", false).change();
+    });
+
+    $(".modal-inner").on("click", function(e) {
+      e.stopPropagation();
+    });
+  } 
+});
