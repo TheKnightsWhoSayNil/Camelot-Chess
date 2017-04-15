@@ -12,7 +12,7 @@ class PiecesController < ApplicationController
 
       if @piece.color != @piece.game.user_turn
         render text: "It is the other player's turn"
-      elsif @piece.move_to!(piece_params[:x_position].to_i, piece_params[:y_position].to_i) == false
+      elsif @piece.move_to!(piece_params[:x_position].to_i, piece_params[:y_position].to_i, piece_params[:piece_type]) == false
         render text: "Invalid Move (Or Valid Capture)"
       else
         render text: "Valid Move"
@@ -23,6 +23,6 @@ class PiecesController < ApplicationController
   private
 
   def piece_params
-    params.require(:piece).permit(:x_position, :y_position)
+    params.require(:piece).permit(:x_position, :y_position, :piece_type)
   end
 end

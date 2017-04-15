@@ -9,7 +9,7 @@
           <td class="piece-square ui-droppable" data-x="<%= col %>" data-y="<%= row %>">
             <% @pieces.each do |piece| %>
               <% if piece.x_position == col && piece.y_position == row %>
-                <div class="piece" data-url="<%= game_piece_path(piece.game, piece)%>" data="piece-type">
+                <div class="piece" data-url="<%= game_piece_path(piece.game, piece)%>" data-piece-type="<%= piece.piece_type %>">
                   <%= image_tag(piece.piece_image) %>
                 </div>
               <% end %>

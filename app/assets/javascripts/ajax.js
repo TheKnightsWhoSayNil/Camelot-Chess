@@ -13,7 +13,7 @@ $( function() {
       var y = $(event.target).data('y');
       var urlUpdatePath = $('.ui-draggable-dragging').data('url');
       var is_pawn_promotion = function() {
-        return $(".piece").draggable === 'Pawn' &&
+        return ui.draggable.data('pieceType') === 'Pawn' &&
           (y === 0 || y === 7); 
       };
     
@@ -35,19 +35,19 @@ $( function() {
         });
       };
 
-          if (is_pawn_promotion()) {
-              openModal('#promo-modal');
-              var promoSubmitButton = $(".promo-selection-submit");
-              promoSubmitButton.on('click', function() {
-              var type = $('.promo-selection.input[selected]').val();
-              sendAJAXRequest(x, y, type);
-              });
-          } else { 
-            sendAJAXRequest(x, y);
-          }
-        }
-      });
+      if (is_pawn_promotion()) {
+        openModal('#promo-modal');
+        var promoSubmitButton = $(".promo-selection-submit");
+        promoSubmitButton.on('click', function() {
+          var type = $('.promo-selection.input[selected]').val();
+          sendAJAXRequest(x, y, type);
+        });
+      } else { 
+        sendAJAXRequest(x, y);
+      }
+    }
   });
+});
 
 
   // Modal
