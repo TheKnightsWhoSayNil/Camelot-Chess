@@ -24,10 +24,7 @@ ActiveRecord::Schema.define(version: 20170405002900) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "name"
-    t.integer  "turn"
     t.string   "user_turn"
-    t.boolean  "en_passant"
-    t.integer  "move_number"
   end
 
   create_table "pieces", force: :cascade do |t|
@@ -39,8 +36,6 @@ ActiveRecord::Schema.define(version: 20170405002900) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "state"
-    t.integer  "user_id"
-    t.integer  "last_moved"
     t.integer  "en_passant_x"
     t.integer  "en_passant_y"
   end
