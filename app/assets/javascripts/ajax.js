@@ -4,8 +4,7 @@ $( function() {
     grid: [60, 60],
     containment: ".game-board",
   });
-
-    
+ 
   $( ".piece-square" ).droppable({
     accept: ".piece",
     drop: function( event, ui ) {
@@ -50,24 +49,24 @@ $( function() {
 });
 
 
-  // Modal
+// Modal
 
-  function openModal (modalId) {
-    var $modal = $(modalId);
+function openModal (modalId) {
+  var $modal = $(modalId);
 
-    $modal.prop("checked", true);
+  $modal.prop("checked", true);
 
-      if ($modal.is(":checked")) {
-        $("body").addClass("modal-open");
-      } else {
-        $("body").removeClass("modal-open");
-      }
+    if ($modal.is(":checked")) {
+      $("body").addClass("modal-open");
+    } else {
+      $("body").removeClass("modal-open");
+    }
 
-    $(".modal-fade-screen, .modal-close").on("click", function() {
-      $(".modal-state:checked").prop("checked", false).change();
-    });
+  $(".modal-fade-screen, .modal-close").on("click", function() {
+    $(".modal-state:checked").prop("checked", false).change();
+  });
 
-    $(".modal-inner").on("click", function(e) {
-      e.stopPropagation();
-    });
-  } 
+  $(".modal-inner").on("click", function(e) {
+    e.stopPropagation();
+  });
+}
