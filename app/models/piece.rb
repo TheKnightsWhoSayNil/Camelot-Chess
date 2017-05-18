@@ -15,7 +15,7 @@ class Piece < ApplicationRecord
     "#{color.downcase}_#{piece_type.downcase}.png"
   end
 
-  def move_to!(x, y, promotion_type)
+  def move_to!(x, y)
     if color == game.user_turn
       if valid_move?(x, y) && space_available?(x, y) && not_into_check?(x, y)
         capture_piece_at!(x, y) if occupied_by_opposing_piece?(x, y)
