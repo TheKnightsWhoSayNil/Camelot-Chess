@@ -1,0 +1,32 @@
+<div class="modal">
+  <label for="promo-modal">
+    <div class="modal-trigger">Click for Modal</div>
+  </label>
+  <input class="modal-state" id="promo-modal" type="checkbox" />
+  <div class="modal-fade-screen">
+    <div class="modal-inner">
+      <div class="modal-close" for="promo-modal"></div>
+        <div class="promo-modal-text">
+          <h1>Pawn Promotion!</h1>
+          <h1>Make your selection: </h1>
+        </div>
+        <form action="#" class="pawn-promotion">
+          <div class="promo-selection-container">
+            <% [Queen, Knight, Bishop, Rook].each do |piece_type| %>
+              <div class="promo-selection">
+                <label>
+                  <%= image_tag(piece_type.new(color: current_color).piece_image) %>
+                  <%= piece_type.name %>
+                  <input type="radio" name="promo-piece" value="<%= piece_type.name %>">
+                </label>
+              </div>
+            <% end %>  
+          </div>
+          <br/>
+          <div class="promo-selection-submit">
+            <input type="submit">
+          </div>
+        </form>
+    </div>
+  </div>
+</div>

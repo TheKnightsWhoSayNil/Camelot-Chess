@@ -1,44 +1,3 @@
-<script>
-
-$( function() {
-  $( ".piece" ).draggable({
-    snap: ".piece-square",
-    grid: [60, 60],
-    containment: ".game-board",
-  });
-
-    
-  $( ".piece-square" ).droppable({
-    accept: ".piece",
-    drop: function( event, ui ) {
-      var x = $(event.target).data('x');
-      var y = $(event.target).data('y');
-      var urlUpdatePath = $('.ui-draggable-dragging').data('url');
-      console.log(x);
-      console.log(y);
-      console.log(urlUpdatePath);
-         
-      $.ajax({
-        type: 'PUT',
-        url: urlUpdatePath,
-        data: { piece: { x_position: x, y_position: y }  },
-        success: function(response) {
-          if(response == 'OK') {
-            console.log(response);
-          } else {
-            alert(response);
-          }
-          // cause the page to refresh to align the moved piece on the square.
-          //Turbolinks.visit(window.location, { action: 'replace' }); 
-          //location.reload();
-        }
-        });
-      }
-    }); 
-  });
-
-</script>
-
 <div class="game-board-container">
   <h2 class="game-title"><%= @game.name %></h2>
 
@@ -50,7 +9,7 @@ $( function() {
           <td class="piece-square ui-droppable" data-x="<%= col %>" data-y="<%= row %>">
             <% @pieces.each do |piece| %>
               <% if piece.x_position == col && piece.y_position == row %>
-                <div class="piece" data-url="<%= game_piece_path(piece.game, piece) %>">
+                <div class="piece" data-url="<%= game_piece_path(piece.game, piece)%>" data-piece-type="<%= piece.piece_type %>">
                   <%= image_tag(piece.piece_image) %>
                 </div>
               <% end %>
@@ -62,7 +21,4 @@ $( function() {
   </table>
 </div>
 
-<%= render 'partials/forfeit_button' %>
-
-
-
+<%= render 'partials/promotion_modal' %>
