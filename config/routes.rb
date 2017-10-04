@@ -8,4 +8,6 @@ Rails.application.routes.draw do
     resources :pieces, only: [:show, :update]
   end
   resources :users, only: :show
+
+  mount ActionCable.server, at: '/cable'
 end

@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :message do
+    content "MyText"
+  end
   factory :game do
     association :white_user, factory: :user
   end

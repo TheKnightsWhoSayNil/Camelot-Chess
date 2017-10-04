@@ -2,18 +2,22 @@
 
 
 .game-board-container {
-  height: 600px;
-  margin-top: 40px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 5% 5%;
 }
 
 .game-title {
   text-align: center;
+  margin-top: 50px;
 
 }
 
 .game-board {
-  height: 504px;
-  width: 504px;
+  height: auto;
+  width: auto;
   margin: 0 auto;
   border: 2px solid;
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);

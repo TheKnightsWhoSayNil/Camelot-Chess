@@ -13,6 +13,7 @@ class GamesController < ApplicationController
     @pieces = @game.pieces
     @black_player = @game.black_user_id
     @white_player = @game.white_user_id
+    @messages = Message.all
   end
 
   def new

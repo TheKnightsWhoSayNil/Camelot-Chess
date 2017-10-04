@@ -39,9 +39,8 @@ $( function() {
 
 </script>
 
+<h2 class="game-title"><%= @game.name %></h2>
 <div class="game-board-container">
-  <h2 class="game-title"><%= @game.name %></h2>
-
   <table class="game-board">
     <% 7.downto(0) do |row| %>
       <tr>
@@ -60,7 +59,21 @@ $( function() {
       </tr>
     <% end %>
   </table>
+
+  <div class="chatRoom">
+    <h1>Chat room</h1>
+      
+    <div id="messages">
+      <%= render @messages %>
+    </div>
+      
+    <form>
+      <input type="text" data-behavior="room_speaker">
+    </form>
+  </div>
 </div>
+
+<br style="clear: both;" />
 
 <%= render 'partials/forfeit_button' %>
 
